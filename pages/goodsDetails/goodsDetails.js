@@ -24,6 +24,7 @@ Page({
 		sheetshow:false,         //规格弹框控制
 		goods_total_limit:'',  //商品阶梯
 		guige:['41','42','43','44'],  //规格
+		guige1:['白色','黑色','蓝色','灰色'],  //规格
 		type1:0,         //规格index
 		cnum:1           ,//数量
 		goods_sku_id:0,  //商品id

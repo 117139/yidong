@@ -61,7 +61,7 @@
 	<view class="hengxian"></view>
 	<van-popup custom-class="popopBox" show="{{ sheetshow }}"
 	position="bottom" bind:close="onClose"
-	custom-style="height:760rpx">
+	custom-style="height:960rpx">
 		<view class="popopBox1">
 			<view class="goodsimg">
 				<image src="{{spimg[0]}}"
@@ -70,7 +70,7 @@
 			</view>
 			<view class="goodstkjg">
 				<view class="closebtn" bindtap="onClose">
-					<image src="/static/images/index/closebtn_03.jpg"></image>
+					<image src="/static/images/closebtn_03.jpg"></image>
 				</view>
 				<view class="tkpri">￥123.00</view>
 				<view class="tkname oh2">商品名称描述商品名称描述商品名称描述商品名称描述商品名称描述商品名称描述</view>
@@ -79,6 +79,14 @@
 		<view class="tkguigetit">规格选择</view>
 		<view class="guigeBox">
 			<text class="guigeOne {{idx==type1?'cur':''}}" wx:for="{{guige}}"wx:for-index="idx"
+								wx:for-item="item" 
+								wx:key="idx"
+								data-gg="{{idx}}"
+								bindtap="selegg">{{item}}</text>
+		</view>
+		<view class="tkguigetit">颜色选择</view>
+		<view class="guigeBox">
+			<text class="guigeOne {{idx==type1?'cur':''}}" wx:for="{{guige1}}"wx:for-index="idx"
 								wx:for-item="item" 
 								wx:key="idx"
 								data-gg="{{idx}}"
