@@ -1,0 +1,148 @@
+<!--logs.wxml-->
+<import src="../../vendor/wxParse/wxParse.wxml" />
+<import src="/utils/pageState/index.wxml" />
+<template is="pageState" data="{{...pageState}}" />
+<wxs src="../../utils/filter.wxs" module="filter" />
+<view class="container log-list">
+  <swiper class="swiper"
+  	indicator-dots="{{indicatorDots}}"
+  	autoplay="{{autoplay}}"
+  	interval="{{interval}}"
+  	duration="{{duration}}"
+  	indicator-active-color='#8e8e8e'
+  	circular=true
+  >
+  	<block wx:for="{{spimg}}" wx:for-index="idx"          
+        wx:for-item="item" 
+        wx:key="idx">
+  		<swiper-item>
+  			<image src="{{item}}"
+					class="slide-image"
+					width="355" height="150"
+					data-curitem="{{item}}"
+					bindtap="pveimg"/>
+  		</swiper-item>
+  	</block>
+  </swiper>
+	<view>
+		<view class="contbox dis_flex ju_b">
+			<view class="flex_1 oh2">YI-DONG SPORT 屹动专业运动鞋 专业为中小学生运动打造的运动鞋</view>
+			<view class="shuxian"></view>
+			<view class="dis_flex flex_dc aic">
+				<text class="iconfont iconfenxiang fz36 "></text>
+				<view>分享</view>
+			</view>
+		</view>
+		<view class="contbox dis_flex aic">
+			<view class="cf6377a fz30 mr20 fwb">￥<text class="fz50">{{filter.moneyFormat(750)}}</text></view>
+			<view class="scx c3 fz26">原价：￥{{filter.moneyFormat(1550)}}</view>
+		</view>
+	</view>
+	<view class="hengxian"></view>
+	<view class="guige" bindtap="sheetshow">
+		<view class="guige_l">
+			<view class="guige_l_name">促销</view>
+			 <view>分享领100元无门槛优惠券</view>
+		</view>
+		<view class="guige_r">
+			<text class="iconfont iconsangedian fz36 c9"></text>
+		</view>
+	</view>
+	<view class="hengxian"></view>
+	<view class="guige" bindtap="sheetshow">
+		<view class="guige_l">
+			<view class="guige_l_name">规格</view>
+			 <view wx:if="{{guige[0]}}">{{cnum}}个，{{guige[type1].goods_sku_info.goods_unit}}</view>
+		</view>
+		<view class="guige_r">
+			<text class="iconfont iconsangedian fz36 c9"></text>
+		</view>
+	</view>
+	<view class="hengxian"></view>
+	<van-popup custom-class="popopBox" show="{{ sheetshow }}"
+	position="bottom" bind:close="onClose"
+	custom-style="height:760rpx">
+		<view class="popopBox1">
+			<view class="goodsimg">
+				<image src="{{spimg[0]}}"
+				data-src="{{spimg[0]}}"
+					bindtap="previewImage"></image>
+			</view>
+			<view class="goodstkjg">
+				<view class="closebtn" bindtap="onClose">
+					<image src="/static/images/index/closebtn_03.jpg"></image>
+				</view>
+				<view class="tkpri">￥123.00</view>
+				<view class="tkname oh2">商品名称描述商品名称描述商品名称描述商品名称描述商品名称描述商品名称描述</view>
+			</view>
+		</view>
+		<view class="tkguigetit">规格选择</view>
+		<view class="guigeBox">
+			<text class="guigeOne {{idx==type1?'cur':''}}" wx:for="{{guige}}"wx:for-index="idx"
+								wx:for-item="item" 
+								wx:key="idx"
+								data-gg="{{idx}}"
+								bindtap="selegg">{{item}}</text>
+		</view>
+		<view class="countnum">
+			<text>数量</text>
+			<van-stepper custom-class="steppera" 
+			input-class="vanipt"
+			plus-class="vantjia"
+			minus-class="vantjian"
+			value="{{ cnum }}" 
+			data-selec="{{idx}}" 
+			bind:input="onChange"
+			bind:change="onChange" />
+		</view>
+		<view class="czbtnG">
+			<view class="jrgwc" bindtap="addwgc">加入购物车</view>
+			<view class="buybtn" bindtap="nowbuy">立即购买</view>
+		</view>
+	</van-popup>
+	<view class="w100">
+		<view class="guige" bindtap="">
+			<view class="guige_l">
+				<view class="fz32 mr10">用户评价</view>
+				<view class="guige_l_name">(10条)</view>
+			</view>
+			<view >
+				查看全部<text class="iconfont iconnext fz32 c9 ml10"></text>
+			</view>
+		</view>
+		<view class="contbox  dis_flex">
+			<image class="plhaedimg" 
+			catchtap="previewImage"
+			data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563957484276&di=052d557cdbc7daf8272249343c94faf2&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201805%2F13%2F20180513224039_tgfwu.png"
+			src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563957484276&di=052d557cdbc7daf8272249343c94faf2&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201805%2F13%2F20180513224039_tgfwu.png"
+			></image>
+			<view class="flex_1">
+				<view class="fz26 c3 mb10 dis_flex ju_b">
+					<text>用户昵称123</text>
+					<text class="fz24 c9">2019年7月6日</text>
+				</view>
+				<view class="fz26 oh3 c9">这里是商品评价描述性文字这里是商品评价描述性文字这里是商品评价描述性文字……</view>
+			</view>
+		</view>
+	</view>
+	<view class="hengxian"></view>
+	<view class="contbox goodsmsgs">
+		<view class="dis_flex aic w100 ju_c pt40 pb30">
+			<text class="mr10">——————</text><text class="iconfont iconaixin fz26 cf6377a mr10"></text><text class="fz32 c3 fwb">商品详情</text><text class="ml10">——————</text>
+		</view>
+		<template is="wxParse" data="{{wxParseData:article.nodes}}" />
+		<!-- <image class="goodsdetailsimg" src="../../static/images/index/goodsdetails_06.jpg"></image> -->
+	</view>
+	<view class="bottomBox">
+		<view class="opengwc" bindtap="opengwc">
+			<view class="l_icon">
+				<!-- <image src="/static/images/index/gwcicon.png"></image> -->
+				<text class="iconfont iconicon1 fz60"></text>
+				<view wx:if="{{addshow}}" class="goodsnum"></view>
+			</view>
+			<view class="l_name">购物车</view>
+		</view>
+		<view class="jrgwc" bindtap="sheetshow">加入购物车</view>
+		<view class="buybtn" bindtap="sheetshow">立即购买</view>
+	</view>
+</view>

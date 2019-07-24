@@ -1,0 +1,26 @@
+/* pages/setyj/setyj.wxss */
+.container{
+	padding: 0 36rpx;
+}
+.intbox{
+	height: 250rpx;
+	padding: 20rpx;
+	border: 1px solid #ddd;
+	display: flex;
+	line-height: 40rpx;
+}
+.thbtn{
+	width: 350rpx;
+	background-color: #E22829;
+	height: 80rpx;
+	line-height: 80rpx;
+	color: #fff;
+	border-radius: 80rpx;
+	font-size: 36rpx;
+}
+.ssint{
+	width: 100%;
+	height: auto;
+	font-size: 36rpx;
+	/* line-height: 50rpx; */
+}

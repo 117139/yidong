@@ -1,0 +1,14 @@
+<!--pages/setyj/setyj.wxml-->
+<view class="container">
+	<form class="topform w100" bindsubmit="formSubmit">
+		<view class="dis_flex pb100">
+			<view class="mr20 lh50 ">意见反馈</view>
+			<view class="intbox  flex_1">
+				<!-- <input class="ssint" type="text" placeholder="请输入手机号" name="sr"/> -->
+				<textarea class="ssint" placeholder="请输入意见反馈" name="sr" id="" cols="30" rows="10"></textarea>
+			</view>
+		</view>
+		<button  class="mt60 thbtn" form-type="submit">提交</button>
+		
+	</form >
+</view>

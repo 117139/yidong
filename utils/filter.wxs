@@ -1,0 +1,39 @@
+
+// filter.wxs
+var dateFormat = function(date) {
+    var dates = date.split('/');
+    return dates[0] + "年" + dates[1] + "月" + dates[2] + "日";
+}
+var imgIP=function(img){
+	var newimg ='http://192.168.129.119/'+img
+	console.log(newimg)
+	return newimg
+}
+var moneyFormat = function(money) {
+		money=money-1+1
+    return money.toFixed(2);
+}
+var getgimg = function(img) {
+	var img1=img.split(",")
+	// console.log(img1[0])
+    return img1[0]
+}
+var getTime = function(time){
+  var date = time.split(" ")
+  console.log(date[0])
+  var date1 = date[0].split("/")
+  date = date1[2] + '-' + date1[0] + '-' + date1[1] + " " + date[1]
+  console.log(date)
+  return date
+}
+/*
+ * 导出
+ */
+module.exports = {
+    dateFormat: dateFormat,
+    moneyFormat: moneyFormat,
+	getgimg:getgimg,
+  getTime:getTime,
+	imgIP:imgIP
+
+}

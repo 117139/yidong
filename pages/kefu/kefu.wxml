@@ -1,0 +1,5 @@
+<!--pages/kefu/kefu.wxml-->
+<view class="container">
+	<image bindtap="previewImage" src="{{kf}}" data-src="{{kf}}"></image>
+	<view class="tac mt20">请添加客服微信</view>
+</view>

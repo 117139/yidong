@@ -1,0 +1,106 @@
+<!--my.wxml-->
+<view class="container log-list">
+	<view class="mybanner">
+
+		<view class="myhead">
+			<!-- <image class="bg" src="/static/images/my/mytx.jpg"></image> -->
+			<image class="bg" src="{{userInfo.avatarUrl}}" data-src="{{userInfo.avatarUrl}}" bindtap="previewImage"></image>
+		</view>
+		<view class="myname">{{userInfo.nickName}}</view>
+
+	</view>
+	<view class="myguanli">
+		<view class="mycell w100" bindtap="jump" data-url="/pages/OrderList/OrderList?type=0">
+			<view class="cell_l">
+				<view class="glicon">
+					<text class="iconfont icondingdan"></text>
+				</view>
+				我的订单
+			</view>
+			<view class="fz30 c6">
+				查看全部订单 >
+			</view>
+		</view>
+	</view>
+	<view class="ddstate">
+		<view class="stateOne" bindtap="jump" data-url="/pages/OrderList/OrderList?type=1">
+
+			<view class="stateicon">
+				<text class="iconfont icondaizhifudingdan"></text>
+			</view>
+			<view>待支付</view>
+		</view>
+		<view class="stateOne" bindtap="jump" data-url="/pages/OrderList/OrderList?type=2">
+			<view class="stateicon">
+				<text class="iconfont icondaifahuo"></text>
+			</view>
+			<view>待发货</view>
+		</view>
+		<view class="stateOne" bindtap="jump" data-url="/pages/OrderList/OrderList?type=2">
+			<view class="stateicon">
+				<text class="iconfont icondaishouhuo"></text>
+			</view>
+			<view>待收货</view>
+		</view>
+		<view class="stateOne" bindtap="jump" data-url="/pages/OrderList/OrderList?type=3">
+			<view class="stateicon">
+				<text class="iconfont iconjiaoyiwancheng"></text>
+			</view>
+			<view>交易完成</view>
+		</view>
+		<view class="shuxian"></view>
+		<view class="stateOne " bindtap="jump" data-url="/pages/kefu/kefu">
+			<view class="stateicon">
+				<text class="iconfont iconkefu"></text>
+			</view>
+			<view>客服</view>
+		</view>
+	</view>
+	<view class="myguanli">
+		<view class="mycell" bindtap="jump" data-url="/pages/myaddress/myaddress">
+			<view class="cell_l">
+				<view class="glicon">
+					<text class="iconfont icondizhi"></text>
+				</view>
+				地址管理
+			</view>
+			<view class="cnext">
+				<text class="iconfont iconnext"></text>
+			</view>
+		</view>
+		<view class="mycell" bindtap="jump" data-url="/pages/yhlist/yhlist">
+			<view class="cell_l">
+				<view class="glicon">
+					<text class="iconfont iconyouhuiquan"></text>
+				</view>
+				我的优惠券
+			</view>
+			<view class="cnext">
+				<text class="iconfont iconnext"></text>
+			</view>
+		</view>
+		<view class="mycell" bindtap="jump" data-url="/pages/about/about">
+			<view class="cell_l">
+				<view class="glicon">
+					<text class="iconfont iconguanyuwomen"></text>
+				</view>
+				关于我们
+			</view>
+			<view class="cnext">
+				<text class="iconfont iconnext"></text>
+			</view>
+		</view>
+		<view class="mycell" bindtap="jump" data-url="/pages/setyj/setyj">
+			<view class="cell_l">
+				<view class="glicon">
+					<text class="iconfont iconyijian"></text>
+				</view>
+				意见反馈
+			</view>
+			<view class="cnext">
+				<text class="iconfont iconnext"></text>
+			</view>
+		</view>
+		
+	</view>
+</view>

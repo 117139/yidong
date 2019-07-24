@@ -1,0 +1,74 @@
+<!--logs.wxml-->
+<import src="/utils/pageState/index.wxml" />
+<template is="pageState" data="{{...pageState}}" />
+<view class="container">
+  <!-- <view class="address" bindtap="goaddress">
+		<view class="add_l">
+			<view class="al_1">{{address.name}} <text class="l_tel">{{address.mobile}}</text></view>
+			
+			<view class="al_2">{{address.province}}{{address.city}}{{address.county}}{{address.address}}</view>
+		</view>
+		<view class="add_r">
+			<image src="/static/images/my/mygl_06.png"></image>
+		</view>
+	</view> -->
+	<view class="address">
+		<view class="add_l">
+			<view class="al_1">MISTERAYQU <text class="l_tel"as>113****7031</text></view>
+			<view class="al_2">上海市徐汇区田林路487号宝石22号楼杉德大厦1楼</view>
+		</view>
+		<!-- <view class="add_r"> -->
+			<text class="iconfont iconnext"></text>
+		<!-- </view> -->
+	</view>
+	<view class="orderbder">
+		<image src="/static/images/orderborder.png"></image>
+	</view>
+	<view class="goodsBox contbox">
+		<view class="goodsdft" wx:for="{{order_product_list}}"
+		wx:for-index="idx1"
+		wx:for-item="item1" 
+		wx:key="idx1" 
+		data-id="{{1}}" bindtap="goOrderDetails">
+			<view class="goodsImg">
+				<!-- <image src="{{spimg[idx][idx1]}}"></image> -->
+				<image src="{{item1.goods_img}}"></image>
+			</view>
+			<view class="goodsInr">
+				<view class="fz30 c3 oh1"> 
+					这里是运动鞋标题描述性文字这里是运动鞋标题描述性文字这里是运动鞋标题描述性文字……
+				</view>
+				<!-- <view class="sptype" wx:if="{{item1.is_ladder_pricing==1}}">阶梯优惠商品 
+					<text class="orderstatus">{{item.order_info.order_process}}</text>
+				</view> -->
+				<view class="goodsInr1 fz26 c9">
+					白色；43 X1
+				</view>
+				<text class="fz30 cf6377a fwb">￥23.00</text>
+				
+			</view>
+		</view>
+		<view class="dis_flex ju_b pt30 pb20">
+			<view class="fz30 c9">总价：</view>
+			<view class="fz36 cf6377a fwb">￥123.00</view>
+		</view>
+	</view>
+	<view class="hengxian"></view>
+	<view class="guige" bindtap="sheetshow">
+		<view class="guige_l">
+			<view class="guige_l_name">优惠券</view>
+			 <view>分享领100元无门槛优惠券</view>
+		</view>
+		<view class="guige_r">
+			<text class="iconfont iconsangedian fz36 c9"></text>
+		</view>
+	</view>
+	
+
+	<view class="fixbottom">
+		<view class="fb_l">￥{{sum}}</view>
+		<view wx:if="{{paykg}}" class="subbtn"  bindtap="subbtn">提交订单</view>
+		<view wx:if="{{!paykg}}" class="subbtn subbtn1" >提交订单</view>
+	</view>
+	
+</view>

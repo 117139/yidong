@@ -1,0 +1,64 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/Order/Order",
+		"pages/OrderDetails/OrderDetails",
+    "pages/kefu/kefu",
+    "pages/fabiaopl/fabiaopl",
+    "pages/pinglun/pinglun",
+		"pages/goodsDetails/goodsDetails",
+		"pages/my/my",
+		"pages/OrderList/OrderList",
+    "pages/yhlist/yhlist",
+    "pages/setyj/setyj",
+		"pages/car/car", 
+    "pages/login/login",
+		"pages/about/about",
+		"pages/addAdd/addAdd",
+		"pages/addressEdit/addressEdit",
+		"pages/myaddress/myaddress",
+		
+		
+		
+		
+    "pages/logs/logs"
+		
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "YIDONG-SPORT",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+	"tabBar": {
+		"color": "#333333",
+		"selectedColor": "#00a0e9",
+		"list": [
+			{
+			  "pagePath": "pages/index/index",
+			  "text": "首页",
+			  "iconPath": "/static/images/1_1.png",
+			  "selectedIconPath": "/static/images/1.png"
+			},
+			{
+			  "pagePath": "pages/car/car",
+			  "text": "购物车",
+			  "iconPath": "/static/images/2_1.png",
+			  "selectedIconPath": "/static/images/2.png"
+			},
+			{
+			  "pagePath": "pages/my/my",
+			  "text": "我的",
+			  "iconPath": "/static/images/3_1.png",
+			  "selectedIconPath": "/static/images/3.png"
+			}
+		]
+	},
+	"usingComponents": {
+		"van-stepper": "vendor/vant/lib/stepper/index",
+		"van-submit-bar": "vendor/vant/lib/submit-bar/index",
+		"van-popup": "vendor/vant/lib/popup/index",
+		"van-action-sheet": "vendor/vant/lib/action-sheet/index"
+	}
+}

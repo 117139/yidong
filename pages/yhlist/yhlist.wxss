@@ -1,0 +1,4 @@
+/* pages/yhlist/yhlist.wxss */
+.container{
+	padding: 0 36rpx;
+}

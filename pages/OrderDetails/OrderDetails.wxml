@@ -1,0 +1,91 @@
+<!--logs.wxml-->
+<import src="/utils/pageState/index.wxml" />
+<wxs src="../../utils/filter.wxs" module="filter" />
+<template is="pageState" data="{{...pageState}}" />
+<view class="container">
+  <view class="address">
+		<view class="add_l">
+			<view class="al_1">MISTERAYQU <text class="l_tel"as>113****7031</text></view>
+			<view class="al_2">上海市徐汇区田林路487号宝石22号楼杉德大厦1楼</view>
+		</view>
+		<view class="add_r">
+			<image src="/static/images/my/mygl_06.png"></image> 
+		</view>
+	</view>
+	<view class="orderbder">
+		<image src="/static/images/orderborder.png"></image>
+	</view>
+	<view class="goodsBox contbox">
+		<view class="goodsdft" wx:for="{{order_product_list}}"
+		wx:for-index="idx1"
+		wx:for-item="item1" 
+		wx:key="idx1" 
+		data-id="{{1}}" bindtap="goOrderDetails">
+			<view class="goodsImg">
+				<!-- <image src="{{spimg[idx][idx1]}}"></image> -->
+				<image src="{{item1.goods_img}}"></image>
+			</view>
+			<view class="goodsInr">
+				<view class="fz36 c3 oh1"> 
+					这里是运动鞋标题描述性文字这里是运动鞋标题描述性文字这里是运动鞋标题描述性文字……
+				</view>
+				<!-- <view class="sptype" wx:if="{{item1.is_ladder_pricing==1}}">阶梯优惠商品 
+					<text class="orderstatus">{{item.order_info.order_process}}</text>
+				</view> -->
+				<view class="goodsInr1 fz32 c9">
+					白色；43 X1
+				</view>
+				<text class="fz30 cf6377a fwb">￥23.00</text>
+				<view class="goodsInr1">	 {{item1.goods_unit}} 
+					 <!-- {{item1.goods_count}}件 -->
+				</view>
+			</view>
+		</view>
+	</view>
+	
+	<view class="hengxian"></view>
+	<view class="ordermsg" wx:show="{{order_status!==''}}">
+		<view class="msgtit">
+			订单信息
+		</view>
+		
+		<view class="msginr">
+			<!-- <view hidden='{{order_status===0}}' class="orderewm">
+				<canvas class='canvas' style="width:{{qrcodeWidth}}px; height:{{qrcodeWidth}}px;" canvas-id='canvas' bindlongtap=''></canvas>
+			</view> -->
+			<view class="ordermsg_r">
+				<view class="omsgp">订单编号：{{123454667}}</view>
+				<view class="omsgp">创建时间：{{'2019-7-6'}}</view>
+				<view class="omsgp" wx:if="{{order_status!==0}}">付款时间：{{'2019-7-6'}}</view>
+				<view class="ordercaozuo">
+					<!-- <text>￥{{sum}}</text> -->
+					<view wx:if="{{order_status===0}}" class="confirmBtn" bindtap="pay">付款</view>
+					<view wx:if="{{order_status===2}}" class="confirmBtn" bindtap="confirmBtn">确认收货</view>
+				</view>
+			</view>
+		</view>
+		
+	</view>
+	<view class="hengxian"></view>
+	<view class="w100 bgfff contbox">
+		<view class="dis_flex ju_b w100 pt40">
+			<text class="fz26 c3">商品总额</text>
+			<text class="fz26 c3 fwb">￥123.00</text>
+		</view>
+		<view class="dis_flex ju_b w100 pt10">
+			<text class="fz26 c3">优惠券</text>
+			<text class="fz26 c3 fwb">-￥100.00</text>
+		</view>
+		<view class="dis_flex ju_b w100 pb100">
+			<text class="fz26 c3"></text>
+			<view>
+				<text class="fz30 c3 ">需付款:</text>
+				<text class="fz30 cf6377a fwb">￥23.00</text>
+			</view>
+		</view>
+	</view>
+	<view class="ordercaozuo">
+		<view class="confirmBtn cancelBtn" data-oid="{{item.order_info.order_info_id}}" bindtap="cancelOrder">取消订单</view>
+		<view class="confirmBtn" data-oid="{{item.order_info.order_info_id}}" bindtap="pay">付款</view>
+	</view>
+</view>

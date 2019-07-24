@@ -1,0 +1,16 @@
+<!--pages/yhlist/yhlist.wxml-->
+<view class="container">
+	<view class="yhquan">
+		<image class="yhqbg" src="../../static/images/quan_03.jpg"></image>
+		<view class="yhqinr">
+			<view class="fz140 c30 fwb mr30 letter-s20">100</view>
+			<view class="yhinr">
+				<view class="fz34 c30">优惠券<text class="fz30">(一个号仅限一张)</text></view>
+				<view class="gofenxiang">
+					点击商品进行分享<text class="iconfont iconnext ml10 fz24"></text>
+					<button class="shareBtn" open-type='share' data-supid="1" data-type="{{idx1}}"></button>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

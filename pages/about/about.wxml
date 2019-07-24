@@ -1,0 +1,7 @@
+<!--logs.wxml-->
+<view class="container">
+  <view class="logo">
+		<image src="../../static/images/aboutlogo.png"></image>
+	</view>
+	<view class="abouttext">关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们</view>
+</view>
