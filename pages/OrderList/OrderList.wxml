@@ -6,7 +6,7 @@
 	<!-- <view class="hengxian"></view> -->
 	<view class='dis_flex ju_a w100 pb40 pt20 bgfff'>
 		<block wx:for="{{datalist}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
-			<view class="{{type==idx?'typecur':''}}" data-type="{{idx}}" bindtap='bindcur'>{{item}}</view>
+			<view class="{{type==idx?'typecur':'c9'}}" data-type="{{idx}}" bindtap='bindcur'>{{item}}</view>
 		</block>
 	  <!-- <view class="{{type==0?'typecur':''}}" data-type="0" bindtap='bindcur'>最新</view>
 	  <view class="{{type==1?'typecur':''}}" data-type="1" bindtap='bindcur'>热门</view>

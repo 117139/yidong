@@ -109,14 +109,14 @@
 }
 .xjjine{
 	font-size: 32rpx;
-	color: #fe0042;
+	color: #f75852;
 }
 .ordercaozuo{
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
 	font-size: 32rpx;
-	color: #fe0042;
+	color: #f75852;
 	/* padding-bottom: 25rpx; */
 }
 .confirmBtn{
@@ -146,5 +146,6 @@
 }
 .typecur{
   padding-bottom: 12rpx;
-  border-bottom: 6rpx solid #e22829;
+  border-bottom: 6rpx solid #f75852;
+	color: #f75852;
 }

@@ -140,9 +140,10 @@ image{
 	background: #eee;
 }
 .l_icon{
-	width: 66rpx;
-	height: 66rpx;
+	width: 50rpx;
+	height: 50rpx;
 	position: relative;
+	
 }
 
 .goodsnum{

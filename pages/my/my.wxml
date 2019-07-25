@@ -30,7 +30,7 @@
 				<view class="stateicon">
 					<text class="iconfont icondaizhifudingdan"></text>
 				</view>
-				<view>待支付</view>
+				<view>待付款</view>
 			</view>
 			<view class="stateOne" bindtap="jump" data-url="/pages/OrderList/OrderList?type=2">
 				<view class="stateicon">

@@ -147,7 +147,7 @@
 	height: 100rpx;
 	padding-left: 28rpx;
 	font-size: 28rpx;
-	color: #fe0042;
+	color: #f75852;
 	display: flex;
 	align-items: center;
 	font-weight: bold;
@@ -155,7 +155,7 @@
 .subbtn{
 	width: 212rpx;
 	height: 100rpx;
-	background-color: #fe0042;
+	background-color: #f75852;
 	color:#fff;
 	font-size: 28rpx;
 	display: flex;

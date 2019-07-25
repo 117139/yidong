@@ -155,7 +155,7 @@
 		<view class="opengwc w100r" bindtap="openshouye">
 			<!-- <view class="l_icon"> -->
 				<!-- <image src="/static/images/index/gwcicon.png"></image> -->
-				<text class="iconfont iconshouye1 fz60"></text>
+				<text class="iconfont iconshoye fz50 c9"></text>
 				<!-- <view wx:if="{{addshow}}" class="goodsnum"></view> -->
 			<!-- </view> -->
 			<view class="l_name">首页</view>
@@ -164,7 +164,7 @@
 		<view class="opengwc w100r" bindtap="opengwc">
 			<view class="l_icon">
 				<!-- <image src="/static/images/index/gwcicon.png"></image> -->
-				<text class="iconfont iconicon1 fz60"></text>
+				<text class="iconfont icongwc fz50 c9"></text>
 				<view wx:if="{{addshow}}" class="goodsnum"></view>
 			</view>
 			<view class="l_name">购物车</view>
