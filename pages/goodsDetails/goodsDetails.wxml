@@ -124,7 +124,7 @@
 				<view class="fz32 mr10">用户评价</view>
 				<view class="guige_l_name">(10条)</view>
 			</view>
-			<view class="fz26 c9">
+			<view class="fz26 c9" bindtap="gomore">
 				查看全部<text class="iconfont iconnext fz32 c9 ml10"></text>
 			</view>
 		</view>
@@ -155,7 +155,7 @@
 		<view class="opengwc w100r" bindtap="openshouye">
 			<!-- <view class="l_icon"> -->
 				<!-- <image src="/static/images/index/gwcicon.png"></image> -->
-				<text class="iconfont iconshouye1 fz50"></text>
+				<text class="iconfont iconshouye1 fz60"></text>
 				<!-- <view wx:if="{{addshow}}" class="goodsnum"></view> -->
 			<!-- </view> -->
 			<view class="l_name">首页</view>

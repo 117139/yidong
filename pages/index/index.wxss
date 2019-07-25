@@ -34,9 +34,10 @@ page{
 	height: 66rpx;
 	border-radius: 10rpx;
 	border: solid 1px #f75852;
+	background-color: #f75852;
 	font-family: MicrosoftYaHei;
 	font-size: 32rpx;
-	color: #f75852;
+	color: #fff;
 	display: flex;
 	justify-content: center;
 	align-items: center;

@@ -72,6 +72,11 @@ Page({
 			type1:e.currentTarget.dataset.gg
 		})
 	},
+	gomore(){
+		wx.navigateTo({
+			url:"/pages/pinglun/pinglun"
+		})
+	},
 	addwgc(){
 		wx.showToast({
 			title:"加入成功"

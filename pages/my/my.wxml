@@ -17,8 +17,8 @@
 				</view>
 				我的订单
 			</view>
-			<view class="fz30 c6">
-				查看全部订单 >
+			<view class="fz26 c6">
+				查看全部订单 <text class="iconfont iconnext fz26 c6"></text>
 			</view>
 		</view>
 	</view>
