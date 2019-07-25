@@ -39,7 +39,7 @@
 		</view>
 	</view>
 	<view class="hengxian"></view>
-		<view class="list boxsiz dis_flex ais" bindtap="jump" data-url="/pages/goodsDetails/goodsDetails?shop_id=1">
+	<view class="list boxsiz dis_flex ais" bindtap="jump" data-url="/pages/goodsDetails/goodsDetails?shop_id=1">
 		<image class="shopimg" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463694&di=f1313a20ae6905d950e3fb48bf30dacf&imgtype=0&src=http%3A%2F%2Fpic4.58cdn.com.cn%2Fzhuanzh%2Fn_v27fbe81b6f94548ce9fdac6489ffe3276.jpg%3Fw%3D750%26h%3D0"></image>
 		<view class="flex_1">
 			<view class="oh1 mb50 fwb c30 fz30">这里是运动鞋标题描述这里是运动鞋标题描述</view>
@@ -54,5 +54,8 @@
 				</view>
 			</view>
 		</view>
+	</view>
+	<view class="bottombox">
+		—— 屹动 ——
 	</view>
 </view>

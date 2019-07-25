@@ -16,7 +16,7 @@
 			</view>
 			<view class="xuanze" data-selec="{{idx}}" catchtap="select">
 				<view class="xuanze1 {{goods_sele[idx].xuan==true? 'xuanze2':''}}">
-					<icon  wx:if="{{goods_sele[idx].xuan==true}}" type="success" size="18" color="#fe0042" />
+					<icon  wx:if="{{goods_sele[idx].xuan==true}}" type="success" size="12" color="#fe0042" />
 				</view>
 			</view>
 			<view class="goodsImg">
@@ -48,7 +48,7 @@
 	<view class="vbottom" wx:if="{{goods.length!==0}}">
 		<view class="selecAll" bindtap="selecAll">
 			<view class="xuanze1 all {{all==true? 'xuanze2':''}}">
-				<icon  wx:if="{{all==true}}" type="success" size="20" color="#fe0042" />
+				<icon  wx:if="{{all==true}}" type="success" size="12" color="#fe0042" />
 			</view>
 			全选
 		</view>
