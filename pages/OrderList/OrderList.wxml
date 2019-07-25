@@ -3,7 +3,8 @@
 <wxs src="../../utils/filter.wxs" module="filter" />
 <template is="pageState" data="{{...pageState}}" />
 <view class="container">
-	<view class='dis_flex ju_a w100 pb40 bgfff'>
+	<!-- <view class="hengxian"></view> -->
+	<view class='dis_flex ju_a w100 pb40 pt20 bgfff'>
 		<block wx:for="{{datalist}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
 			<view class="{{type==idx?'typecur':''}}" data-type="{{idx}}" bindtap='bindcur'>{{item}}</view>
 		</block>

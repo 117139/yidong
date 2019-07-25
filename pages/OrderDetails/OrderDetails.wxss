@@ -147,6 +147,7 @@ image{
 }
 .omsgp{
 	font-size: 26rpx;
+	margin-bottom: 12rpx;
 	color: #666;
 }
 .ordercaozuo{

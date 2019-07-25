@@ -30,7 +30,7 @@
 			<view class="shuxian"></view>
 			<view class="dis_flex flex_dc aic">
 				<text class="iconfont iconfenxiang fz36 "></text>
-				<view>分享</view>
+				<view class="fz26">分享</view>
 			</view>
 		</view>
 		<view class="contbox dis_flex aic">
@@ -39,13 +39,23 @@
 		</view>
 	</view>
 	<view class="hengxian"></view>
-	<view class="guige" bindtap="sheetshow">
+	<view class="guige">
 		<view class="guige_l">
 			<view class="guige_l_name">促销</view>
-			 <view>分享领100元无门槛优惠券</view>
+			 <view class="c9">分享领100元无门槛优惠券</view>
 		</view>
 		<view class="guige_r">
 			<text class="iconfont iconsangedian fz36 c9"></text>
+		</view>
+	</view>
+	<view class="hengxian"></view>
+	<view class="guige">
+		<view class="guige_l">
+			<view class="guige_l_name">运费</view>
+			 <view class="c9">10元</view>
+		</view>
+		<view class="guige_r">
+			<!-- <text class="iconfont iconsangedian fz36 c9"></text> -->
 		</view>
 	</view>
 	<view class="hengxian"></view>
@@ -114,7 +124,7 @@
 				<view class="fz32 mr10">用户评价</view>
 				<view class="guige_l_name">(10条)</view>
 			</view>
-			<view >
+			<view class="fz26 c9">
 				查看全部<text class="iconfont iconnext fz32 c9 ml10"></text>
 			</view>
 		</view>
@@ -142,7 +152,16 @@
 		<!-- <image class="goodsdetailsimg" src="../../static/images/index/goodsdetails_06.jpg"></image> -->
 	</view>
 	<view class="bottomBox">
-		<view class="opengwc" bindtap="opengwc">
+		<view class="opengwc w100r" bindtap="openshouye">
+			<!-- <view class="l_icon"> -->
+				<!-- <image src="/static/images/index/gwcicon.png"></image> -->
+				<text class="iconfont iconshouye1 fz50"></text>
+				<!-- <view wx:if="{{addshow}}" class="goodsnum"></view> -->
+			<!-- </view> -->
+			<view class="l_name">首页</view>
+		</view>
+		<view class="shuxian_x"></view>
+		<view class="opengwc w100r" bindtap="opengwc">
 			<view class="l_icon">
 				<!-- <image src="/static/images/index/gwcicon.png"></image> -->
 				<text class="iconfont iconicon1 fz60"></text>
@@ -150,7 +169,7 @@
 			</view>
 			<view class="l_name">购物车</view>
 		</view>
-		<view class="jrgwc" bindtap="sheetshow">加入购物车</view>
-		<view class="buybtn" bindtap="sheetshow">立即购买</view>
+		<view class="jrgwc flex_1" bindtap="sheetshow">加入购物车</view>
+		<view class="buybtn flex_1" bindtap="sheetshow">立即购买</view>
 	</view>
 </view>

@@ -148,6 +148,11 @@ Page({
 			addshow:false
 		})
 	},
+	openshouye(){
+		wx.switchTab({
+		  url: '/pages/index/index'
+		})
+	},
 	getGoodsDetails(id,gid){
 		const pageState1 = pageState.default(this)
 		pageState1.loading()    // 切换为loading状态

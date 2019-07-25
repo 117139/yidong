@@ -141,6 +141,8 @@ Page({
 	getOrderList(id){
 		const pageState1 = pageState.default(this)
 		pageState1.loading()    // 切换为loading状态
+		pageState1.finish() 
+		return
 		let that = this
 		//http://water5100.800123456.top/WebService.asmx/order
 		wx.request({

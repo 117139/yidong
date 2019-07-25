@@ -1,6 +1,7 @@
 .container{
 	min-height: 100vh;
 	background: #eeeeee;
+	border-top: 1px solid #eee;
 	/* padding-top: 17rpx; */
 }
 .goodsImg image{
@@ -123,8 +124,8 @@
 	height: 64rpx;
 	border-radius: 32rpx;
 	font-size: 24rpx;
-	color: #f6377a;
-	border:1px solid #f6377a;
+	color: #f75852;
+	border:1px solid #f75852;
 	display: flex;
 	justify-content: center;
 	align-items: center;

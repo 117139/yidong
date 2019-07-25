@@ -6,7 +6,7 @@
           wx:for-item="item" 
           wx:key="idx">
 		<view class="addp1">
-			<text>{{item.name}}</text>
+			<text class="mr20">{{item.name}}</text>
 			<text>{{item.mobile}}</text>
 		</view>
 		<view class="addp2">{{item.province}}{{item.city}}{{item.county}}{{item.address}}</view>
@@ -19,8 +19,12 @@
 				默认地址
 			</view>
 			<view class="setcz">
-				<view class="setting2" data-id="{{idx}}" bindtap="addressEdit">编辑</view>
-				<view class="setting3" data-id="{{item.user_member_shopping_address_id}}" bindtap="addressDel">删除</view>
+				<view class="setting2" data-id="{{idx}}" bindtap="addressEdit">
+					<text class="iconfont icondingdan fz26 mr5"></text>编辑
+				</view>
+				<view class="setting3" data-id="{{item.user_member_shopping_address_id}}" bindtap="addressDel">
+					<text class="iconfont iconshanchu fz26 mr5"></text>删除
+				</view>
 			</view>
 		</view>
 	</view>

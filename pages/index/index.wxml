@@ -14,30 +14,13 @@
 	</swiper>
 	<view class="goodsmsgs mian">
 		<view class="dis_flex aic w100 ju_c pt40 pb30">
-			<text class="mr10">——————</text><text class="iconfont iconaixin fz26 cf6377a mr10"></text><text class="fz32 c3 fwb">分享领券</text><text class="ml10">——————</text>
+			<text class="mr10">——————</text><text class="iconfont iconaixin fz26 cf6377a mr10"></text><text class="fz32 c3 fwb">产品展示</text><text class="ml10">——————</text>
 		</view>
 		<template is="wxParse" data="{{wxParseData:article.nodes}}" />
 		<image class="goodsdetailsimg" src="../../static/images/fwb_03.jpg"></image>
 	</view>
 	<view class="hengxian"></view>
-	<view class="list boxsiz dis_flex ais" bindtap="jump" data-url="/pages/goodsDetails/goodsDetails?shop_id=1">
-		<image class="shopimg" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463694&di=f1313a20ae6905d950e3fb48bf30dacf&imgtype=0&src=http%3A%2F%2Fpic4.58cdn.com.cn%2Fzhuanzh%2Fn_v27fbe81b6f94548ce9fdac6489ffe3276.jpg%3Fw%3D750%26h%3D0"></image>
-		<view class="flex_1">
-			<view class="oh1 mb50 fwb c30 fz30">这里是运动鞋标题描述这里是运动鞋标题描述</view>
-			<view class="scx fz26 c3">原价 : {{filter.moneyFormat(1550)}}</view>
-			<view class="dis_flex ju_b aic w100">
-				<view class="cf33c7b fwb">
-					<text class="fz30">￥</text>
-					<text class="fz48">{{filter.moneyFormat(670)}}</text>
-				</view>
-				<view class="gobuy fwb">
-					立即抢购
-				</view>
-			</view>
-		</view>
-	</view>
-	<view class="hengxian"></view>
-	<view class="mian mb50">
+  <view class="mian mb50">
 		<view class="dis_flex aic w100 ju_c pt30 pb15">
 			<text class="mr10">——————</text><text class="iconfont iconaixin fz26 cf6377a mr10"></text><text class="fz32 c3 fwb">分享领券</text><text class="ml10">——————</text>
 		</view>
@@ -51,6 +34,23 @@
 						点击商品进行分享<text class="iconfont iconnext ml10 fz24"></text>
 						<button class="shareBtn" open-type='share' data-supid="1" data-type="{{idx1}}"></button>
 					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="hengxian"></view>
+		<view class="list boxsiz dis_flex ais" bindtap="jump" data-url="/pages/goodsDetails/goodsDetails?shop_id=1">
+		<image class="shopimg" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463694&di=f1313a20ae6905d950e3fb48bf30dacf&imgtype=0&src=http%3A%2F%2Fpic4.58cdn.com.cn%2Fzhuanzh%2Fn_v27fbe81b6f94548ce9fdac6489ffe3276.jpg%3Fw%3D750%26h%3D0"></image>
+		<view class="flex_1">
+			<view class="oh1 mb50 fwb c30 fz30">这里是运动鞋标题描述这里是运动鞋标题描述</view>
+			<view class="scx fz26 c3">原价 : {{filter.moneyFormat(1550)}}</view>
+			<view class="dis_flex ju_b aic w100">
+				<view class="cf33c7b fwb">
+					<text class="fz30">￥</text>
+					<text class="fz48">{{filter.moneyFormat(670)}}</text>
+				</view>
+				<view class="gobuy fwb">
+					立即抢购
 				</view>
 			</view>
 		</view>

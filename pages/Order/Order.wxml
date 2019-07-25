@@ -63,6 +63,17 @@
 			<text class="iconfont iconsangedian fz36 c9"></text>
 		</view>
 	</view>
+	<view class="hengxian"></view>
+	<view class="guige" bindtap="sheetshow">
+		<view class="guige_l">
+			<view class="guige_l_name">运费</view>
+			 <!-- <view>10元</view> -->
+		</view>
+		<!-- <view class="guige_r"> -->
+			<view class="fz26 c9">+￥10.00</view>
+			<!-- <text class="iconfont iconsangedian fz36 c9"></text> -->
+		<!-- </view> -->
+	</view>
 	
 
 	<view class="fixbottom">

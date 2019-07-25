@@ -73,6 +73,10 @@
 			<text class="fz26 c3 fwb">￥123.00</text>
 		</view>
 		<view class="dis_flex ju_b w100 pt10">
+			<text class="fz26 c3">运费</text>
+			<text class="fz26 c3 fwb">+￥10.00</text>
+		</view>
+		<view class="dis_flex ju_b w100 pt10">
 			<text class="fz26 c3">优惠券</text>
 			<text class="fz26 c3 fwb">-￥100.00</text>
 		</view>
@@ -80,7 +84,7 @@
 			<text class="fz26 c3"></text>
 			<view>
 				<text class="fz30 c3 ">需付款:</text>
-				<text class="fz30 cf6377a fwb">￥23.00</text>
+				<text class="fz30 cf6377a fwb">￥33.00</text>
 			</view>
 		</view>
 	</view>

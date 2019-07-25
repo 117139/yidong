@@ -19,7 +19,7 @@ page{
 	height: 150rpx;
 	border-radius: 50%;
 	overflow: hidden;
-	border: 4rpx solid #87bdea;
+	/* border: 4rpx solid #87bdea; */
 	
 	margin-bottom: 24rpx;
 }
@@ -75,7 +75,7 @@ page{
 	justify-content: space-between;
 }
 .cell_l{
-	font-size: 38rpx;
+	font-size: 30rpx;
 	color: #666;
 	display: flex;
 	align-items: center;

@@ -16,14 +16,16 @@
 	font-size: 28rpx;
 	color: #333;
 	display: flex;
-	justify-content: space-between;
+	/* justify-content: space-between; */
 }
 .addp2{
 	font-size: 24rpx;
 	color: #333333;
-	height: 110rpx;
+	height: 80rpx;
 	display: flex;
 	align-items: center;
+	border-bottom: 1px solid #eee;
+	margin-bottom: 10rpx;
 }
 .addsetting{
 	width: 100%;

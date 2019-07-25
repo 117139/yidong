@@ -125,6 +125,9 @@ Page({
 		})
 	},
 	openOrder(){
+		wx.navigateTo({
+			url:"/pages/Order/Order"
+		})
 		let that = this
 		let xuanG=that.data.goods_sele
 		let idG=''

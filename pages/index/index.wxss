@@ -6,11 +6,11 @@ page{
 /*swiper*/
 .swiper{	
 	width: 100%;
-	height: 375rpx;
+	height: 475rpx;
 }
 .swiper image{
 	width: 100%;
-	height: 375rpx;
+	height: 475rpx;
 }
 .goodsdetailsimg{
 	width: 100%;
@@ -33,10 +33,10 @@ page{
 	width: 194rpx;
 	height: 66rpx;
 	border-radius: 10rpx;
-	border: solid 1px #f6377a;
+	border: solid 1px #f75852;
 	font-family: MicrosoftYaHei;
 	font-size: 32rpx;
-	color: #f6377a;
+	color: #f75852;
 	display: flex;
 	justify-content: center;
 	align-items: center;
