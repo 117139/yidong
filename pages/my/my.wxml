@@ -9,7 +9,7 @@
 		<view class="myname">{{userInfo.nickName}}</view>
 
 	</view>
-	<view class="myguanli">
+	<view class="myguanli myguanli1">
 		<view class="mycell w100" bindtap="jump" data-url="/pages/OrderList/OrderList?type=0">
 			<view class="cell_l">
 				<view class="glicon">
@@ -23,33 +23,36 @@
 		</view>
 	</view>
 	<view class="ddstate">
-		<view class="stateOne" bindtap="jump" data-url="/pages/OrderList/OrderList?type=1">
-
-			<view class="stateicon">
-				<text class="iconfont icondaizhifudingdan"></text>
+		
+		<view class="flex_1 dis_flex ju_b">
+			<view class="stateOne" bindtap="jump" data-url="/pages/OrderList/OrderList?type=1">
+			
+				<view class="stateicon">
+					<text class="iconfont icondaizhifudingdan"></text>
+				</view>
+				<view>待支付</view>
 			</view>
-			<view>待支付</view>
-		</view>
-		<view class="stateOne" bindtap="jump" data-url="/pages/OrderList/OrderList?type=2">
-			<view class="stateicon">
-				<text class="iconfont icondaifahuo"></text>
+			<view class="stateOne" bindtap="jump" data-url="/pages/OrderList/OrderList?type=2">
+				<view class="stateicon">
+					<text class="iconfont icondaifahuo"></text>
+				</view>
+				<view>待发货</view>
 			</view>
-			<view>待发货</view>
-		</view>
-		<view class="stateOne" bindtap="jump" data-url="/pages/OrderList/OrderList?type=2">
-			<view class="stateicon">
-				<text class="iconfont icondaishouhuo"></text>
+			<view class="stateOne" bindtap="jump" data-url="/pages/OrderList/OrderList?type=2">
+				<view class="stateicon">
+					<text class="iconfont icondaishouhuo"></text>
+				</view>
+				<view>待收货</view>
 			</view>
-			<view>待收货</view>
-		</view>
-		<view class="stateOne" bindtap="jump" data-url="/pages/OrderList/OrderList?type=3">
-			<view class="stateicon">
-				<text class="iconfont iconjiaoyiwancheng"></text>
+			<view class="stateOne" bindtap="jump" data-url="/pages/OrderList/OrderList?type=3">
+				<view class="stateicon">
+					<text class="iconfont iconjiaoyiwancheng"></text>
+				</view>
+				<view>交易完成</view>
 			</view>
-			<view>交易完成</view>
 		</view>
 		<view class="shuxian"></view>
-		<view class="stateOne " bindtap="jump" data-url="/pages/kefu/kefu">
+		<view class="stateOne kficon" bindtap="jump" data-url="/pages/kefu/kefu">
 			<view class="stateicon">
 				<text class="iconfont iconkefu"></text>
 			</view>
@@ -65,7 +68,7 @@
 				地址管理
 			</view>
 			<view class="cnext">
-				<text class="iconfont iconnext"></text>
+				<text class="iconfont iconnext cddd"></text>
 			</view>
 		</view>
 		<view class="mycell" bindtap="jump" data-url="/pages/yhlist/yhlist">
@@ -76,7 +79,7 @@
 				我的优惠券
 			</view>
 			<view class="cnext">
-				<text class="iconfont iconnext"></text>
+				<text class="iconfont iconnext cddd"></text>
 			</view>
 		</view>
 		<view class="mycell" bindtap="jump" data-url="/pages/about/about">
@@ -87,10 +90,10 @@
 				关于我们
 			</view>
 			<view class="cnext">
-				<text class="iconfont iconnext"></text>
+				<text class="iconfont iconnext cddd"></text>
 			</view>
 		</view>
-		<view class="mycell" bindtap="jump" data-url="/pages/setyj/setyj">
+		<view class="mycell bb0" bindtap="jump" data-url="/pages/setyj/setyj">
 			<view class="cell_l">
 				<view class="glicon">
 					<text class="iconfont iconyijian"></text>
@@ -98,7 +101,7 @@
 				意见反馈
 			</view>
 			<view class="cnext">
-				<text class="iconfont iconnext"></text>
+				<text class="iconfont iconnext cddd"></text>
 			</view>
 		</view>
 		

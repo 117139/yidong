@@ -16,7 +16,7 @@
 			</view>
 			<view class="xuanze" data-selec="{{idx}}" catchtap="select">
 				<view class="xuanze1 {{goods_sele[idx].xuan==true? 'xuanze2':''}}">
-					<icon  wx:if="{{goods_sele[idx].xuan==true}}" type="success" size="20" color="#fe0042" />
+					<icon  wx:if="{{goods_sele[idx].xuan==true}}" type="success" size="18" color="#fe0042" />
 				</view>
 			</view>
 			<view class="goodsImg">
@@ -24,9 +24,7 @@
 				<image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563884477581&di=3967512f3e4999247d51768d3aff6898&imgtype=0&src=http%3A%2F%2Fi1.ygimg.cn%2Fpics%2Fadidasclassic%2F2014%2F100008500%2F100008500_01_l.jpg%3F3"></image>
 			</view>
 			<view class="goodsinr">
-				<view class="goodsname fz30 c30 fwb oh1">
-					这里是运动鞋标题……
-				</view>
+				<view class="goodsname fz30 c30 fwb oh1">这里是运动鞋标题……</view>
 				<view class="goodspri">HI7白色；43</view>
 				<view class="goodspri1">
 					<text class="fz36 cf6377a fwb">￥{{filter.moneyFormat(goods_sele[idx].price)}}</text>

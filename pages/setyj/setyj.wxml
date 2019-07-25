@@ -1,14 +1,27 @@
 <!--pages/setyj/setyj.wxml-->
 <view class="container">
-	<form class="topform w100" bindsubmit="formSubmit">
-		<view class="dis_flex pb100">
-			<view class="mr20 lh50 ">意见反馈</view>
-			<view class="intbox  flex_1">
-				<!-- <input class="ssint" type="text" placeholder="请输入手机号" name="sr"/> -->
-				<textarea class="ssint" placeholder="请输入意见反馈" name="sr" id="" cols="30" rows="10"></textarea>
-			</view>
-		</view>
-		<button  class="mt60 thbtn" form-type="submit">提交</button>
+	<!-- <view class="fabutit ">发表评论</view> -->
+	<view class="textareabox">
+		<textarea bindinput="bint" class="ttaa" name="" maxlength="150" id="" cols="30" rows="10"></textarea>
+		<view class="ttnum">{{tmpdata.fblen}}/150</view>
+	</view>
+	<view class="imgbox mb40">
+		<view class="addimg1" wx:for="{{tmpdata.imgb}}" 
+				 wx:for-index="idx"
+				 wx:for-item="item"
+				 wx:key="idx"
+				 data-idx="{{idx}}"
+				 bindtap="imgdel">
 		
-	</form >
+			<image  src="{{item}}" mode="aspectFill"></image>
+		</view>
+		
+		<view wx:if="{{tmpdata.imgb.length<9}}" class="addimg" bindtap="scpic">
+			
+			<text class="iconfont iconjiahao fz100 c9"></text>
+		</view>
+	</view>
+	<view class="fabubtn" bindtap="fabusub">
+		提交
+	</view>
 </view>

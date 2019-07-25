@@ -214,6 +214,9 @@
 .c9{
 	color: #999;
 }
+.cddd{
+	color: #ddd;
+}
 .cf33c7b{
 	/* color: #f33c7b; */
 	color: #f75852;

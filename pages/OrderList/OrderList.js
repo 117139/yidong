@@ -112,7 +112,7 @@ Page({
   },
 	gopinlun(){
 		wx.navigateTo({
-			url:'/pages/pinglun/pinglun'
+			url:'/pages/fabiaopl/fabiaopl'
 		})
 	},
 	//删除

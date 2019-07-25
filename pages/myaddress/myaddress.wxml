@@ -11,14 +11,14 @@
 		</view>
 		<view class="addp2">{{item.province}}{{item.city}}{{item.county}}{{item.address}}</view>
 		<view class="addsetting">
-			<view class="setting1" data-id="{{item.user_member_shopping_address_id}}" bindtap="selecmr">
+			<view class="setting1 flex_1 c3" data-id="{{item.user_member_shopping_address_id}}" bindtap="selecmr">
 				<view class="mricon {{item.default_add==1?'mricon1':''}}">
 					<icon  wx:if="{{item.default_add==1}}" size="13" type="success" color="#135eac" />
 
 				</view>
 				默认地址
 			</view>
-			<view class="setcz">
+			<view class="setcz c3">
 				<view class="setting2" data-id="{{idx}}" bindtap="addressEdit">
 					<text class="iconfont icondingdan fz26 mr5"></text>编辑
 				</view>

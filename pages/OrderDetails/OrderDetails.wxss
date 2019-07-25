@@ -199,7 +199,7 @@ image{
 
 .contbox{
 	width: 100%;
-	padding: 10rpx 28rpx;
+	padding: 0rpx 28rpx;
 	box-sizing: border-box;
 	background-color: #fff;
 }

@@ -57,7 +57,7 @@
 					<view class="confirmBtn" data-oid="{{item.order_info.order_info_id}}" bindtap="pay">付款</view>
 				</view>
 				<view class="ordercaozuo" wx:if="{{item.order_info.order_status==1}}">
-					<view class="confirmBtn" data-oid="{{item.order_info.order_info_id}}" bindtap="shouhuoBtn">取消订单</view>
+					<view class="confirmBtn" data-oid="{{item.order_info.order_info_id}}" bindtap="cancelOrder">取消订单</view>
 				</view>
 				<view class="ordercaozuo" wx:if="{{item.order_info.order_status==2}}">
 					<view class="confirmBtn" bindtap="shouhuoBtn">确认收货</view>
