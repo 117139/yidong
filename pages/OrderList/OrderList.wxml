@@ -4,7 +4,7 @@
 <template is="pageState" data="{{...pageState}}" />
 <view class="container">
 	<!-- <view class="hengxian"></view> -->
-	<view class='dis_flex ju_a w100 pb40 pt20 bgfff'>
+	<view class='dis_flex ju_a w100 pb40 pt20 bgfff mb20'>
 		<block wx:for="{{datalist}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
 			<view class="{{type==idx?'typecur':'c9'}}" data-type="{{idx}}" bindtap='bindcur'>{{item}}</view>
 		</block>
@@ -13,7 +13,7 @@
 	  <view class="{{type==2?'typecur':''}}" data-type="2" bindtap='bindcur'>精华</view> -->
 	</view>
 	
-	<view class="goodsBox" wx:if="{{type==idx0}}" wx:for="{{datalist}}" wx:for-index="idx0" wx:for-item="item0" wx:key="idx0" class="w100">
+	<view class="goodsBox w100" wx:if="{{type==idx0}}" wx:for="{{datalist}}" wx:for-index="idx0" wx:for-item="item0" wx:key="idx0">
 		<view class="zanwu" wx:if="{{goods.length==0}}">暂无内容</view>
 		<view class="goodsOne" wx:for="{{goods}}"
 			wx:for-index="idx"
@@ -52,6 +52,7 @@
 					<view>共2件商品 </view>
 					<text class="">实付款：</text><text class="xjjine">￥{{filter.moneyFormat(2)}}</text>
 				</view>
+        
 				<view class="ordercaozuo" wx:if="{{item.order_info.order_status==0}}">
 					<view class="confirmBtn cancelBtn" data-oid="{{item.order_info.order_info_id}}" bindtap="cancelOrder">取消订单</view>
 					<view class="confirmBtn" data-oid="{{item.order_info.order_info_id}}" bindtap="pay">付款</view>

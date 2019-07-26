@@ -26,6 +26,7 @@ Page({
 		guige:['41','42','43','44'],  //规格
 		guige1:['白色','黑色','蓝色','灰色'],  //规格
 		type1:0,         //规格index
+    type2:0,
 		cnum:1           ,//数量
 		goods_sku_id:0,  //商品id
 		pricelist:0,            //阶梯价
@@ -65,13 +66,19 @@ Page({
 			this.setData({
 				cnum:e.detail
 			});
-	},
-	selegg(e){
-		console.log(e.currentTarget.dataset.gg)
-		this.setData({
-			type1:e.currentTarget.dataset.gg
-		})
-	},
+  },
+  selegg(e) {
+    console.log(e.currentTarget.dataset.gg)
+    this.setData({
+      type1: e.currentTarget.dataset.gg
+    })
+  },
+  selegg1(e) {
+    console.log(e.currentTarget.dataset.gg)
+    this.setData({
+      type2: e.currentTarget.dataset.gg
+    })
+  },
 	gomore(){
 		wx.navigateTo({
 			url:"/pages/pinglun/pinglun"
@@ -230,7 +237,18 @@ Page({
 	},
 	previewImage(e){
 		app.previewImage(e)
-	}
+	},
+  goshare(){
+    wx.showActionSheet({
+      itemList: ['发送给朋友', '保存商品图片'],
+      success(res) {
+        console.log(res.tapIndex)
+      },
+      fail(res) {
+        console.log(res.errMsg)
+      }
+    })
+  }
 })
 	/*wx.request({
 			url:  app.IPurl1+'order',

@@ -5,7 +5,7 @@
 		<textarea bindinput="bint" class="ttaa" name="" maxlength="150" id="" cols="30" rows="10"></textarea>
 		<view class="ttnum">{{tmpdata.fblen}}/150</view>
 	</view>
-	<!-- <view class="imgbox mb40">
+	<view class="imgbox mb40">
 		<view class="addimg1" wx:for="{{tmpdata.imgb}}" 
 				 wx:for-index="idx"
 				 wx:for-item="item"
@@ -20,7 +20,7 @@
 			
 			<text class="iconfont iconjiahao fz100 c9"></text>
 		</view>
-	</view> -->
+	</view>
 	<view class="fabubtn" bindtap="fabusub">
 		发表评论
 	</view>

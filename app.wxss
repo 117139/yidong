@@ -250,6 +250,9 @@
 .fz34{
 	font-size: 34rpx;
 }
+.fz40{
+	font-size: 40rpx;
+}
 .fz48{
 	font-size: 48rpx;
 }
@@ -284,6 +287,9 @@
 .mb10{
 	margin-bottom: 10rpx;
 }
+.mb20{
+	margin-bottom: 20rpx;
+}
 .mb40{
 	margin-bottom: 40rpx;
 }
@@ -293,6 +299,9 @@
 /*padding*/
 .pt10{
 	padding-top: 10rpx;
+}
+.p20{
+  padding: 20rpx;
 }
 .pt20{
 	padding-top: 20rpx;

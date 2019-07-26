@@ -28,14 +28,14 @@
 		<view class="contbox dis_flex ju_b">
 			<view class="flex_1 oh2">YI-DONG SPORT 屹动专业运动鞋 专业为中小学生运动打造的运动鞋</view>
 			<view class="shuxian"></view>
-			<view class="dis_flex flex_dc aic">
+			<view class="dis_flex flex_dc aic" catchtap='goshare'>
 				<text class="iconfont iconfenxiang fz36 "></text>
 				<view class="fz26">分享</view>
 			</view>
 		</view>
 		<view class="contbox dis_flex aic">
 			<view class="cf6377a fz30 mr20 fwb">￥<text class="fz50">{{filter.moneyFormat(750)}}</text></view>
-			<view class="scx c3 fz26">原价：￥{{filter.moneyFormat(1550)}}</view>
+			<view class="scx c3 fz26">原价 ￥{{filter.moneyFormat(1550)}}</view>
 		</view>
 	</view>
 	<view class="hengxian"></view>
@@ -62,7 +62,7 @@
 	<view class="guige" bindtap="sheetshow">
 		<view class="guige_l">
 			<view class="guige_l_name">规格</view>
-			 <view wx:if="{{guige[0]}}">{{cnum}}个，{{guige[type1].goods_sku_info.goods_unit}}</view>
+			 <view wx:if="{{guige[0]}}">已选：{{cnum}}个，{{guige[type1]}}，{{guige1[type1]}}</view>
 		</view>
 		<view class="guige_r">
 			<text class="iconfont iconsangedian fz36 c9"></text>
@@ -96,11 +96,11 @@
 		</view>
 		<view class="tkguigetit">颜色选择</view>
 		<view class="guigeBox">
-			<text class="guigeOne {{idx==type1?'cur':''}}" wx:for="{{guige1}}"wx:for-index="idx"
+			<text class="guigeOne {{idx==type2?'cur':''}}" wx:for="{{guige1}}"wx:for-index="idx"
 								wx:for-item="item" 
 								wx:key="idx"
 								data-gg="{{idx}}"
-								bindtap="selegg">{{item}}</text>
+								bindtap="selegg1">{{item}}</text>
 		</view>
 		<view class="countnum">
 			<text>数量</text>
@@ -155,18 +155,18 @@
 		<view class="opengwc w100r" bindtap="openshouye">
 			<!-- <view class="l_icon"> -->
 				<!-- <image src="/static/images/index/gwcicon.png"></image> -->
-				<text class="iconfont iconshoye fz50 c9"></text>
+				<text class="iconfont iconshoye fz40 c9"></text>
 				<!-- <view wx:if="{{addshow}}" class="goodsnum"></view> -->
 			<!-- </view> -->
 			<view class="l_name">首页</view>
 		</view>
 		<view class="shuxian_x"></view>
 		<view class="opengwc w100r" bindtap="opengwc">
-			<view class="l_icon">
+			<!-- <view class="l_icon"> -->
 				<!-- <image src="/static/images/index/gwcicon.png"></image> -->
-				<text class="iconfont icongwc fz50 c9"></text>
-				<view wx:if="{{addshow}}" class="goodsnum"></view>
-			</view>
+				<text class="iconfont icongwc fz40 c9"></text>
+				<!-- <view wx:if="{{addshow}}" class="goodsnum"></view>
+			</view> -->
 			<view class="l_name">购物车</view>
 		</view>
 		<view class="jrgwc flex_1" bindtap="sheetshow">加入购物车</view>

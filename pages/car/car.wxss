@@ -202,8 +202,8 @@ page{
 }
 .heji{
 	flex: 1;
-	font-size: 28rpx;
-	color: #333;
+	font-size: 32rpx;
+	color: #f75852;
 	font-weight: bold;
 }
 .jiesuan{
