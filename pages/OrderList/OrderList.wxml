@@ -19,6 +19,13 @@
 			wx:for-index="idx"
 			wx:for-item="item" 
 			wx:key="idx">
+			<view class="orderstatus dis_flex ju_b aic">
+				<view>订单号：101325489641</view>
+				<view class="cf6377a" wx:if="{{item.order_info.order_status==0}}">待付款</view>
+				<view class="cf6377a" wx:if="{{item.order_info.order_status==1}}">待发货</view>
+				<view class="cf6377a" wx:if="{{item.order_info.order_status==2}}">待收货</view>
+				<view class="cf6377a" wx:if="{{item.order_info.order_status==3}}">待付款</view>
+			</view>
 			<view class="goodsdft" wx:for="{{item.order_product_list}}"
 			wx:for-index="idx1"
 			wx:for-item="item1" 
@@ -32,12 +39,16 @@
 					<view class="fz36 c3 oh1"> 
 						{{idx0}}这里是运动鞋标题描述性文字……
 					</view>
-					<!-- <view class="sptype" wx:if="{{item1.is_ladder_pricing==1}}">阶梯优惠商品 
-						<text class="orderstatus">{{item.order_info.order_process}}</text>
-					</view> -->
-					<view class="goodsInr1 fz32 c9">
-						白色；43
+					
+					
+					<view class="fz26 c9 dis_flex flex_dc">	
+						<text class="mb10">颜色：白色；</text> 
+						<view class="dis_flex ju_b">
+							<text>尺码：43</text>
+							<view>x1</view>
+						</view>
 					</view>
+					
 					<view class="goodsInr1">	 {{item1.goods_unit}} 
 						 <!-- {{item1.goods_count}}件 -->
 					</view>
@@ -45,10 +56,7 @@
 			</view>
 			<view class="caozuo">
 				<view class="xiaoji">
-					<view class="cf6377a" wx:if="{{item.order_info.order_status==0}}">待付款</view>
-					<view class="cf6377a" wx:if="{{item.order_info.order_status==1}}">待发货</view>
-					<view class="cf6377a" wx:if="{{item.order_info.order_status==2}}">待收货</view>
-					<view class="cf6377a" wx:if="{{item.order_info.order_status==3}}">待付款</view>
+					
 					<view>共2件商品 </view>
 					<text class="">实付款：</text><text class="xjjine">￥{{filter.moneyFormat(2)}}</text>
 				</view>

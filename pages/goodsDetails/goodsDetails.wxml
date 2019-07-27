@@ -3,6 +3,7 @@
 <import src="/utils/pageState/index.wxml" />
 <template is="pageState" data="{{...pageState}}" />
 <wxs src="../../utils/filter.wxs" module="filter" />
+ 
 <view class="container log-list">
   <swiper class="swiper"
   	indicator-dots="{{indicatorDots}}"
@@ -171,5 +172,14 @@
 		</view>
 		<view class="jrgwc flex_1" bindtap="sheetshow">加入购物车</view>
 		<view class="buybtn flex_1" bindtap="sheetshow">立即购买</view>
+	</view>
+	<van-popup show="{{ showcan }}" bind:close="onClosecanvas">
+		<view class="tcc">
+				<image class="showimg" src="{{shareTempFilePath}}"></image>
+				<view class="saveimg" bindtap="getTempFilePath">保存图片</view>
+		</view>
+	</van-popup>
+	<view class="hiddenbox">
+		<canvas  canvas-id='share' class="htoi"></canvas>
 	</view>
 </view>

@@ -21,7 +21,7 @@
 			</view>
 			<view class="goodsImg">
 				<!-- <image src="{{filter.getgimg(item.order_cart.goods_img)}}"></image> -->
-				<image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563884477581&di=3967512f3e4999247d51768d3aff6898&imgtype=0&src=http%3A%2F%2Fi1.ygimg.cn%2Fpics%2Fadidasclassic%2F2014%2F100008500%2F100008500_01_l.jpg%3F3"></image>
+				<image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463693&di=39d4ee06bfc66cdde04022278d004fee&imgtype=0&src=http%3A%2F%2Fpic45.nipic.com%2F20140729%2F1628220_084628920000_2.jpg"></image>
 			</view>
 			<view class="goodsinr">
 				<view class="goodsname fz30 c30 fwb oh1">这里是运动鞋标题……</view>

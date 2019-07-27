@@ -117,28 +117,30 @@
 	align-items: center;
 	font-size: 32rpx;
 	color: #f75852;
-	/* padding-bottom: 25rpx; */
+	padding-bottom: 30rpx;
 }
 .confirmBtn{
 	width: 180rpx;
 	height: 64rpx;
 	border-radius: 32rpx;
 	font-size: 24rpx;
-	color: #f75852;
+	color: #fff;
 	border:1px solid #f75852;
+	background-color: #f75852;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 .cancelBtn{
-	color: #999999;
-	border:1px solid #999999;
+	color: #fff;
+	border:1px solid #f75852;
+	background-color: #f75852;
 	margin-right: 30rpx;
 }
 .caozuo{
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	align-items: flex-end;
 }
 .orderstatus{
 	font-size: 24rpx;
@@ -148,4 +150,9 @@
   padding-bottom: 12rpx;
   border-bottom: 6rpx solid #f75852;
 	color: #f75852;
+}
+
+.orderstatus{
+	height: 100rpx;
+	border-bottom: 1px solid #eee;
 }

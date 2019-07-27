@@ -22,6 +22,7 @@ Page({
 			{qj:'10-',num:5,pri:72,gs:0,spri:360}
 		],
 		sheetshow:false,         //规格弹框控制
+		showcan:false,
 		goods_total_limit:'',  //商品阶梯
 		guige:['41','42','43','44'],  //规格
 		guige1:['白色','黑色','蓝色','灰色'],  //规格
@@ -31,7 +32,14 @@ Page({
 		goods_sku_id:0,  //商品id
 		pricelist:0,            //阶梯价
 		havenum:0,               //已购数量
-		addshow:false         //小红点
+		addshow:false,         //小红点
+		width:0,
+		shareTempFilePath:'',
+
+
+
+
+
   },
   onLoad: function (option) {
     if(option.id){
@@ -46,14 +54,101 @@ Page({
 		this.getGoodsDetails(option.id,option.sku_info_id)
   },
 	onReady: function () {
-		var that=this;
+    var that = this;
+   var query = wx.createSelectorQuery();
+
+    query.select('.htoi').boundingClientRect(function (rect) {
+      // console.log(rect.width)
+      that.setData({
+        width: rect.width
+      })
+			const ctx = wx.createCanvasContext('share');
+			console.log(ctx)
+			 wx.getImageInfo({
+			  src:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463693&di=39d4ee06bfc66cdde04022278d004fee&imgtype=0&src=http%3A%2F%2Fpic45.nipic.com%2F20140729%2F1628220_084628920000_2.jpg',
+			  success(res){
+			    ctx.drawImage(res.path,0,0,750,750)
+					ctx.fillStyle="#fff";
+					ctx.fillRect(0,750,750,150);
+					ctx.setFillStyle('#000000')//文字颜色：默认黑色
+					ctx.setFontSize(44)//设置字体大小，默认10
+					ctx.fillText('霸道板鞋男' ,38, 810)
+					ctx.save()
+					ctx.fillStyle="#f2f2f2";
+					ctx.fillRect(0,840,750,434);
+					ctx.save()
+					ctx.setFillStyle('#f75852')//文字颜色：默认黑色
+					
+					// ctx.setFontSize(14)//设置字体大小，默认10
+					ctx.font="bold 52px Arial";
+					ctx.fillText('￥133.00' ,38, 1060)
+					ctx.drawImage("../../static/images/xcxewm.jpg",432,860,270,270)
+					ctx.save()
+					ctx.setFillStyle('#333333')//文字颜色：默认黑色
+					
+					// ctx.setFontSize(14)//设置字体大小，默认10
+					ctx.font="30px Arial";
+					ctx.fillText('扫码或长按小程序码' ,432, 1180)
+			    ctx.draw()
+
+			  }
+			})
+    }).exec();
+		// wx.showLoading({
+		// 	title:'图片生成中'
+		// })
+		setTimeout(function(){
+			that.getTempFilePath1()
+			wx.hideLoading()
+		},500)
 		
 	},
+  //获取临时路径
+  getTempFilePath1: function () {
+    wx.canvasToTempFilePath({
+      canvasId: 'share',
+      success: (res) => {
+				console.log(res.tempFilePath)
+        this.setData({
+          shareTempFilePath: res.tempFilePath
+        })
+		
+      }
+    })
+  },
+  //获取临时路径
+  getTempFilePath: function () {
+    wx.canvasToTempFilePath({
+      canvasId: 'share',
+      success: (res) => {
+				console.log(res.tempFilePath)
+        this.setData({
+          shareTempFilePath: res.tempFilePath
+        })
+				wx.saveImageToPhotosAlbum({
+					filePath:res.tempFilePath,
+					success(res1) {
+						console.log(res1)
+					}
+				})
+		
+      }
+    })
+  },
+
+
+
+
+
+
 	onClose(){
 		this.setData({
 			sheetshow:false
 		})
 	},
+	onClosecanvas() {
+    this.setData({ showcan: false });
+  },
 	sheetshow(){
 		this.setData({
 			sheetshow:true
@@ -239,10 +334,15 @@ Page({
 		app.previewImage(e)
 	},
   goshare(){
+		var that =this
     wx.showActionSheet({
       itemList: ['发送给朋友', '保存商品图片'],
       success(res) {
         console.log(res.tapIndex)
+        if (res.tapIndex==1){
+					that.getTempFilePath1()
+          that.setData({ showcan: true });
+        }
       },
       fail(res) {
         console.log(res.errMsg)

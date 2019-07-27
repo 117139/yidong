@@ -49,7 +49,7 @@
 			</view>
 		</view>
 		<view class="dis_flex ju_b pt30 pb20">
-			<view class="fz30 c9">总价：</view>
+			<view class="fz30 c3">总价：</view>
 			<view class="fz36 cf6377a fwb">￥123.00</view>
 		</view>
 	</view>
@@ -57,13 +57,13 @@
 	<view class="guige" bindtap="sheetshow">
 		<view class="guige_l">
 			<view class="guige_l_name">优惠券</view>
-			 <view>分享领100元无门槛优惠券</view>
+			 <view class="c9">已选10元优惠券</view>
 		</view>
 		<view class="guige_r">
 			<text class="iconfont iconsangedian fz36 c9"></text>
 		</view>
 	</view>
-	<view class="hengxian"></view>
+	<!-- <view class="hengxian"></view> -->
 	<view class="guige" bindtap="sheetshow">
 		<view class="guige_l">
 			<view class="guige_l_name">运费</view>

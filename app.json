@@ -1,14 +1,14 @@
 {
   "pages": [
     "pages/index/index",
+		"pages/OrderList/OrderList",
+		"pages/goodsDetails/goodsDetails",
     "pages/Order/Order",
 		"pages/OrderDetails/OrderDetails",
     "pages/kefu/kefu",
     "pages/fabiaopl/fabiaopl",
     "pages/pinglun/pinglun",
-		"pages/goodsDetails/goodsDetails",
 		"pages/my/my",
-		"pages/OrderList/OrderList",
     "pages/yhlist/yhlist",
     "pages/setyj/setyj",
 		"pages/car/car", 

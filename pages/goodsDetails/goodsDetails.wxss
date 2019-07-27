@@ -296,3 +296,43 @@ image{
 	padding: 10rpx 28rpx;
 	box-sizing: border-box;
 }
+
+
+
+.tcc{
+	width: 80vw;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.hiddenbox{
+	width: 0;
+	height: 0;
+	overflow: hidden;
+}
+.htoi{
+	width:750px;height:1206px;
+	box-shadow:4rpx 4rpx 8rpx rgba(0,0,0,0.5);
+	margin-top: 20px;
+	/* transform:scale(.5); */
+	opacity: 0;
+	
+}
+.showimg{
+	width: 375rpx;
+	height: 603rpx;
+	margin-top: 20px;
+}
+.saveimg{
+	width: 300rpx;
+	height: 100rpx;
+	border-radius: 50rpx;
+	background: #f75852;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #fff;
+	margin-top: 40rpx;
+	margin-bottom: 20px;
+}

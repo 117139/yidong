@@ -34,7 +34,7 @@ page{
 	height: 46rpx;
 	line-height: 46rpx;
 	border-radius: 50%;
-	background-color: #333;
+	background-color: #999;
 	color: #fff;
 	font-size: 26rpx;
 	/* display: flex;
@@ -211,7 +211,7 @@ page{
 	height: 100rpx;
 	background: #f75852;
 	color: #fff;
-	font-size: 28rpx;
+	font-size: 30rpx;
 	display: flex;
 	align-items: center;
 	justify-content: center;

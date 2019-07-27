@@ -2,3 +2,6 @@
 .container{
 	padding: 0 36rpx;
 }
+.yhinr{
+	height: 94rpx;
+}
