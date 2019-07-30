@@ -32,7 +32,7 @@
 				<!-- <view class="sptype" wx:if="{{item1.is_ladder_pricing==1}}">阶梯优惠商品 
 					<text class="orderstatus">{{item.order_info.order_process}}</text>
 				</view> -->
-				<view class="goodsInr1 fz32 c9">
+				<view class="goodsInr1 fz26 c9">
 					白色；43 X1
 				</view>
 				<text class="fz30 cf6377a fwb">￥23.00</text>
@@ -80,7 +80,7 @@
 			<text class="fz26 c3">优惠券</text>
 			<text class="fz26 c3 fwb">-￥100.00</text>
 		</view>
-		<view class="dis_flex ju_b w100 pb100">
+		<view class="dis_flex ju_b w100 pb10">
 			<text class="fz26 c3"></text>
 			<view>
 				<text class="fz30 c3 ">需付款:</text>
@@ -88,6 +88,7 @@
 			</view>
 		</view>
 	</view>
+	<view class="hengxian  mb100"></view>
 	<view class="ordercaozuo">
 		<view class="confirmBtn cancelBtn" data-oid="{{item.order_info.order_info_id}}" bindtap="cancelOrder">取消订单</view>
 		<view class="confirmBtn" data-oid="{{item.order_info.order_info_id}}" bindtap="pay">付款</view>

@@ -3,33 +3,25 @@
 <import src="/utils/pageState/index.wxml" />
 <template is="pageState" data="{{...pageState}}" />
 <wxs src="../../utils/filter.wxs" module="filter" />
- 
+
 <view class="container log-list">
-  <swiper class="swiper"
-  	indicator-dots="{{indicatorDots}}"
-  	autoplay="{{autoplay}}"
-  	interval="{{interval}}"
-  	duration="{{duration}}"
-  	indicator-active-color='#8e8e8e'
-  	circular=true
-  >
-  	<block wx:for="{{spimg}}" wx:for-index="idx"          
-        wx:for-item="item" 
-        wx:key="idx">
-  		<swiper-item>
-  			<image src="{{item}}"
-					class="slide-image"
-					width="355" height="150"
-					data-curitem="{{item}}"
-					bindtap="pveimg"/>
-  		</swiper-item>
-  	</block>
-  </swiper>
+	<swiper class="swiper" 
+	indicator-dots="{{indicatorDots}}"
+	autoplay="{{autoplay}}" 
+	interval="{{interval}}" 
+	duration="{{duration}}"
+	indicator-active-color='#8e8e8e' circular="{{circular}}" >
+		<block wx:for="{{spimg}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+			<swiper-item>
+				<image src="{{item}}" class="slide-image" width="355" height="150" data-curitem="{{item}}" bindtap="pveimg" />
+			</swiper-item>
+		</block>
+	</swiper>
 	<view>
 		<view class="contbox dis_flex ju_b">
 			<view class="flex_1 oh2">YI-DONG SPORT 屹动专业运动鞋 专业为中小学生运动打造的运动鞋</view>
 			<view class="shuxian"></view>
-			<view class="dis_flex flex_dc aic" catchtap='goshare'>
+			<view class="dis_flex flex_dc aic ju_c" catchtap="listenerButton">  <!-- catchtap='goshare' -->
 				<text class="iconfont iconfenxiang fz36 "></text>
 				<view class="fz26">分享</view>
 			</view>
@@ -42,8 +34,8 @@
 	<view class="hengxian"></view>
 	<view class="guige">
 		<view class="guige_l">
-			<view class="guige_l_name">促销</view>
-			 <view class="c9">分享领100元无门槛优惠券</view>
+			<view class="guige_l_name c3">促销</view>
+			<view class="c9">分享领100元无门槛优惠券</view>
 		</view>
 		<view class="guige_r">
 			<text class="iconfont iconsangedian fz36 c9"></text>
@@ -52,8 +44,8 @@
 	<view class="hengxian"></view>
 	<view class="guige">
 		<view class="guige_l">
-			<view class="guige_l_name">运费</view>
-			 <view class="c9">10元</view>
+			<view class="guige_l_name c3">运费</view>
+			<view class="c9">10元</view>
 		</view>
 		<view class="guige_r">
 			<!-- <text class="iconfont iconsangedian fz36 c9"></text> -->
@@ -62,22 +54,18 @@
 	<view class="hengxian"></view>
 	<view class="guige" bindtap="sheetshow">
 		<view class="guige_l">
-			<view class="guige_l_name">规格</view>
-			 <view wx:if="{{guige[0]}}">已选：{{cnum}}个，{{guige[type1]}}，{{guige1[type1]}}</view>
+			<view class="guige_l_name c3">规格</view>
+			<view class="c9" wx:if="{{guige[0]}}">已选：{{cnum}}双，{{guige[type1]}}，{{guige1[type1]}}</view>
 		</view>
 		<view class="guige_r">
 			<text class="iconfont iconsangedian fz36 c9"></text>
 		</view>
 	</view>
 	<view class="hengxian"></view>
-	<van-popup custom-class="popopBox" show="{{ sheetshow }}"
-	position="bottom" bind:close="onClose"
-	custom-style="height:960rpx">
+	<van-popup custom-class="popopBox" show="{{ sheetshow }}" position="bottom" bind:close="onClose" custom-style="height:960rpx">
 		<view class="popopBox1">
 			<view class="goodsimg">
-				<image src="{{spimg[0]}}"
-				data-src="{{spimg[0]}}"
-					bindtap="previewImage"></image>
+				<image src="{{spimg[0]}}" data-src="{{spimg[0]}}" bindtap="previewImage"></image>
 			</view>
 			<view class="goodstkjg">
 				<view class="closebtn" bindtap="onClose">
@@ -89,30 +77,18 @@
 		</view>
 		<view class="tkguigetit">规格选择</view>
 		<view class="guigeBox">
-			<text class="guigeOne {{idx==type1?'cur':''}}" wx:for="{{guige}}"wx:for-index="idx"
-								wx:for-item="item" 
-								wx:key="idx"
-								data-gg="{{idx}}"
-								bindtap="selegg">{{item}}</text>
+			<text class="guigeOne {{idx==type1?'cur':''}}" wx:for="{{guige}}" wx:for-index="idx" wx:for-item="item" wx:key="idx"
+			 data-gg="{{idx}}" bindtap="selegg">{{item}}</text>
 		</view>
 		<view class="tkguigetit">颜色选择</view>
 		<view class="guigeBox">
-			<text class="guigeOne {{idx==type2?'cur':''}}" wx:for="{{guige1}}"wx:for-index="idx"
-								wx:for-item="item" 
-								wx:key="idx"
-								data-gg="{{idx}}"
-								bindtap="selegg1">{{item}}</text>
+			<text class="guigeOne {{idx==type2?'cur':''}}" wx:for="{{guige1}}" wx:for-index="idx" wx:for-item="item" wx:key="idx"
+			 data-gg="{{idx}}" bindtap="selegg1">{{item}}</text>
 		</view>
 		<view class="countnum">
 			<text>数量</text>
-			<van-stepper custom-class="steppera" 
-			input-class="vanipt"
-			plus-class="vantjia"
-			minus-class="vantjian"
-			value="{{ cnum }}" 
-			data-selec="{{idx}}" 
-			bind:input="onChange"
-			bind:change="onChange" />
+			<van-stepper custom-class="steppera" input-class="vanipt" plus-class="vantjia" minus-class="vantjian" value="{{ cnum }}"
+			 data-selec="{{idx}}" bind:input="onChange" bind:change="onChange" />
 		</view>
 		<view class="czbtnG">
 			<view class="jrgwc" bindtap="addwgc">加入购物车</view>
@@ -130,11 +106,8 @@
 			</view>
 		</view>
 		<view class="contbox  dis_flex">
-			<image class="plhaedimg" 
-			catchtap="previewImage"
-			data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563957484276&di=052d557cdbc7daf8272249343c94faf2&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201805%2F13%2F20180513224039_tgfwu.png"
-			src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563957484276&di=052d557cdbc7daf8272249343c94faf2&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201805%2F13%2F20180513224039_tgfwu.png"
-			></image>
+			<image class="plhaedimg" catchtap="previewImage" data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563957484276&di=052d557cdbc7daf8272249343c94faf2&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201805%2F13%2F20180513224039_tgfwu.png"
+			 src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563957484276&di=052d557cdbc7daf8272249343c94faf2&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201805%2F13%2F20180513224039_tgfwu.png"></image>
 			<view class="flex_1">
 				<view class="fz26 c3 mb10 dis_flex ju_b">
 					<text>用户昵称123</text>
@@ -147,7 +120,8 @@
 	<view class="hengxian"></view>
 	<view class="contbox goodsmsgs">
 		<view class="dis_flex aic w100 ju_c pt40 pb30">
-			<text class="mr10">——————</text><text class="iconfont iconaixin fz26 cf6377a mr10"></text><text class="fz32 c3 fwb">商品详情</text><text class="ml10">——————</text>
+			<text class="mr10">——————</text><text class="iconfont iconaixin fz26 cf6377a mr10"></text><text class="fz32 c3 fwb">商品详情</text><text
+			 class="ml10">——————</text>
 		</view>
 		<template is="wxParse" data="{{wxParseData:article.nodes}}" />
 		<!-- <image class="goodsdetailsimg" src="../../static/images/index/goodsdetails_06.jpg"></image> -->
@@ -155,31 +129,43 @@
 	<view class="bottomBox">
 		<view class="opengwc w100r" bindtap="openshouye">
 			<!-- <view class="l_icon"> -->
-				<!-- <image src="/static/images/index/gwcicon.png"></image> -->
-				<text class="iconfont iconshoye fz40 c9"></text>
-				<!-- <view wx:if="{{addshow}}" class="goodsnum"></view> -->
+			<!-- <image src="/static/images/index/gwcicon.png"></image> -->
+			<text class="iconfont iconshoye fz40 c9"></text>
+			<!-- <view wx:if="{{addshow}}" class="goodsnum"></view> -->
 			<!-- </view> -->
 			<view class="l_name">首页</view>
 		</view>
 		<view class="shuxian_x"></view>
 		<view class="opengwc w100r" bindtap="opengwc">
 			<!-- <view class="l_icon"> -->
-				<!-- <image src="/static/images/index/gwcicon.png"></image> -->
-				<text class="iconfont icongwc fz40 c9"></text>
-				<!-- <view wx:if="{{addshow}}" class="goodsnum"></view>
+			<!-- <image src="/static/images/index/gwcicon.png"></image> -->
+			<text class="iconfont icongwc fz40 c9"></text>
+			<!-- <view wx:if="{{addshow}}" class="goodsnum"></view>
 			</view> -->
 			<view class="l_name">购物车</view>
 		</view>
 		<view class="jrgwc flex_1" bindtap="sheetshow">加入购物车</view>
 		<view class="buybtn flex_1" bindtap="sheetshow">立即购买</view>
 	</view>
+	<action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet">
+		<action-sheet-item>
+			<button open-type="share">分享给好友</button>
+		</action-sheet-item>
+		<action-sheet-item>
+			<button catchtap="getTempFilePath1">生成分享卡片</button>
+		</action-sheet-item>
+		  
+		<!--自动隐藏action-sheet-->
+		<action-sheet-cancel>取消</action-sheet-cancel>
+	</action-sheet>
+
 	<van-popup show="{{ showcan }}" bind:close="onClosecanvas">
 		<view class="tcc">
-				<image class="showimg" src="{{shareTempFilePath}}"></image>
-				<view class="saveimg" bindtap="getTempFilePath">保存图片</view>
+			<image class="showimg" src="{{shareTempFilePath}}"></image>
+			<view class="saveimg" bindtap="getTempFilePath">保存图片</view>
 		</view>
 	</van-popup>
 	<view class="hiddenbox">
-		<canvas  canvas-id='share' class="htoi"></canvas>
+		<canvas canvas-id='share' class="htoi"></canvas>
 	</view>
 </view>

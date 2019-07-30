@@ -1,6 +1,7 @@
 <!--logs.wxml-->
 <import src="/utils/pageState/index.wxml" />
-<template is="pageState" data="{{...pageState}}" />
+<!-- <template is="pageState" data="{{...pageState}}" /> -->
+<view class="hengxian"></view>
 <view class="container">
   <!-- <view class="address" bindtap="goaddress">
 		<view class="add_l">
@@ -57,11 +58,9 @@
 	<view class="guige" bindtap="sheetshow">
 		<view class="guige_l">
 			<view class="guige_l_name">优惠券</view>
-			 <view class="c9">已选10元优惠券</view>
+			 <!-- <view class="c9">已选100元优惠券</view> -->
 		</view>
-		<view class="guige_r">
-			<text class="iconfont iconsangedian fz36 c9"></text>
-		</view>
+		<view class="fz26 c9">-￥100.00</view>
 	</view>
 	<!-- <view class="hengxian"></view> -->
 	<view class="guige" bindtap="sheetshow">

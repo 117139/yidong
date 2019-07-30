@@ -235,6 +235,9 @@
 	color: #ffb719;
 }
 /*fontsize*/
+.fz22{
+	font-size: 22rpx;
+}
 .fz24{
 	font-size: 24rpx;
 }
@@ -295,6 +298,9 @@
 }
 .mb50{
 	margin-bottom: 50rpx;
+}
+.mb100{
+	margin-bottom: 100rpx;
 }
 /*padding*/
 .pt10{

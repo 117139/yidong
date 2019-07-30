@@ -49,9 +49,9 @@ page{
 	margin-right: 22rpx;
 }
 .xuanze{
-	width: 40rpx;
-	height: 40rpx;
-	padding: 40rpx 30rpx 40rpx 30rpx;
+	width: 30rpx;
+	height: 30rpx;
+	padding: 40rpx 30rpx 40rpx 0rpx;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -195,16 +195,18 @@ page{
 }
 .all.xuanze2{
 	
-	border: 1px solid #FE0042;
+	/* border: 1px solid #FE0042; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 .heji{
-	flex: 1;
+	/* flex: 1; */
+	margin-right: 10rpx;
 	font-size: 32rpx;
 	color: #f75852;
-	font-weight: bold;
+	/* font-weight: bold; */
+	text-align: right;
 }
 .jiesuan{
 	width: 210rpx;

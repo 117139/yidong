@@ -102,7 +102,7 @@ image{
 	color: #333;
 }
 .guige_l_name{
-	color: #999;
+	color: #333;
 	margin-right: 25rpx;
 }
 .guige_r{
@@ -323,6 +323,7 @@ image{
 	width: 375rpx;
 	height: 603rpx;
 	margin-top: 20px;
+	background-color: #eee;
 }
 .saveimg{
 	width: 300rpx;
@@ -335,4 +336,10 @@ image{
 	color: #fff;
 	margin-top: 40rpx;
 	margin-bottom: 20px;
+}
+action-sheet-item{
+	padding: 0!important;
+}
+button {
+	background-color: #fff!important;
 }

@@ -24,7 +24,7 @@
 				<image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463693&di=39d4ee06bfc66cdde04022278d004fee&imgtype=0&src=http%3A%2F%2Fpic45.nipic.com%2F20140729%2F1628220_084628920000_2.jpg"></image>
 			</view>
 			<view class="goodsinr">
-				<view class="goodsname fz30 c30 fwb oh1">这里是运动鞋标题……</view>
+				<view class="goodsname fz30 c30 oh1">这里是运动鞋标题……</view>
 				<view class="goodspri">HI7白色；43</view>
 				<view class="goodspri1">
 					<text class="fz36 cf6377a fwb">￥{{filter.moneyFormat(goods_sele[idx].price)}}</text>
@@ -46,14 +46,15 @@
 		</view>	
 	</view>
 	<view class="vbottom" wx:if="{{goods.length!==0}}">
-		<view class="selecAll" bindtap="selecAll">
+		<view class="selecAll flex_1" bindtap="selecAll">
 			<view class="xuanze1 all {{all==true? 'xuanze2':''}}">
 				<icon  wx:if="{{all==true}}" type="success" size="12" color="#fe0042" />
 			</view>
 			全选
 		</view>
 		<view class="heji">
-			合计:￥{{sum}}
+			<view>合计:￥{{sum}}</view>
+			<view class="fz22 c9">不含运费</view>
 		</view>
 		<view class="jiesuan" bindtap="openOrder">去结算</view>
 	</view>

@@ -14,6 +14,7 @@ Page({
 		goodsd:'',
 		indicatorDots: true,
 		autoplay: true,
+		circular:true,
 		interval: 3000,
 		duration: 1000,
 		qujan:[
@@ -35,12 +36,23 @@ Page({
 		addshow:false,         //小红点
 		width:0,
 		shareTempFilePath:'',
-
+		actionSheetHidden: true,
 
 
 
 
   },
+	listenerButton: function() {
+        this.setData({
+            actionSheetHidden: !this.data.actionSheetHidden
+        });
+    },
+    listenerActionSheet:function() {
+      this.setData({
+        actionSheetHidden: !this.data.actionSheetHidden
+      })
+    },
+
   onLoad: function (option) {
     if(option.id){
 			// console.log(option.id)
@@ -48,7 +60,7 @@ Page({
 				goods_sku_id:option.id
 			})
 		}
-		var article = '<div>11111111</div><img  src="/uploadfile/2019/0724/20190724101802392.png" style="width: 859px; height: 646px;" /><div>11111111</div>'
+		var article = '<div>11111111</div><div>11111111</div>'
 		WxParse.wxParse('article', 'html', article, this, 5);
 		
 		this.getGoodsDetails(option.id,option.sku_info_id)
@@ -97,32 +109,57 @@ Page({
 		// wx.showLoading({
 		// 	title:'图片生成中'
 		// })
-		setTimeout(function(){
-			that.getTempFilePath1()
-			wx.hideLoading()
-		},500)
+		// setTimeout(function(){
+		// 	that.getTempFilePath1()
+		// 	wx.hideLoading()
+		// },500)
 		
 	},
   //获取临时路径
   getTempFilePath1: function () {
+		var that =this
+		wx.showLoading({
+			title:'图片生成中'
+		})
     wx.canvasToTempFilePath({
       canvasId: 'share',
       success: (res) => {
+				wx.hideLoading()
 				console.log(res.tempFilePath)
-        this.setData({
+        that.setData({
           shareTempFilePath: res.tempFilePath
         })
+				setTimeout(function(){
+					that.setData({
+						showcan: true ,
+						actionSheetHidden: !that.data.actionSheetHidden
+					
+					});
+				},1000)
 		
       }
     })
+		
+		
   },
-  //获取临时路径
+  //下载
   getTempFilePath: function () {
-    wx.canvasToTempFilePath({
+		var that =this
+		wx.showLoading({
+			title:'正在保存'
+		})
+		wx.saveImageToPhotosAlbum({
+			filePath:that.data.shareTempFilePath,
+			success(res1) {
+				console.log(res1)
+				wx.hideLoading()
+			}
+		})
+    /*wx.canvasToTempFilePath({
       canvasId: 'share',
       success: (res) => {
 				console.log(res.tempFilePath)
-        this.setData({
+        that.setData({
           shareTempFilePath: res.tempFilePath
         })
 				wx.saveImageToPhotosAlbum({
@@ -133,7 +170,7 @@ Page({
 				})
 		
       }
-    })
+    })*/
   },
 
 
@@ -341,7 +378,7 @@ Page({
         console.log(res.tapIndex)
         if (res.tapIndex==1){
 					that.getTempFilePath1()
-          that.setData({ showcan: true });
+         
         }
       },
       fail(res) {

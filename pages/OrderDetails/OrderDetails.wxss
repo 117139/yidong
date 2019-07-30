@@ -1,5 +1,6 @@
 .container{
 	background: #eeeeee;
+	padding-top: 17rpx;
 }
 image{
 	width: 100%;
@@ -114,7 +115,7 @@ image{
 .ordermsg{
 	width: 100%;
 	background-color: #fff;
-	padding: 30rpx 28rpx 60rpx;
+	padding: 30rpx 28rpx 30rpx;
 	box-sizing: border-box;
 	
 }
@@ -228,14 +229,16 @@ image{
 	height: 64rpx;
 	border-radius: 32rpx;
 	font-size: 24rpx;
-	color: #f75852;
+	color: #fff;
 	border:1px solid #f75852;
+	background-color: #f75852;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 .cancelBtn{
-	color: #999999;
-	border:1px solid #999999;
+	color: #fff;
+	border:1px solid #f75852;
+	background-color: #f75852;
 	margin-right: 30rpx;
 }

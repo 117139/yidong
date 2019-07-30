@@ -42,12 +42,12 @@
 					
 					
 					<view class="fz26 c9 dis_flex ju_b">	
-						
-						<view class="dis_flex">
+						<view>
 							<text class="mb10">颜色：白色；</text> 
-							<text>尺码：43</text>
 							
+							<text>尺码：43</text>
 						</view>
+							
 						<view>x1</view>
 					</view>
 					

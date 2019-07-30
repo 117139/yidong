@@ -1,4 +1,5 @@
 <!--logs.wxml-->
+<view class="hengxian"></view>
 <form class="container" bindsubmit="formSubmit">
   <view class="addmsg">
 		<view class="msgtit">收货人</view>
