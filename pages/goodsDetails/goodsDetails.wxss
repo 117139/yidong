@@ -172,7 +172,7 @@ image{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #fe0042;
+	background-color: #f75852;
 	color: #fff;
 	font-size: 30rpx;
 }
@@ -229,7 +229,7 @@ image{
 }
 .tkpri{
 	font-size: 34rpx;
-	color: #fe0042;
+	color: #f75852;
 	margin: 80rpx 0 25rpx;
 }
 .tkname{
@@ -266,8 +266,8 @@ image{
 	margin-right: 38rpx;
 }
 .guigeOne.cur{
-	border: 1px solid #fe0042;
-	color: #fe0042;
+	border: 1px solid #f75852;
+	color: #f75852;
 }
 .countnum{
 	display: flex;

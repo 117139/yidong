@@ -49,8 +49,8 @@ page{
 	margin-right: 22rpx;
 }
 .xuanze{
-	width: 30rpx;
-	height: 30rpx;
+	width: 24rpx;
+	height: 24rpx;
 	padding: 40rpx 30rpx 40rpx 0rpx;
 	display: flex;
 	justify-content: center;
@@ -58,8 +58,8 @@ page{
 	
 }
 .xuanze1{
-	width: 30rpx;
-	height: 30rpx;
+	width: 24rpx;
+	height: 24rpx;
 	border-radius: 50%;
 	border: 1px solid #ddd;
 	box-sizing: border-box;

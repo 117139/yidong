@@ -30,13 +30,13 @@ page{
 	margin-right: 44rpx;
 }
 .gobuy{
-	width: 194rpx;
-	height: 66rpx;
+	width: 148rpx;
+	height: 50rpx;
 	border-radius: 10rpx;
 	border: solid 1px #f75852;
 	background-color: #f75852;
 	font-family: MicrosoftYaHei;
-	font-size: 32rpx;
+	font-size: 26rpx;
 	color: #fff;
 	display: flex;
 	justify-content: center;

@@ -36,7 +36,7 @@
 					<image src="{{filter.getgimg(item1.goods_img)}}"></image>
 				</view>
 				<view class="goodsInr">
-					<view class="fz30 c3 oh1"> 
+					<view class="fz28 c3 oh1"> 
 						{{idx0}}这里是运动鞋标题描述性文字……
 					</view>
 					

@@ -42,8 +42,9 @@
 				<!-- <view class="sptype" wx:if="{{item1.is_ladder_pricing==1}}">阶梯优惠商品 
 					<text class="orderstatus">{{item.order_info.order_process}}</text>
 				</view> -->
-				<view class="goodsInr1 fz26 c9">
-					白色；43 X1
+				<view class="goodsInr1 fz26 c9 dis_flex ju_b">
+				<view>	白色；43 </view>
+				<view>X1</view>
 				</view>
 				<text class="fz30 cf6377a fwb">￥23.00</text>
 				
