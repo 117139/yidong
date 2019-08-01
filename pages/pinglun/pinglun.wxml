@@ -1,6 +1,6 @@
 <!--pages/pinglun/pinglun.wxml-->
 <view class="container contbox">
-	<view class="bb1d0 dis_flex pb30 mb20 bgfff p20" wx:for="{{datalist}}">
+	<view class=" dis_flex pb30 mb20 bgfff p20" wx:for="{{datalist}}">
 		<image class="plhaedimg" 
 		catchtap="previewImage"
 		data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563957484276&di=052d557cdbc7daf8272249343c94faf2&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201805%2F13%2F20180513224039_tgfwu.png"

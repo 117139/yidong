@@ -29,7 +29,7 @@
 	</view>
 	<view class="addmsg">
 		<view class="">设置默认地址</view>
-		<switch class="mrdz" checked bindchange="switch1Change" color="#f22f5a"/>
+		<switch class="mrdz" checked bindchange="switch1Change" color="#f75852"/>
 		<input hidden type="text" name="moren"  value="{{moren}}"/>
 	</view>
 	<!-- <view class="definebtn">保存</view> -->

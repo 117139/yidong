@@ -12,7 +12,7 @@
     <view class="page-state-error page-state-center" wx:if="{{state == 'error'}}">
       <icon type="warn" size="40" />
       <view class="message pstatemessage">{{message}}</view>
-      <button class="retrybtn" type="warn" catchtap="onRetry">重试</button>
+      <view class="retrybtn" catchtap="onRetry">重试</view>
     </view>
   </view>
 </template>

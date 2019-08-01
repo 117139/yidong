@@ -62,17 +62,14 @@ Page({
 		}
 	//http://water5100.800123456.top/WebService.asmx/useraddress
 		wx.request({
-			url:  app.IPurl1+'useraddress',
+			url:  app.IPurl+'/api/userAddress',
 			data:  {
-					op:'save',
-					key:'server_mima',
-					tokenstr:wx.getStorageSync('tokenstr'),
-					province:that.data.region[0], 
-					city:that.data.region[1], 
-					country:that.data.region[2], 
+					token:wx.getStorageSync('token'),
+					area:that.data.region[0]+' '+that.data.region[1]+' '+that.data.region[2], 
 					address:formresult.xxaddress,
-					name: formresult.name,
-					mobile:formresult.tel
+					user_name: formresult.name,
+					phone:formresult.tel,
+					is_default:formresult.moren ? 1:0
 		    },
 			header: {
 				'content-type': 'application/x-www-form-urlencoded' 
@@ -81,15 +78,14 @@ Page({
 			method:'POST',
 			success(res) {
 				console.log(res.data)
-				if(res.data.error==-2){
-					app.checktoken(res.data.error)
-					// that.onLoad()
-				}
-				if(res.data.error==0){
+				
+				if(res.data.code==1){
 					wx.showToast({
 						title:'保存成功'
 					})
-					wx.navigateBack()
+					setTimeout(function(){
+						wx.navigateBack()
+					},1000)
 				}
 			}
 		})

@@ -1,12 +1,12 @@
-
+var imgip='http://xie.800123456.top/'
 // filter.wxs
 var dateFormat = function(date) {
     var dates = date.split('/');
     return dates[0] + "年" + dates[1] + "月" + dates[2] + "日";
 }
 var imgIP=function(img){
-	var newimg ='http://192.168.129.119/'+img
-	console.log(newimg)
+	var newimg =imgip+img
+	// console.log(newimg)
 	return newimg
 }
 var moneyFormat = function(money) {
@@ -17,7 +17,12 @@ var moneyFormat = function(money) {
 var getgimg = function(img) {
 	var img1=img.split(",")
 	// console.log(img1[0])
-    return img1[0]
+    return imgip+img1[0]
+}
+var getgimgarr = function (img) {
+  var img1 = img.split(",")
+  // console.log(img1[0])
+  return img1
 }
 var getTime = function(time){
   var date = time.split(" ")
@@ -35,6 +40,7 @@ module.exports = {
     moneyFormat: moneyFormat,
 	getgimg:getgimg,
   getTime:getTime,
-	imgIP:imgIP
+	imgIP:imgIP,
+	getgimgarr:getgimgarr
 
 }

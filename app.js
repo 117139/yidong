@@ -1,13 +1,13 @@
 //app.js
 App({
-	IPurl1:'https://wx5100api.tdgjs.com/WebService.asmx/',
+	IPurl:'http://xie.800123456.top/',
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
-   
+   wx.setStorageSync('token', 'xxx')
     // 获取用户信息
     wx.getSetting({
     	success: res => {
@@ -18,11 +18,10 @@ App({
     					// 可以将 res 发送给后台解码出 unionId
     					this.globalData.userInfo = res.userInfo
     					wx.setStorageSync('userWxmsg', res.userInfo)
-    					console.log(res.userInfo)
-    					// 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-    					// 所以此处加入 callback 以防止这种情况
+    					// console.log(res.userInfo)
+   
     					// 登录
-    					this.dologin()
+    					// this.dologin()
     
     				}
     			})
@@ -34,26 +33,45 @@ App({
     	}
     })
   },
+	onShow(){
+		 wx.getSetting({
+			success: res => {
+				if (res.authSetting['scope.userInfo']) {
+					// 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+					wx.getUserInfo({
+						success: res => {
+							// 可以将 res 发送给后台解码出 unionId
+							this.globalData.userInfo = res.userInfo
+							wx.setStorageSync('userWxmsg', res.userInfo)
+							console.log(res.userInfo)
+							
+							// 登录
+							// this.dologin()
+		
+						}
+					})
+				} else {
+					wx.reLaunch({
+						url: '/pages/login/login',
+					})
+				}
+			}
+		})
+	},
 	dologin(){
 		let that = this
 		wx.login({
 			success: function(res) {
 				// 发送 res.code 到后台换取 openId, sessionKey, unionId
-
-				// console.log(that.IPurl1)
-				// const url =   
-				let data = {
-					code: res.code
-				}
+	
 				let rcode = res.code
 				console.log(res.code)
-				return
 				wx.request({
-					url:  that.IPurl+'/index/userlogin/login', 
+					url:  that.IPurl+'/api/login', 
 					data: {
-						'code':rcode,
-						'avatarUrl':that.globalData.userInfo.avatarUrl,
-						'nickName':that.globalData.userInfo.nickName,
+						'js_code':rcode,
+						'userInfo':that.globalData.userInfo,
+						
 					},
 					// header: {
 					// 	'content-type': 'application/x-www-form-urlencoded' 
@@ -62,36 +80,25 @@ App({
 					method:'POST',
 					success(res) {
 						console.log(res)
-						console.log(res.data)
-						if(res.data.errCode==0){
-							// wx.reLaunch({
-							//   url: '/pages/index/index',
-							//   fail: (err) => {
-							//     console.log("失败: " + JSON.stringify(err));
-							//   }
-							// })
+						// console.log(res.data)
+						if(res.data.code==1){
+							
 							console.log('登录成功')
 		          wx.setStorageSync('login', 'login')
 							wx.setStorageSync('usermsg', res.data.retData)
 						}else{
 							wx.showToast({
 								icon:'none',
-								title:res.data.ertips
+								title:'登录失败'
 							})
 						}
-						if(res.data.error==2){
-							wx.setStorageSync('tokenstr', res.data.tokenstr)
-							wx.setStorageSync('appcode', rcode)
-							wx.reLaunch({
-								url:'/pages/login/login'
-							})
-						}
+						
 					}
 				})
 			}
 		})
 	},
-  globalData: {
+	globalData: {
     userInfo: null
   },
 	/**   
@@ -124,5 +131,18 @@ App({
 		wx.navigateTo({
 			url:e.currentTarget.dataset.url
 		})
+	},
+	openOrder(id,xzarr,type){
+		console.log(id)
+		if(type){
+			wx.navigateTo({
+			  url: '/pages/Order/Order?id=' + id+'&type='+type+'&xzarr='+xzarr
+			})
+		}else{
+			wx.navigateTo({
+			  url: '/pages/Order/Order?id=' + id
+			})
+		}
+		
 	},
 })

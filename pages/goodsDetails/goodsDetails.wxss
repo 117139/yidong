@@ -195,7 +195,8 @@ image{
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
-	height: 760rpx;
+	padding-bottom: 150rpx;
+	height: auto;
 }
 .popopBox1{
 	width: 100%;
@@ -257,7 +258,7 @@ image{
 	height: 50rpx;
 	padding: 0 10rpx;
 	border-radius: 8rpx;
-	border: 1px solid #999999;
+	border: 1px solid #ddd;
 	font-size: 26rpx;
 	color: #333;
 	display: inline-flex;
@@ -310,14 +311,21 @@ image{
 	width: 0;
 	height: 0;
 	overflow: hidden;
+	opacity: 0;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	z-index: -1;
 }
+
 .htoi{
+	position: relative;
 	width:750px;height:1206px;
-	box-shadow:4rpx 4rpx 8rpx rgba(0,0,0,0.5);
-	margin-top: 20px;
+	/* box-shadow:4rpx 4rpx 8rpx rgba(0,0,0,0.5); */
+	/* margin-top: 20px; */
 	/* transform:scale(.5); */
 	opacity: 0;
-	
+	z-index: -1;
 }
 .showimg{
 	width: 375rpx;
@@ -339,7 +347,21 @@ image{
 }
 action-sheet-item{
 	padding: 0!important;
+	position: relative;
+	height: 100rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 button {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
 	background-color: #fff!important;
+	opacity: 0;
+}
+.guige{
+	position: relative;
 }

@@ -2,7 +2,10 @@
 page{
 	width: 100%;
 }
-
+.container{
+	min-height: 100%;
+	height: auto;
+}
 /*swiper*/
 .swiper{	
 	width: 100%;

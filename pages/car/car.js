@@ -64,7 +64,6 @@ Page({
 				all:false
 			})
 		}
-		that.ladderpri_gb()
 		//计算总价
 		that.countpri()
 	},
@@ -97,7 +96,6 @@ Page({
 		this.setData({
 			goods_sele:this.data.goods_sele
 		});
-		this.ladderpri_gb()
 		//计算总价
 		this.countpri()
 	},
@@ -107,46 +105,43 @@ Page({
 		let var2= this.data.goods_sele
 		for (let i in var2) {
 			if(var2[i].xuan==true){
-				
-				if(var2[i].laddermsgs){
-					
-						heji +=var2[i].laddermsgs.Totalpri*100
-
-				}else{
 					heji +=var2[i].num*(var2[i].pri*100)
-				}
+				
 			}
 		}
 		
-		heji=(heji/100).toFixed(2)
+		heji=(heji/100).toFixed(0)
 
 		this.setData({
 			sum:heji
 		})
 	},
 	openOrder(){
-		wx.navigateTo({
-			url:"/pages/Order/Order"
-		})
+		// wx.navigateTo({
+		// 	url:"/pages/Order/Order"
+		// })
 		let that = this
 		let xuanG=that.data.goods_sele
 		let idG=''
+		var xzarr=[]
 	for(let i in xuanG){
 			if(xuanG[i].xuan){
 				if(idG==''){
-					idG =xuanG[i].order_cart_id
+					idG =xuanG[i].id
+					
 				}else{
-					idG +=','+xuanG[i].order_cart_id
+					idG +=','+xuanG[i].id
 				}
-				
+				xzarr.push(that.data.goods[i])
 			}
 			
 			// console.log(idG)
 		}
-		
+		xzarr=JSON.stringify(xzarr)
+		console.log(xzarr)
 		console.log(idG)
 		if(idG!==''){
-			app.openOrder(idG,1)
+			app.openOrder(idG,xzarr,1)
 		}
 	},
 	//加减
@@ -165,20 +160,22 @@ Page({
 		//http://water5100.800123456.top/WebService.asmx/shopcar
 		
 		// return
+		var jkurl
+		if(ad=='-'){
+			jkurl='/api/shoppingGoodsNumDown/'+id
+		}else{
+			jkurl='/api/shoppingGoodsNumUp/'+id
+		}
 		wx.request({
-			url:  app.IPurl1+'shopcar',
+			url:  app.IPurl+jkurl,
 			data:{
-				op:'num',
-				ad:ad,
-				order_cart_id:id,
-				key:app.jkkey,
-				tokenstr:wx.getStorageSync('tokenstr')
+				token:wx.getStorageSync('token')
 			},
 			header: {
 				'content-type': 'application/x-www-form-urlencoded' 
 			},
 			dataType:'json',
-			method:'POST',
+			method:'PUT',
 			success(res) {
 				// console.log(res.data)
 				
@@ -186,18 +183,21 @@ Page({
 					app.checktoken(res.data.error)
 					that.onLoad()
 				}
-				if(res.data.error==0){
+				if(res.data.code==1){
 					let resultd=res.data
 					console.log(res)
 					console.log(resultd)
 					if(ad=='-'){
 						that.data.goods_sele[thisidx].num--
+						that.data.goods[thisidx].num--
 					}else{
 						that.data.goods_sele[thisidx].num++
+						that.data.goods[thisidx].num++
 					}
 					
 					that.setData({
-						goods_sele:that.data.goods_sele
+						goods_sele:that.data.goods_sele,
+						goods:that.data.goods
 					})
 					console.log(thisidx)
 					
@@ -212,30 +212,22 @@ Page({
 		const pageState1 = pageState.default(this)
 		pageState1.loading()    // 切换为loading状态
 		let that = this
-		pageState1.finish()
-		return
 		wx.request({
-			url:  app.IPurl1+'shopcar',
+			url:  app.IPurl+'/api/shopping',
 			data:{
-				op:'list',
-				key:app.jkkey,
-				tokenstr:wx.getStorageSync('tokenstr')
+				token:wx.getStorageSync('token')
 			},
 			header: {
 				'content-type': 'application/x-www-form-urlencoded' 
 			},
 			dataType:'json',
-			method:'POST',
+			method:'GET',
 			success(res) {
 				// console.log(res.data)
 				
-				if(res.data.error==-2){
-					app.checktoken(res.data.error)
-					that.onLoad()
-				}
-				if(res.data.error==0){
-					let resultd=res.data.list
-					console.log(resultd)
+				if(res.data.code==1){
+					let resultd=res.data.data
+					// console.log(resultd)
 					that.setData({
 						goods:resultd
 					})
@@ -246,16 +238,16 @@ Page({
 						
 							arra.push({
 								xuan:false,
-								pri:resultd[i].order_cart.internal_price,
-								num:resultd[i].order_cart.goods_count,
-								order_cart_id:resultd[i].order_cart.order_cart_id,
-								goods_sku_id:resultd[i].order_cart.goods_sku_id
+								id:resultd[i].id,
+								pri:resultd[i].goods_real_price,
+								num:resultd[i].num,
+								order_cart_id:resultd[i].id
 							})
 					}
 					that.setData({
 						goods_sele:arra,
 						all:false,
-						sum:'0.00'
+						sum:'0'
 					})
 					that.countpri()
 				}

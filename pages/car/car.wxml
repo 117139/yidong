@@ -19,15 +19,15 @@
 					<icon  wx:if="{{goods_sele[idx].xuan==true}}" type="success" size="12" color="#fe0042" />
 				</view>
 			</view>
-			<view class="goodsImg">
+			<view class="goodsImg" wx:if="{{item.goods_pic}}">
 				<!-- <image src="{{filter.getgimg(item.order_cart.goods_img)}}"></image> -->
-				<image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463693&di=39d4ee06bfc66cdde04022278d004fee&imgtype=0&src=http%3A%2F%2Fpic45.nipic.com%2F20140729%2F1628220_084628920000_2.jpg"></image>
+				<image src="{{filter.getgimg(item.goods_pic)}}"></image>
 			</view>
 			<view class="goodsinr">
-				<view class="goodsname fz30 c30 oh1">这里是运动鞋标题……</view>
-				<view class="goodspri">HI7白色；43</view>
+				<view class="goodsname fz30 c30 oh1">{{item.goods_name}}</view>
+				<view class="goodspri">{{item.attr_set}}</view>
 				<view class="goodspri1">
-					<text class="fz36 cf6377a fwb">￥{{filter.moneyFormat(goods_sele[idx].price)}}</text>
+					<text class="fz36 cf6377a fwb">￥{{filter.moneyFormat(goods_sele[idx].pri)}}</text>
 					<!-- <van-stepper custom-class="steppera" 
 					input-class="vanipt"
 					plus-class="vantjia"
@@ -37,9 +37,9 @@
 					bind:focus="onfocus"
 					bind:change="onChange" /> -->
 					<view class="vstepper steppera">
-						<view catchtaptap="onNum" data-idx="{{idx}}" data-ad="-" data-id="{{item.order_cart.order_cart_id}}" class="vantjian c9">-</view>
+						<view catchtap="onNum" data-idx="{{idx}}" data-ad="-" data-id="{{item.id}}" class="vantjian c9">-</view>
 						<input class="vanipt c6" disabled value="{{ goods_sele[idx].num }}"></input>
-						<view catchtaptap="onNum" data-idx="{{idx}}" data-ad="+" data-id="{{item.order_cart.order_cart_id}}" class="vantjia c9">+</view>
+						<view catchtap="onNum" data-idx="{{idx}}" data-ad="+" data-id="{{item.id}}" class="vantjia c9">+</view>
 					</view>
 				</view>
 			</view>

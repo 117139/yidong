@@ -1,6 +1,7 @@
 <!--logs.wxml-->
 <import src="/utils/pageState/index.wxml" />
 <!-- <template is="pageState" data="{{...pageState}}" /> -->
+<wxs src="../../utils/filter.wxs" module="filter" />
 <view class="hengxian"></view>
 <view class="container">
   <!-- <view class="address" bindtap="goaddress">
@@ -13,7 +14,7 @@
 			<image src="/static/images/my/mygl_06.png"></image>
 		</view>
 	</view> -->
-	<view class="address">
+	<view class="address" data-url="/pages/myaddress1/myaddress" bindtap="jump">
 		<view class="add_l">
 			<view class="al_1">MISTERAYQU <text class="l_tel"as>113****7031</text></view>
 			<view class="al_2">上海市徐汇区田林路487号宝石22号楼杉德大厦1楼</view>
@@ -26,58 +27,55 @@
 		<image src="/static/images/orderborder.png"></image>
 	</view>
 	<view class="goodsBox contbox">
-		<view class="goodsdft" wx:for="{{order_product_list}}"
-		wx:for-index="idx1"
-		wx:for-item="item1" 
-		wx:key="idx1" 
-		data-id="{{1}}" bindtap="goOrderDetails">
-			<view class="goodsImg">
+		<view class="goodsdft" wx:for="{{xzarr}}"
+		wx:for-index="idx"
+		wx:for-item="item" 
+		wx:key="idx">
+			<view class="goodsImg" wx:if="{{item.goods_pic}}">
 				<!-- <image src="{{spimg[idx][idx1]}}"></image> -->
-				<image src="{{item1.goods_img}}"></image>
+				<image src="{{filter.getgimg(item.goods_pic)}}"></image>
 			</view>
 			<view class="goodsInr">
-				<view class="fz30 c3 oh1"> 
-					这里是运动鞋标题描述性文字这里是运动鞋标题描述性文字这里是运动鞋标题描述性文字……
-				</view>
+				<view class="fz30 c3 oh1">{{item.goods_name}}</view>
 				<!-- <view class="sptype" wx:if="{{item1.is_ladder_pricing==1}}">阶梯优惠商品 
 					<text class="orderstatus">{{item.order_info.order_process}}</text>
 				</view> -->
 				<view class="goodsInr1 fz26 c9 dis_flex ju_b">
-				<view>	白色；43 </view>
-				<view>X1</view>
+				<view>{{item.attr_set}}</view>
+				<view>X{{item.num}}</view>
 				</view>
-				<text class="fz30 cf6377a fwb">￥23.00</text>
+				<text class="fz30 cf6377a fwb">￥{{item.goods_real_price}}</text>
 				
 			</view>
 		</view>
 		<view class="dis_flex ju_b pt30 pb20">
 			<view class="fz30 c3">总价：</view>
-			<view class="fz36 cf6377a fwb">￥123.00</view>
+			<view class="fz36 cf6377a fwb">￥{{sum}}</view>
 		</view>
 	</view>
 	<view class="hengxian"></view>
-	<view class="guige" bindtap="sheetshow">
+	<view class="guige" wx:if="yhlist[0].coupon_money">
 		<view class="guige_l">
 			<view class="guige_l_name">优惠券</view>
 			 <!-- <view class="c9">已选100元优惠券</view> -->
 		</view>
-		<view class="fz26 c9">-￥100.00</view>
+		<view class="fz26 c9">-￥{{yhlist[0].coupon_money}}</view>
 	</view>
 	<!-- <view class="hengxian"></view> -->
-	<view class="guige" bindtap="sheetshow">
+	<view class="guige">
 		<view class="guige_l">
 			<view class="guige_l_name">运费</view>
 			 <!-- <view>10元</view> -->
 		</view>
 		<!-- <view class="guige_r"> -->
-			<view class="fz26 c9">+￥10.00</view>
+			<view class="fz26 c9">{{yunfei==0? '免运费':'+￥'+yunfei}}</view>
 			<!-- <text class="iconfont iconsangedian fz36 c9"></text> -->
 		<!-- </view> -->
 	</view>
 	
 
 	<view class="fixbottom">
-		<view class="fb_l">￥{{sum}}</view>
+		<view class="fb_l">￥{{zsum}}</view>
 		<view wx:if="{{paykg}}" class="subbtn"  bindtap="subbtn">提交订单</view>
 		<view wx:if="{{!paykg}}" class="subbtn subbtn1" >提交订单</view>
 	</view>

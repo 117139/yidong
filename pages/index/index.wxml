@@ -1,14 +1,16 @@
 <!--index.wxml-->
 <import src="../../vendor/wxParse/wxParse.wxml" />
 <import src="/utils/pageState/index.wxml" />
-<template is="pageState" data="{{...pageState}}" />
+<!-- <template is="pageState" data="{{...pageState}}" /> -->
 <wxs src="../../utils/filter.wxs" module="filter" />
 <view class="container w100">
 	<swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
 	 indicator-active-color='#fff' circular="{{circular}}">
 		<block wx:for="{{bannerimg}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
 			<swiper-item>
-				<image src="{{item}}" class="slide-image" width="355" height="150" />
+				<!-- <image src="{{item}}" class="slide-image" width="355" height="150" /> -->
+				<image wx:if="{{item.pic}}" lazy-load='true' src="{{filter.imgIP(item.pic)}}" class="slide-image"/>
+
 			</swiper-item>
 		</block>
 	</swiper>
@@ -17,7 +19,7 @@
 			<text class="mr10">——————</text><text class="iconfont iconaixin fz26 cf6377a mr10"></text><text class="fz32 c3 fwb">产品展示</text><text class="ml10">——————</text>
 		</view>
 		<template is="wxParse" data="{{wxParseData:article.nodes}}" />
-		<image class="goodsdetailsimg" src="../../static/images/fwb_03.jpg"></image>
+		<!-- <image class="goodsdetailsimg" src="../../static/images/fwb_03.jpg"></image> -->
 	</view>
 	<view class="hengxian"></view>
   <view class="mian mb50">
@@ -27,11 +29,11 @@
 		<view class="yhquan">
 			<image class="yhqbg" src="../../static/images/quan_04.jpg"></image>
 			<view class="yhqinr">
-				<view class="fz140 c30 fwb mr30 letter-s20">100</view>
+				<view class="fz140 c30 fwb mr30 letter-s20">{{youhui}}</view>
 				<view class="yhinr">
 					<view class="fz34 c30">优惠券<text class="fz30">(一个号仅限一张)</text></view>
 					<view class="gofenxiang">
-						点击商品进行分享<text class="iconfont iconnext ml10 fz24"></text>
+						点击商品进行分享<text class="iconfont iconxiaosanjiao_ ml10 fz14"></text>
 						<button class="shareBtn" open-type='share' data-supid="1" data-type="{{idx1}}"></button>
 					</view>
 				</view>
@@ -39,7 +41,7 @@
 		</view>
 	</view>
 	<view class="hengxian"></view>
-	<view class="list boxsiz dis_flex ais" bindtap="jump" data-url="/pages/goodsDetails/goodsDetails?shop_id=1">
+	<!-- <view class="list boxsiz dis_flex ais" bindtap="jump" data-url="/pages/goodsDetails/goodsDetails?shop_id=1">
 		<image class="shopimg" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463694&di=f1313a20ae6905d950e3fb48bf30dacf&imgtype=0&src=http%3A%2F%2Fpic4.58cdn.com.cn%2Fzhuanzh%2Fn_v27fbe81b6f94548ce9fdac6489ffe3276.jpg%3Fw%3D750%26h%3D0"></image>
 		<view class="flex_1">
 			<view class="oh2 mb50 c30 fz30">这里是运动鞋标题描述这里是运动鞋标题描述</view>
@@ -48,9 +50,28 @@
 				<view class="dis_flex aic">
 					<view class="cf33c7b fwb">
 						<text class="fz30">￥</text>
-						<text class="fz48">{{filter.moneyFormat(670)}}</text>
+						<text class="fz48">{{filter.moneyFormat(750)}}</text>
 					</view>
 					<view class="scx fz26 c9 ml10">￥{{filter.moneyFormat(1550)}}</view>
+				</view>
+				<view class="gobuy">
+					立即抢购
+				</view>
+			</view>
+		</view>
+	</view> -->
+	<view class="list boxsiz dis_flex ais" bindtap="jump" data-url="/pages/goodsDetails/goodsDetails?shop_id=1">
+		<image wx:if="{{goods.goods_pic}}" class="shopimg" src="{{filter.getgimg(goods.goods_pic)}}"></image>
+		<view class="flex_1 dis_flex flex_dc ju_b">
+			<view class="oh2 mb50 c30 fz30">{{goods.goods_name}}</view>
+			
+			<view class="dis_flex ju_b aic w100">
+				<view class="dis_flex aic">
+					<view class="cf33c7b fwb">
+						<text class="fz30">￥</text>
+						<text class="fz48">{{filter.moneyFormat(goods.goods_real_price)}}</text>
+					</view>
+					<view class="scx fz26 c9 ml10">￥{{filter.moneyFormat(goods.goods_price)}}</view>
 				</view>
 				<view class="gobuy">
 					立即抢购

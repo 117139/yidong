@@ -19,9 +19,8 @@ Page({
 		this.setData({
 			editaddress:JSON.parse(option.address)
 		})
-		this.data.region[0]=this.data.editaddress.province
-		this.data.region[1]=this.data.editaddress.city
-		this.data.region[2]=this.data.editaddress.county
+		var area=this.data.editaddress.area.split(' ')
+		this.data.region=area
 		this.setData({
 			region:this.data.region
 		})
@@ -30,8 +29,9 @@ Page({
 	//选择地区
 	bindRegionChange(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
+		this.data.region=e.detail.value
     this.setData({
-      region: e.detail.value
+      region: this.data.region
     })
   },
 	//设置默认
@@ -78,21 +78,17 @@ Page({
 			});
 			return false;
 		}
-	//http://water5100.800123456.top/WebService.asmx/useraddress
 		wx.request({
-			url:  app.IPurl1+'useraddress',
+			url: app.IPurl+'/api/userAddress/'+that.data.editaddress.id,
 			data:  {
-					op:'save',
-					key:'server_mima',
-					tokenstr:wx.getStorageSync('tokenstr'),
-					province:that.data.region[0], 
-					city:that.data.region[1], 
-					country:that.data.region[2], 
+					
+					token:wx.getStorageSync('token'),
+					area:that.data.region[0]+''+that.data.region[1]+''+that.data.region[2], 
 					address:formresult.xxaddress,
-					name: formresult.name,
-					mobile:formresult.tel,
-					user_member_shopping_address_id:that.data.editaddress.user_member_shopping_address_id
-				},
+					user_name: formresult.name,
+					phone:formresult.tel,
+					is_default:formresult.moren ? 1:0
+			},
 			header: {
 				'content-type': 'application/x-www-form-urlencoded' 
 			},
@@ -100,16 +96,25 @@ Page({
 			method:'POST',
 			success(res) {
 				console.log(res.data)
-				if(res.data.error==-2){
-					app.checktoken(res.data.error)
-					// that.onLoad()
-				}
-				if(res.data.error==0){
+				if(res.data.code==1){
 					wx.showToast({
 						title:'操作成功'
 					})
-					wx.navigateBack()
+					setTimeout(function(){
+						wx.navigateBack()
+					},1000)
+				}else{
+					wx.showToast({
+						icon:'none',
+						title:res.data.msg
+					})
 				}
+			},
+			fail(){
+				wx.showToast({
+					icon:'none',
+					title:res.data.msg
+				})
 			}
 		})
   }

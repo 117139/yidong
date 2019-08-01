@@ -1,9 +1,10 @@
 <!--pages/yhlist/yhlist.wxml-->
+<wxs src="../../utils/filter.wxs" module="filter" />
 <view class="container">
-	<view class="yhquan">
-		<image class="yhqbg" src="../../static/images/quan_03.jpg"></image>
+	<view class="yhquan" wx:for="{{yhlist}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+		<image class="yhqbg" src="../../static/images/quan_04.jpg"></image>
 		<view class="yhqinr">
-			<view class="fz140 c30 fwb mr30 letter-s20">100</view>
+			<view class="fz140 c30 fwb mr30 letter-s20">{{filter.moneyFormat(item.coupon_money)}}</view>
 			<!-- <view class="yhinr">
 				<view class="fz34 c30">优惠券<text class="fz30">(一个号仅限一张)</text></view>
 				<view class="gofenxiang">
@@ -12,8 +13,10 @@
 				</view>
 			</view> -->
 			<view class="yhinr">
-				<view class="fz34 c30">优惠券</view>
-				<view  class="fz26 cf">无门槛</view>
+				<view class="fz34 c30 w100">优惠券</view>
+				<view class="gofenxiang ">
+					<text class="flex_1 pl10">无门槛</text><text class="iconfont iconxiaosanjiao_ ml10 fz14 mr20"></text>
+				</view>
 			</view>
 		</view>
 	</view>

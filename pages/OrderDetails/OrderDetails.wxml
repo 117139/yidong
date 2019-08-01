@@ -26,8 +26,7 @@
 				<image src="{{item1.goods_img}}"></image>
 			</view>
 			<view class="goodsInr">
-				<view class="fz36 c3 oh1"> 
-					这里是运动鞋标题描述性文字这里是运动鞋标题描述性文字这里是运动鞋标题描述性文字……
+				<view class="fz36 c3 oh1">这里是运动鞋标题描述性文字这里是运动鞋标题描述性文字这里是运动鞋标题描述性文字……
 				</view>
 				<!-- <view class="sptype" wx:if="{{item1.is_ladder_pricing==1}}">阶梯优惠商品 
 					<text class="orderstatus">{{item.order_info.order_process}}</text>

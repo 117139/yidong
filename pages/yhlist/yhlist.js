@@ -1,18 +1,19 @@
 // pages/yhlist/yhlist.js
+const app=getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+			yhlist:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+	
   },
 
   /**
@@ -26,7 +27,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+		this.getyhlist()
   },
 
   /**
@@ -62,5 +63,43 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+	getyhlist(){
+		var that=this
+		wx.request({
+				url:  app.IPurl+'/api/userCouponList',
+				data:{
+					token:wx.getStorageSync('token')
+				},
+				header: {
+					'content-type': 'application/x-www-form-urlencoded' 
+				},
+				dataType:'json',
+				method:'get',
+				success(res) {
+					console.log(res.data)
+					if(res.data.code==1){
+			
+							that.setData({
+								yhlist:res.data.data
+							})
+							
+					}else{
+						wx.showToast({
+							icon:'none',
+							title:res.data.msg
+						})
+					}
+					
+				},
+				fail() {
+					wx.showToast({
+						icon:'none',
+						title:res.data.msg
+					})
+					 console.log('失败')
+				}
+			})
+		
+	},
 })

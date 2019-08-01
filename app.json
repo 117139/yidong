@@ -1,8 +1,9 @@
 {
   "pages": [
+		"pages/car/car", 
     "pages/index/index",
-		"pages/OrderList/OrderList",
 		"pages/goodsDetails/goodsDetails",
+		"pages/OrderList/OrderList",
     "pages/Order/Order",
 		"pages/OrderDetails/OrderDetails",
     "pages/kefu/kefu",
@@ -11,12 +12,12 @@
 		"pages/my/my",
     "pages/yhlist/yhlist",
     "pages/setyj/setyj",
-		"pages/car/car", 
     "pages/login/login",
 		"pages/about/about",
 		"pages/addAdd/addAdd",
 		"pages/addressEdit/addressEdit",
 		"pages/myaddress/myaddress",
+    "pages/myaddress1/myaddress",
 		
 		
 		
