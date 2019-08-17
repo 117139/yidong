@@ -1,5 +1,5 @@
 //logs.js
-var pageState = require('../../utils/pageState/index.js')
+// var pageState = require('../../utils/pageState/index.js')
 const app = getApp()
 const QRCode = require('../../utils/weapp-qrcode.js')
 import rpx2px from '../../utils/rpx2px.js'
@@ -7,7 +7,10 @@ let qrcode;
 const qrcodeWidth = rpx2px(210)
 Page({
   data: {
-		order_info_id:'',
+		btnkg:0,
+		htmlkg:0,
+		Odata:'',
+		order_id:'',
 		order_status:'',
 		delivery_code:'',
 		goods:[],
@@ -15,11 +18,7 @@ Page({
 		shopNum:[],
 		goods_sele:[],
     qujan:[],
-		order_product_list:[
-			{goods_img:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463693&di=39d4ee06bfc66cdde04022278d004fee&imgtype=0&src=http%3A%2F%2Fpic45.nipic.com%2F20140729%2F1628220_084628920000_2.jpg'},
-			{goods_img:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463693&di=39d4ee06bfc66cdde04022278d004fee&imgtype=0&src=http%3A%2F%2Fpic45.nipic.com%2F20140729%2F1628220_084628920000_2.jpg'},
-			{goods_img:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463693&di=39d4ee06bfc66cdde04022278d004fee&imgtype=0&src=http%3A%2F%2Fpic45.nipic.com%2F20140729%2F1628220_084628920000_2.jpg'},
-		],
+		order_product_list:[],
 		show0:0,
 		show1:0,
 		show2:0,
@@ -27,19 +26,32 @@ Page({
 		qrcodeWidth: qrcodeWidth,
   },
   onLoad: function (option) {
+		wx.setNavigationBarTitle({
+			title:'加载中...'
+		})
     if(option.id){
 			console.log(option.id)
 		}
 		this.setData({
-			order_info_id:option.id
+			order_id:option.id
 		})
 		this.getOrderList(option.id)
   },
+	cload(){
+		this.getOrderList(this.data.order_id)
+	},
 	onReady(){
 		let that =this
 		that.countpri()
 		console.log(that.delivery_code)
 		
+	},
+	onShow(){
+		if(that.data.btnkg==1){
+			that.setData({
+				btnkg:0
+			})
+		}
 	},
 	bindPickerChange(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -112,118 +124,219 @@ Page({
 			sum:heji
 		})*/
 	},
-	confirmBtn(){
-		console.log('确认收货')
-		/*wx.request({
-			url: address + 'wxPay',
-			data: {
-				openId: openId
-				// amount: amount,
-				// openId: openId
-			},
-			header: {
-					'content-type': 'application/x-www-form-urlencoded' // 默认值
-			},
-			method: "POST",
-			success: function (res) {
-				console.log(res);
-				that.doWxPay(res.data);
-			},
-			fail: function (err) {
-				wx.showToast({
-						icon: "none",
-						title: '服务器异常，清稍候再试'
-				})
-			},
-		});*/
+	//取消订单
+	cancelOrder(e){
+		let that =this
+		// console.log('picker发送选择改变，携带值为', e.detail.value)
+		let oid=e.currentTarget.dataset.oid
+		wx.showModal({
+			title: '提示',
+			content: '是否取消该订单?',
+			success (res) {
+				if (res.confirm) {
+					console.log('用户点击确定')
+					wx.request({
+						url:  app.IPurl+'/api/order',
+						data:{
+							status:-1,
+							order_id:oid,
+							token:wx.getStorageSync('token')
+						},
+						header: {
+							'content-type': 'application/x-www-form-urlencoded' 
+						},
+						dataType:'json',
+						method:'PUT',
+						success(res) {
+							if(res.data.error==-2){
+								app.checktoken(res.data.error)
+								that.onLoad()
+							}
+							if(res.data.code==1){
+								wx.showToast({
+									title: '删除成功',
+									duration: 1000
+								});
+								setTimeout(function(){
+									// var pages=[1,1,1,1,1]
+									// var goods=[ [],[],[],[],[], ]
+									// that.setData({
+									// 	pages:pages,
+									// 	goods:goods
+									// })
+									// that.getOrderList()
+									wx.navigateBack()
+								},1000)
+								// that.getOrderList(that.data.type)
+							}else{
+								wx.showToast({
+									title: '操作失败',
+									duration: 1000
+								});
+							}
+							
+						
+						},
+						fail() {
+							 wx.showToast({
+							 	title: '操作失败',
+							 	duration: 1000
+							 });
+						}
+					})
+				} else if (res.cancel) {
+					console.log('用户点击取消')
+				}
+			}
+		})
+		
+	},
+	//去评论
+	gopinlun(e){
+		wx.navigateTo({
+			url:'/pages/fabiaopl/fabiaopl?oid='+e.currentTarget.dataset.oid
+		})
+	},
+	shouhuoBtn(e){
+		let that =this
+		// console.log('picker发送选择改变，携带值为', e.detail.value)
+		let oid=e.currentTarget.dataset.oid
+		wx.showModal({
+			title: '提示',
+			content: '是否确认收货?',
+			success (res) {
+				if (res.confirm) {
+					console.log('用户点击确定')
+					if(that.data.btnkg==1){
+						return
+					}else{
+						that.setData({
+							btnkg:1
+						})
+					}
+					wx.request({
+						url:  app.IPurl+'/api/order',
+						data:{
+							status:1,
+							order_id:oid,
+							token:wx.getStorageSync('token')
+						},
+						header: {
+							'content-type': 'application/x-www-form-urlencoded' 
+						},
+						dataType:'json',
+						method:'PUT',
+						success(res) {
+							that.setData({
+								btnkg:0
+							})
+							console.log(res.data)
+							if(res.data.code==1){
+								wx.showToast({
+									title: '收货成功',
+									duration: 1000
+								});
+								setTimeout(function(){
+								// 	var pages=[1,1,1,1,1]
+								// 	var goods=[ [],[],[],[],[], ]
+								// 	that.setData({
+								// 		pages:pages,
+								// 		goods:goods
+								// 	})
+								// 	that.getOrderList()
+								wx.navigateBack()
+								},1000)
+							}else{
+								if(res.data.msg){
+									wx.showToast({
+										title: res.data.msg,
+										duration: 2000,
+										icon:'none'
+									});
+								}else{
+									wx.showToast({
+										title: '网络异常',
+										duration: 2000,
+										icon:'none'
+									});
+								}
+							}
+							
+						
+						},
+						fail() {
+							that.setData({
+								btnkg:0
+							})
+							 wx.showToast({
+							 	title: '操作失败',
+							 	duration: 1000
+							 });
+						}
+					})
+				} else if (res.cancel) {
+					console.log('用户点击取消')
+				}
+			}
+		})
+		
+		
 	},
 	//获取订单详情
 	getOrderList(id){
-		const pageState1 = pageState.default(this)
-		pageState1.loading()    // 切换为loading状态
-		pageState1.finish() 
-		return
+		// const pageState1 = pageState.default(this)
+		// pageState1.loading()    // 切换为loading状态
+		
 		let that = this
 		//http://water5100.800123456.top/WebService.asmx/order
 		wx.request({
-			url:  app.IPurl1+'order',
+			url:  app.IPurl+'/api/order/1',
 			data:{
-				op:'info',
-				order_info_id:id,
-				key:app.jkkey,
-				tokenstr:wx.getStorageSync('tokenstr')
+				order_id:id,
+				token:wx.getStorageSync('token')
 			},
 			header: {
 				'content-type': 'application/x-www-form-urlencoded' 
 			},
 			dataType:'json',
-			method:'POST',
+			method:'get',
 			success(res) {
 				// console.log(res.data)
 				
-				if(res.data.error==-2){
-					app.checktoken(res.data.error)
-					that.onLoad()
-				}
-				if(res.data.error==0){
-	
+				if(res.data.code==1){
+						
 						let resultd=res.data
 						console.log(res.data)
-						console.log(resultd.info.delivery_code)
-						that.ewm(resultd.info.delivery_code)
-						let	sum1=resultd.info.order_price.toFixed(2)
-						console.log(sum1)
+						// console.log(resultd.info.delivery_code)
+						// that.data.spimg = that.data.spimg.concat(imgb)
 						that.setData({
-							goods:resultd,
-							order_status:resultd.info.order_status,
-							delivery_code:resultd.info.delivery_code,
-							sum:sum1
+							Odata:resultd.data,
+							htmlReset:0
 						})
-						let imgb=[]
-						console.log(resultd.list)
-						for(let i in resultd.list){
-							let rlb=resultd.list[i].order_product.goods_img.split(",")
-							imgb.push(rlb[0])
-						}
-						that.data.spimg = that.data.spimg.concat(imgb)
-						that.setData({
-							spimg:that.data.spimg
+						wx.setNavigationBarTitle({
+							title:'订单详情'
 						})
-						//设置订单的阶梯数据
-						let arra=[]
-						for (let i=0;i<that.data.goods.list.length;i++) {
-							let plist=that.data.goods.list[i]
-							if(plist.order_product.is_ladder_pricing==1){
-								
-								arra.push({
-									pri:plist.order_product.internal_price,
-									num:plist.order_product.goods_count,
-									// order_cart_id:that.data.goods.list[i].order_product.order_cart_id,
-									laddermsgs:that.ladderpri(i)
-								})
-							}else{
-								
-								let ss=plist.order_product.internal_price * plist.order_product.goods_count
-								
-								let Totalpri=Math.round((ss*1000)/1000)
-								
-								arra.push({
-									pri:plist.order_product.internal_price,
-									num:plist.order_product.goods_count,
-									Totalpri:Totalpri,
-									// order_cart_id:plist.order_product.order_cart_id
-								})
-							}
-						}
-						that.setData({
-							goods_sele:arra
-						})
-						/*that.countpri()*/
+				}else{
+					wx.showToast({
+						icon:'none',
+						title:'获取失败'
+					})
+					console.log(res.data)
+					that.setData({
+						htmlReset:1
+					})
 				}
-				pageState1.finish()    // 切换为finish状态
+				// pageState1.finish()    // 切换为finish状态
 			},
-			fail() {
-				 pageState1.error()    // 切换为error状态
+			fail(err) {
+				 wx.showToast({
+				 	icon:'none',
+				 	title:'获取失败'
+				 })
+				 that.setData({
+				 	htmlReset:1
+				 })
+				 console.log(err)
 			}
 		})
 	},
@@ -349,7 +462,15 @@ Page({
 		});
 	},
 	pay(){
-		app.Pay(this.data.goods.info.order_info_id,'info')
+		if(that.data.btnkg==1){
+			return
+		}else{
+			that.setData({
+				btnkg:1
+			})
+		}
+		var that =this
+		app.Pay(that.data.order_id,'info')
 	},
 	onRetry(){
 		this.onLoad()

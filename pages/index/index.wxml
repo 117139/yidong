@@ -3,7 +3,8 @@
 <import src="/utils/pageState/index.wxml" />
 <!-- <template is="pageState" data="{{...pageState}}" /> -->
 <wxs src="../../utils/filter.wxs" module="filter" />
-<view class="container w100">
+<view wx:if="{{htmlReset==1}}" class="chongshi" bindtap='cload'>重试</view>
+<view class="container w100" wx:if="{{goods!=''}}">
 	<swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
 	 indicator-active-color='#fff' circular="{{circular}}">
 		<block wx:for="{{bannerimg}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
@@ -34,9 +35,10 @@
 					<view class="fz34 c30">优惠券<text class="fz30">(一个号仅限一张)</text></view>
 					<view class="gofenxiang">
 						点击商品进行分享<text class="iconfont iconxiaosanjiao_ ml10 fz14"></text>
-						<button class="shareBtn" open-type='share' data-supid="1" data-type="{{idx1}}"></button>
+						
 					</view>
 				</view>
+				<button class="shareBtn" open-type='share' data-supid="1" data-type="{{idx1}}"></button>
 			</view>
 		</view>
 	</view>

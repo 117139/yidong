@@ -1,5 +1,6 @@
 <!--pages/kefu/kefu.wxml-->
+<wxs src="../../utils/filter.wxs" module="filter" />
 <view class="container">
-	<image bindtap="previewImage" src="{{kf}}" data-src="{{kf}}"></image>
+	<image bindtap="previewImage" src="{{filter.imgIP(kf)}}" data-src="{{filter.imgIP(kf)}}"></image>
 	<view class="tac mt20">请添加客服微信</view>
 </view>

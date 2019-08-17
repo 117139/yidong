@@ -31,7 +31,7 @@ Page({
       console.log(e.detail.userInfo)
       app.globalData.userInfo = e.detail.userInfo
 			wx.setStorageSync('userWxmsg', e.detail.userInfo)
-      app.dologin()
+      app.dologin('shouquan')
       /*wx.login({
         success: function (res) {
           if (res.code) {
@@ -60,12 +60,12 @@ Page({
           }
         },
       })*/
-			wx.reLaunch({
-				url: '/pages/index/index',
-				fail(err) {
-					console.log("失败: " + JSON.stringify(err));
-				}
-			})
+			// wx.reLaunch({
+			// 	url: '/pages/index/index',
+			// 	fail(err) {
+			// 		console.log("失败: " + JSON.stringify(err));
+			// 	}
+			// })
     } else {
       //用户按了拒绝按钮
       wx.showModal({

@@ -38,13 +38,13 @@
 				</view>
 				<view>待发货</view>
 			</view>
-			<view class="stateOne" bindtap="jump" data-url="/pages/OrderList/OrderList?type=2">
+			<view class="stateOne" bindtap="jump" data-url="/pages/OrderList/OrderList?type=3">
 				<view class="stateicon">
 					<text class="iconfont icondaishouhuo"></text>
 				</view>
 				<view>待收货</view>
 			</view>
-			<view class="stateOne" bindtap="jump" data-url="/pages/OrderList/OrderList?type=3">
+			<view class="stateOne" bindtap="jump" data-url="/pages/OrderList/OrderList?type=4">
 				<view class="stateicon">
 					<text class="iconfont iconjiaoyiwancheng"></text>
 				</view>

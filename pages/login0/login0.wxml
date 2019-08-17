@@ -1,0 +1,33 @@
+<!--pages/login0/login0.wxml-->
+<view class="container">
+	
+	<view class="header">
+		<image src="/static/images/logo.png"></image>
+	</view>
+	<form class="w100" bindsubmit="formSubmit">
+	<view class="srkbox mb60">
+		<text class="iconfont iconzhanghao cc2"></text>
+		<input type="number" name="tel" bindblur='oniptblur' placeholder="用户名/手机号"/>
+	</view>
+	
+	<view class="srkbox mb60">
+		<text class="iconfont iconmima-copy-copy cc2"></text>
+		<input wx:if="{{showpwd==1}}" type="password" name="pwd"
+		 maxlength="18" placeholder="密码由6-18位字母或数字组成"
+		 bindblur='oniptblurpwd' value="{{pwd}}"/>
+		<input wx:if="{{showpwd==0}}" type="text" name="pwd" 
+		maxlength="18" placeholder="密码由6-18位字母或数字组成"
+		bindblur='oniptblurpwd' value="{{pwd}}"/>
+		<text wx:if="{{showpwd==1}}" class="iconfont iconiconcloseeye cc2" data-type="0" bindtap="toggless"></text>
+		<text wx:if="{{showpwd==0}}" class="iconfont iconyanjing cc2" data-type="1" bindtap="toggless"></text>
+	</view>
+	<view class="tjbtn">
+		登录
+		<button class="definebtn" form-type="submit"></button>
+	</view>
+	<view class="dis_flex ju_b">
+		<view class="denglu" data-url="/pages/setpwd/stpwd" bindtap="jump">忘记密码</view>
+		<view class="denglu denglu1" data-url="/pages/login1/login1" bindtap="jump">注册</view>
+	</view>
+</form>
+</view>

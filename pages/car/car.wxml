@@ -1,8 +1,9 @@
 <!--gwc.wxml-->
-<import src="/utils/pageState/index.wxml" />
+<!-- <import src="/utils/pageState/index.wxml" /> -->
 <wxs src="../../utils/filter.wxs" module="filter" />
-<template is="pageState" data="{{...pageState}}" />
-<view class="container">
+<!-- <template is="pageState" data="{{...pageState}}" /> -->
+<view wx:if="{{htmlReset==1}}" class="chongshi" bindtap='cload'>重试</view>
+<view class="container" wx:if="{{htmlReset==0}}">
 	<view class="zanwu" wx:if="{{goods.length==0}}">暂无内容</view>
   <view class="goods" wx:for="{{goods}}"
 		wx:for-index="idx"
@@ -11,7 +12,7 @@
 		data-tab="{{idx}}"
 		 bindtap="jump" data-url="/pages/goodsDetails/goodsDetails?shop_id=1">
 		<view class="goods1">
-			<view class="scbg">
+			<view class="scbg" data-id="{{item.id}}" catchtap="cardel">
 				<text class="iconfont iconshanchu fz26"></text>
 			</view>
 			<view class="xuanze" data-selec="{{idx}}" catchtap="select">

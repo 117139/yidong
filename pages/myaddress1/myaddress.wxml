@@ -1,28 +1,28 @@
 <!--logs.wxml-->
-<import src="/utils/pageState/index.wxml" />
-<template is="pageState" data="{{...pageState}}" />
+<!-- <import src="/utils/pageState/index.wxml" />
+<template is="pageState" data="{{...pageState}}" /> -->
 <view class="container log-list">
   <view class="addressOne" wx:for="{{addresslist}}" wx:for-index="idx"          
           wx:for-item="item" 
-          wx:key="idx">
+          wx:key="idx"data-idx="{{idx}}" bindtap='selectadd'>
 		<view class="addp1">
 			<text class="mr20">{{item.user_name}}</text>
 			<text>{{item.phone}}</text>
 		</view>
 		<view class="addp2">{{item.area}}{{item.address}}</view>
 		<view class="addsetting">
-			<view class="setting1 flex_1 c3" data-id="{{item.id}}" bindtap="selecmr">
+			<view class="setting1 flex_1 c3" data-id="{{item.id}}" catchtap="selecmr">
 				<view class="mricon {{item.is_default==1?'mricon1':''}}">
-					<icon  wx:if="{{item.is_default==1}}" size="13" type="success" color="#f75852" />
+					<icon  wx:if="{{item.is_default==1}}" size="12" type="success" color="#f75852" />
 
 				</view>
 				默认地址
 			</view>
 			<view class="setcz c3">
-				<view class="setting2" data-id="{{idx}}" bindtap="addressEdit">
+				<view class="setting2" data-id="{{idx}}" catchtap="addressEdit">
 					<text class="iconfont icondingdan fz26 mr5"></text>编辑
 				</view>
-				<view class="setting3" data-id="{{item.id}}" bindtap="addressDel">
+				<view class="setting3" data-id="{{item.id}}" catchtap="addressDel">
 					<text class="iconfont iconshanchu fz26 mr5"></text>删除
 				</view>
 			</view>

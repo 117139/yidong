@@ -77,8 +77,12 @@ page{
 .myguanli1{
 	border-top-left-radius: 12rpx;
 	border-top-right-radius: 12rpx;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
 }
 .ddstate{
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 	border-bottom-left-radius: 12rpx;
 	border-bottom-right-radius: 12rpx;
 }

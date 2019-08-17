@@ -276,6 +276,7 @@ image{
 	font-size: 26rpx;
 	color: #333;
 	margin-top: 60rpx;
+  padding-bottom:60rpx; 
 }
 .czbtnG{
 	position: fixed;

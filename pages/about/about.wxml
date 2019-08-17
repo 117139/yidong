@@ -1,7 +1,9 @@
 <!--logs.wxml-->
+<import src="../../vendor/wxParse/wxParse.wxml" />
 <view class="container">
-  <view class="logo">
+  <!-- <view class="logo">
 		<image src="../../static/images/aboutlogo.png"></image>
 	</view>
-	<view class="abouttext">关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们</view>
+	<view class="abouttext">关于我们</view> -->
+	<template is="wxParse" data="{{wxParseData:article.nodes}}" />
 </view>

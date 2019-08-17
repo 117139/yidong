@@ -1,42 +1,43 @@
 <!--logs.wxml-->
-<import src="/utils/pageState/index.wxml" />
+<!-- <import src="/utils/pageState/index.wxml" /> -->
 <wxs src="../../utils/filter.wxs" module="filter" />
-<template is="pageState" data="{{...pageState}}" />
-<view class="container">
+<!-- <template is="pageState" data="{{...pageState}}" /> -->
+<view wx:if="{{htmlReset==1}}" class="chongshi" bindtap='cload'>重试</view>
+<view class="container" wx:if="{{Odata!=''}}">
   <view class="address">
 		<view class="add_l">
-			<view class="al_1">MISTERAYQU <text class="l_tel"as>113****7031</text></view>
-			<view class="al_2">上海市徐汇区田林路487号宝石22号楼杉德大厦1楼</view>
+			<view class="al_1">{{Odata.address_info.user_name}} <text class="l_tel"as>{{Odata.address_info.phone}}</text></view>
+			<view class="al_2">{{Odata.address_info.address}} </view>
 		</view>
-		<view class="add_r">
+		<!-- <view class="add_r">
 			<image src="/static/images/my/mygl_06.png"></image> 
-		</view>
+		</view> -->
 	</view>
 	<view class="orderbder">
 		<image src="/static/images/orderborder.png"></image>
 	</view>
 	<view class="goodsBox contbox">
-		<view class="goodsdft" wx:for="{{order_product_list}}"
-		wx:for-index="idx1"
-		wx:for-item="item1" 
-		wx:key="idx1" 
-		data-id="{{1}}" bindtap="goOrderDetails">
+		<view class="goodsdft" wx:for="{{Odata.goods_info}}"
+		wx:for-index="idx"
+		wx:for-item="item" 
+		wx:key="idx" 
+		data-id="{{1}}" bindtap="">
 			<view class="goodsImg">
 				<!-- <image src="{{spimg[idx][idx1]}}"></image> -->
-				<image src="{{item1.goods_img}}"></image>
+				<image src="{{filter.getgimg(item.goods_pic)}}"></image>
 			</view>
 			<view class="goodsInr">
-				<view class="fz36 c3 oh1">这里是运动鞋标题描述性文字这里是运动鞋标题描述性文字这里是运动鞋标题描述性文字……
+				<view class="fz36 c3 oh1">{{item.goods_title}}
 				</view>
 				<!-- <view class="sptype" wx:if="{{item1.is_ladder_pricing==1}}">阶梯优惠商品 
 					<text class="orderstatus">{{item.order_info.order_process}}</text>
 				</view> -->
 				<view class="goodsInr1 fz26 c9 dis_flex ju_b">
-					<view>白色；43</view> 
-					<view>x1</view>
+					<view>{{filter.arrtostr(item.attr_set)}}</view> 
+					<view>x{{item.goods_num}}</view>
 				</view>
-				<text class="fz30 cf6377a fwb">￥23.00</text>
-				<view class="goodsInr1">	 {{item1.goods_unit}} 
+				<text class="fz30 cf6377a fwb">￥{{item.goods_real_price}}</text>
+				<view class="goodsInr1">	 <!-- {{item1.goods_unit}} -->
 					 <!-- {{item1.goods_count}}件 -->
 				</view>
 			</view>
@@ -54,14 +55,15 @@
 				<canvas class='canvas' style="width:{{qrcodeWidth}}px; height:{{qrcodeWidth}}px;" canvas-id='canvas' bindlongtap=''></canvas>
 			</view> -->
 			<view class="ordermsg_r">
-				<view class="omsgp">订单编号：{{123454667}}</view>
-				<view class="omsgp">创建时间：{{'2019-7-6'}}</view>
-				<view class="omsgp" wx:if="{{order_status!==0}}">付款时间：{{'2019-7-6'}}</view>
-				<view class="ordercaozuo">
-					<!-- <text>￥{{sum}}</text> -->
+				<view class="omsgp">订单编号：{{Odata.order_info.order_code}}</view>
+				<view class="omsgp">创建时间：{{filter.getDateTime(Odata.order_info.create_time)}}</view>
+				<view class="omsgp" wx:if="{{Odata.order_info.pay_time!=null}}">付款时间：{{filter.getDateTime(Odata.order_info.pay_time)}}</view>
+				<view class="omsgp"wx:if="{{Odata.order_info.status==3||Odata.order_info.status==4}}">快递单号：{{Odata.order_info.logistics_code}}</view>
+				<!-- <view class="ordercaozuo">
+					<text>￥{{filter.moneyFormat(Odata.pay_money)}}</text>
 					<view wx:if="{{order_status===0}}" class="confirmBtn" bindtap="pay">付款</view>
 					<view wx:if="{{order_status===2}}" class="confirmBtn" bindtap="confirmBtn">确认收货</view>
-				</view>
+				</view> -->
 			</view>
 		</view>
 		
@@ -70,27 +72,31 @@
 	<view class="w100 bgfff contbox">
 		<view class="dis_flex ju_b w100 pt40">
 			<text class="fz26 c3">商品总额</text>
-			<text class="fz26 c3 fwb">￥123.00</text>
+			<text class="fz26 c3 fwb">￥{{filter.moneyFormat(Odata.order_info.order_goods_money)}}</text>
 		</view>
 		<view class="dis_flex ju_b w100 pt10">
 			<text class="fz26 c3">运费</text>
-			<text class="fz26 c3 fwb">+￥10.00</text>
+			<text class="fz26 c3 fwb">+￥{{filter.moneyFormat(Odata.order_info.carriage_money)}}</text>
 		</view>
 		<view class="dis_flex ju_b w100 pt10">
 			<text class="fz26 c3">优惠券</text>
-			<text class="fz26 c3 fwb">-￥100.00</text>
+			<text class="fz26 c3 fwb">-￥{{filter.moneyFormat(Odata.order_info.coupon_money)}}</text>
 		</view>
 		<view class="dis_flex ju_b w100 pb10">
 			<text class="fz26 c3"></text>
 			<view>
 				<text class="fz30 c3 ">需付款:</text>
-				<text class="fz30 cf6377a fwb">￥33.00</text>
+				<text class="fz30 cf6377a fwb">￥{{filter.moneyFormat(Odata.order_info.pay_money)}}</text>
 			</view>
 		</view>
 	</view>
 	<view class="hengxian  mb100"></view>
-	<view class="ordercaozuo">
-		<view class="confirmBtn cancelBtn" data-oid="{{item.order_info.order_info_id}}" bindtap="cancelOrder">取消订单</view>
-		<view class="confirmBtn" data-oid="{{item.order_info.order_info_id}}" bindtap="pay">付款</view>
+	<view class="ordercaozuo"
+	 wx:if="{{Odata.order_info.status!==2&&Odata.order_info.comment.length===null}}">
+		<!-- <text>￥{{filter.moneyFormat(Odata.order_info.pay_money)}}</text> -->
+		<view  wx:if="{{Odata.order_info.status==1}}" class="confirmBtn cancelBtn" data-oid="{{order_id}}" bindtap="cancelOrder">取消订单</view>
+		<view  wx:if="{{Odata.order_info.status==1}}" class="confirmBtn" data-oid="{{Odata.order_info.order_code}}" bindtap="pay">付款</view>
+		<view  wx:if="{{Odata.order_info.status==3}}" class="confirmBtn" data-oid="{{order_id}}" bindtap="shouhuoBtn">确认收货</view>
+		<view  wx:if="{{Odata.order_info.status==4&&Odata.order_info.comment===null}}" class="confirmBtn" data-oid="{{order_id}}"  catchtap="gopinlun">去评价</view>
 	</view>
 </view>

@@ -49,24 +49,24 @@ page{
 	margin-right: 22rpx;
 }
 .xuanze{
-	width: 24rpx;
-	height: 24rpx;
+	width: 30rpx;
+	height: 30rpx;
 	padding: 40rpx 30rpx 40rpx 0rpx;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	
+	flex:none;
 }
 .xuanze1{
-	width: 24rpx;
-	height: 24rpx;
+	width: 28rpx;
+	height: 28rpx;
 	border-radius: 50%;
 	border: 1px solid #ddd;
 	box-sizing: border-box;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	
+	flex:none;
 }
 .xuanze2{
 	border: 0;
@@ -117,7 +117,7 @@ page{
 }
 /*步进器*/
 .steppera{
-	width: 150rpx;
+	width: 148rpx;
 	height: 45rpx;
 	border: 1px solid #dcdcdc;
 	display: flex;
@@ -147,6 +147,8 @@ page{
 	text-align: center;
 	display: flex;
 	align-items: center;
+	font-size: 40rpx;
+	line-height: 40rpx;
 	justify-content: center;
 }
 .table1{

@@ -6,7 +6,9 @@ Page({
     userInfo: wx.getStorageSync('userWxmsg')
   },
   onLoad: function () {
-		
+		this.setData({
+			userInfo: wx.getStorageSync('userWxmsg')
+		})
   },
 	previewImage(e){
 		app.previewImage(e)

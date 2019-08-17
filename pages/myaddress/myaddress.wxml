@@ -1,6 +1,6 @@
 <!--logs.wxml-->
-<import src="/utils/pageState/index.wxml" />
-<template is="pageState" data="{{...pageState}}" />
+<!-- <import src="/utils/pageState/index.wxml" />
+<template is="pageState" data="{{...pageState}}" /> -->
 <view class="container log-list">
   <view class="addressOne" wx:for="{{addresslist}}" wx:for-index="idx"          
           wx:for-item="item" 
@@ -13,7 +13,7 @@
 		<view class="addsetting">
 			<view class="setting1 flex_1 c3" data-id="{{item.id}}" bindtap="selecmr">
 				<view class="mricon {{item.is_default==1?'mricon1':''}}">
-					<icon  wx:if="{{item.is_default==1}}" size="13" type="success" color="#f75852" />
+					<icon  wx:if="{{item.is_default==1}}" size="12" type="success" color="#f75852" />
 
 				</view>
 				默认地址

@@ -1,8 +1,9 @@
 <!--logs.wxml-->
-<import src="/utils/pageState/index.wxml" />
+<!-- <import src="/utils/pageState/index.wxml" /> -->
 <wxs src="../../utils/filter.wxs" module="filter" />
-<template is="pageState" data="{{...pageState}}" />
-<view class="container">
+<!-- <template is="pageState" data="{{...pageState}}" /> -->
+<view wx:if="{{htmlReset==1}}" class="chongshi" bindtap='cload'>重试</view>
+<view class="container" wx:if="{{htmlReset==0}}">
 	<!-- <view class="hengxian"></view> -->
 	<view class='dis_flex ju_a w100 pb40 pt20 bgfff mb20'>
 		<block wx:for="{{datalist}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
@@ -15,41 +16,40 @@
 	
 	<view class="goodsBox w100" wx:if="{{type==idx0}}" wx:for="{{datalist}}" wx:for-index="idx0" wx:for-item="item0" wx:key="idx0">
 		<view class="zanwu" wx:if="{{goods.length==0}}">暂无内容</view>
-		<view class="goodsOne" wx:for="{{goods}}"
+		<view class="goodsOne" wx:for="{{goods[idx0]}}"
 			wx:for-index="idx"
 			wx:for-item="item" 
-			wx:key="idx">
+			wx:key="idx"
+			data-id="{{item.id}}" bindtap="goOrderDetails">
 			<view class="orderstatus dis_flex ju_b aic">
-				<view class="c9">订单号：101325489641</view>
-				<view class="cf6377a" wx:if="{{item.order_info.order_status==0}}">待付款</view>
-				<view class="cf6377a" wx:if="{{item.order_info.order_status==1}}">待发货</view>
-				<view class="cf6377a" wx:if="{{item.order_info.order_status==2}}">待收货</view>
-				<view class="cf6377a" wx:if="{{item.order_info.order_status==3}}">待付款</view>
+				<view class="c9">订单号：{{item.order_code}}</view>
+				<view class="cf6377a" wx:if="{{item.status==1}}">待付款</view>
+				<view class="cf6377a" wx:if="{{item.status==2}}">待发货</view>
+				<view class="cf6377a" wx:if="{{item.status==3}}">待收货</view>
+				<view class="cf6377a" wx:if="{{item.status==4}}">已完成</view>
 			</view>
-			<view class="goodsdft" wx:for="{{item.order_product_list}}"
+			<view class="goodsdft" wx:for="{{item.goods_info}}"
 			wx:for-index="idx1"
 			wx:for-item="item1" 
-			wx:key="idx1" 
-			data-id="{{item.order_info.order_info_id}}" bindtap="goOrderDetails">
+			wx:key="idx1" >
 				<view class="goodsImg">
 					<!-- <image src="{{spimg[idx][idx1]}}"></image> -->
-					<image src="{{filter.getgimg(item1.goods_img)}}"></image>
+					<image src="{{filter.getgimg(item1.goods_pic)}}"></image>
 				</view>
 				<view class="goodsInr">
-					<view class="fz28 c3 oh1">{{idx0}}这里是运动鞋标题描述性文字……</view>
+					<view class="fz28 c3 oh1">{{item1.goods_name}}</view>
 					
 					
 					<view class="fz26 c9 dis_flex ju_b">	
 						
 						<view class="dis_flex">
-							<text class="mb10">白色；</text> 
-							<text>43</text>
+							<text class="mb10">{{filter.arrtostr(item1.goods_attr_set)}}</text>
 							
 						</view>
-						<view>x1</view>
+						<view>x{{item1.goods_num}}</view>
 					</view>
 					
-					<view class="goodsInr1">	 {{item1.goods_unit}} 
+					<view class="goodsInr1">
 						 <!-- {{item1.goods_count}}件 -->
 					</view>
 				</view>
@@ -57,22 +57,22 @@
 			<view class="caozuo">
 				<view class="xiaoji">
 					
-					<view>共2件商品 </view>
-					<text class="">实付款：</text><text class="xjjine">￥{{filter.moneyFormat(2)}}</text>
+					<view>共{{item.order_goods_num}}件商品 </view>
+					<text class="">实付款：</text><text class="xjjine">￥{{filter.moneyFormat(item.pay_money)}}</text>
 				</view>
         
-				<view class="ordercaozuo" wx:if="{{item.order_info.order_status==0}}">
-					<view class="confirmBtn cancelBtn" data-oid="{{item.order_info.order_info_id}}" bindtap="cancelOrder">取消订单</view>
-					<view class="confirmBtn" data-oid="{{item.order_info.order_info_id}}" bindtap="pay">付款</view>
+				<view class="ordercaozuo" wx:if="{{item.status==1}}">
+					<view class="confirmBtn cancelBtn" data-oid="{{item.id}}" catchtap="cancelOrder">取消订单</view>
+					<view class="confirmBtn" data-code="{{item.order_code}}" catchtap="pay">付款</view>
 				</view>
-				<view class="ordercaozuo" wx:if="{{item.order_info.order_status==1}}">
-					<view class="confirmBtn" data-oid="{{item.order_info.order_info_id}}" bindtap="cancelOrder">取消订单</view>
+				<view class="ordercaozuo" wx:if="{{item._status==2}}">
+					<view class="confirmBtn" data-oid="{{item.id}}" catchtap="cancelOrder">取消订单</view>
 				</view>
-				<view class="ordercaozuo" wx:if="{{item.order_info.order_status==2}}">
-					<view class="confirmBtn" bindtap="shouhuoBtn">确认收货</view>
+				<view class="ordercaozuo" wx:if="{{item.status==3}}">
+					<view class="confirmBtn" data-oid="{{item.id}}" catchtap="shouhuoBtn">确认收货</view>
 				</view>
-				<view class="ordercaozuo" wx:if="{{item.order_info.order_status==3}}">
-					<view class="confirmBtn" bindtap="gopinlun">去评价</view>
+				<view class="ordercaozuo" wx:if="{{item.status==4}}">
+					<view wx:if="{{item.comment===null}}" class="confirmBtn" data-oid="{{item.id}}" catchtap="gopinlun">去评价</view>
 				</view>
 			</view>
 		</view>

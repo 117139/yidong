@@ -1,9 +1,11 @@
 //logs.js
-var pageState = require('../../utils/pageState/index.js')
+// var pageState = require('../../utils/pageState/index.js')
 const app = getApp()
 
 Page({
   data: {
+		btnkg:0,
+		htmlReset:0,
 		datalist:[
 			'全部',
 			'待付款',
@@ -11,54 +13,26 @@ Page({
 			'待收货',
 			'已完成',
 		],
+		pages:[1,1,1,1,1],
 		type:0,
 		goods:[
-			{
-				order_product_list:[
-					{goods_img:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463693&di=39d4ee06bfc66cdde04022278d004fee&imgtype=0&src=http%3A%2F%2Fpic45.nipic.com%2F20140729%2F1628220_084628920000_2.jpg'},
-					{goods_img:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463693&di=39d4ee06bfc66cdde04022278d004fee&imgtype=0&src=http%3A%2F%2Fpic45.nipic.com%2F20140729%2F1628220_084628920000_2.jpg'},
-					{goods_img:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463693&di=39d4ee06bfc66cdde04022278d004fee&imgtype=0&src=http%3A%2F%2Fpic45.nipic.com%2F20140729%2F1628220_084628920000_2.jpg'},
-				],
-				order_info:{order_info_id:1,order_status:0},
-			},
-			{
-				order_product_list:[
-					{goods_img:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463693&di=39d4ee06bfc66cdde04022278d004fee&imgtype=0&src=http%3A%2F%2Fpic45.nipic.com%2F20140729%2F1628220_084628920000_2.jpg'},
-
-				],
-				order_info:{order_info_id:2,order_status:1},
-			},
-			{
-				order_product_list:[
-					{goods_img:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463693&di=39d4ee06bfc66cdde04022278d004fee&imgtype=0&src=http%3A%2F%2Fpic45.nipic.com%2F20140729%2F1628220_084628920000_2.jpg'},
-
-				],
-				order_info:{order_info_id:2,order_status:2},
-			},
-			{
-				order_product_list:[
-					{goods_img:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463693&di=39d4ee06bfc66cdde04022278d004fee&imgtype=0&src=http%3A%2F%2Fpic45.nipic.com%2F20140729%2F1628220_084628920000_2.jpg'},
-
-				],
-				order_info:{order_info_id:2,order_status:3},
-			},
+				[],
+				[],
+				[],
+				[],
+				[],
 		],
-		spimg:[],
 		shopNum:[],
-    qujan:[],
-		columns:['仓库自提','普通配送'],
-		columns1:['仓库1','仓库2','仓库3','仓库4'],
-		columns2:['时间1','时间2','时间3','时间4'],
-		show0:0,
-		show1:0,
-		show2:0,
 		sum:0,
 		otype:-2
   },
   onLoad: function (option) {
-  //   if(option.id){
-		// 	console.log(option.id)
-		// }
+		wx.setNavigationBarTitle({
+			title:'加载中...'
+		})
+    if(option.id){
+			console.log(option.id)
+		}
 		// let hmtltit
 		// if(option.id==-2){
 		// 	hmtltit="订单"
@@ -73,14 +47,44 @@ Page({
 		wx.setNavigationBarTitle({
 			title: '订单列表'
 		})
-		this.setData({
-			type:option.type
-		})
-		this.getOrderList(option.id)
+		if(option.type){
+			this.setData({
+				type:option.type
+			})
+		}
+		
+		
 		
   },
+	onShow(){
+		var pages=[1,1,1,1,1]
+		var goods=[ [],[],[],[],[], ]
+		this.data.goods=goods
+		this.setData({
+			pages:pages,
+			goods:this.data.goods
+		})
+		if(that.data.btnkg==1){
+			that.setData({
+				btnkg:0
+			})
+		}
+		console.log('我显示了')
+		this.getOrderList('onshow')
+	},
+	cload(){
+		var pages=[1,1,1,1,1]
+		var goods=[ [],[],[],[],[], ]
+		this.data.goods=goods
+		this.setData({
+			pages:pages,
+			goods:this.data.goods
+		})
+		console.log('我显示了')
+		this.getOrderList('onshow')
+	},
 	onReady(){
-		this.countpri()
+		
 	},
 	bindcur(e){
 		var that =this
@@ -88,37 +92,20 @@ Page({
 	  that.setData({
 	    type: e.currentTarget.dataset.type
 	  })
-		// if(that.data.lists[that.data.type].length==0){
-		// 	that.getyhlist()
-		// }
+		// that.getOrderList()
+		if(that.data.goods[that.data.type].length==0){
+			that.getOrderList()
+		}
 	},
-	bindPickerChange(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      show0: e.detail.value
-    })
-  },
-	bchange1(e){
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      show1: e.detail.value
-    })
-  },
-	bchange2(e){
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      show2: e.detail.value
-    })
-  },
-	gopinlun(){
+	gopinlun(e){
 		wx.navigateTo({
-			url:'/pages/fabiaopl/fabiaopl'
+			url:'/pages/fabiaopl/fabiaopl?oid='+e.currentTarget.dataset.oid
 		})
 	},
 	//删除
 	cancelOrder(e){
 		let that =this
-		console.log('picker发送选择改变，携带值为', e.detail.value)
+		// console.log('picker发送选择改变，携带值为', e.detail.value)
 		let oid=e.currentTarget.dataset.oid
 		wx.showModal({
 			title: '提示',
@@ -127,32 +114,40 @@ Page({
 				if (res.confirm) {
 					console.log('用户点击确定')
 					wx.request({
-						url:  app.IPurl1+'order',
+						url:  app.IPurl+'/api/order',
 						data:{
-							op:'del',
-							order_info_id:oid,
-							key:app.jkkey,
-							tokenstr:wx.getStorageSync('tokenstr')
+							status:-1,
+							order_id:oid,
+							token:wx.getStorageSync('token')
 						},
 						header: {
 							'content-type': 'application/x-www-form-urlencoded' 
 						},
 						dataType:'json',
-						method:'POST',
+						method:'PUT',
 						success(res) {
 							if(res.data.error==-2){
 								app.checktoken(res.data.error)
 								that.onLoad()
 							}
-							if(res.data.error==0){
+							if(res.data.code==1){
 								wx.showToast({
 									title: '删除成功',
 									duration: 1000
 								});
-								that.getOrderList(that.data.otype)
+								setTimeout(function(){
+									var pages=[1,1,1,1,1]
+									var goods=[ [],[],[],[],[], ]
+									that.setData({
+										pages:pages,
+										goods:goods
+									})
+									that.getOrderList()
+								},1000)
+								// that.getOrderList(that.data.type)
 							}else{
 								wx.showToast({
-									title: res.data.returnstr,
+									title: '操作失败',
 									duration: 1000
 								});
 							}
@@ -227,77 +222,170 @@ Page({
 		})
 	},
 
-	shouhuoBtn(){
-		console.log('确认收货')
-		wx.showToast({
-			title: '确认收货操作',
-			icon: 'success',
-			duration: 2000
+	shouhuoBtn(e){
+		let that =this
+		// console.log('picker发送选择改变，携带值为', e.detail.value)
+		let oid=e.currentTarget.dataset.oid
+		wx.showModal({
+			title: '提示',
+			content: '是否确认收货?',
+			success (res) {
+				if (res.confirm) {
+					console.log('用户点击确定')
+					if(that.data.btnkg==1){
+						return
+					}else{
+						that.setData({
+							btnkg:1
+						})
+					}
+					wx.request({
+						url:  app.IPurl+'/api/order',
+						data:{
+							status:1,
+							order_id:oid,
+							token:wx.getStorageSync('token')
+						},
+						header: {
+							'content-type': 'application/x-www-form-urlencoded' 
+						},
+						dataType:'json',
+						method:'PUT',
+						success(res) {
+							
+							if(res.data.code==1){
+								wx.showToast({
+									title: '收货成功',
+									duration: 1000
+								});
+								setTimeout(function(){
+									var pages=[1,1,1,1,1]
+									var goods=[ [],[],[],[],[], ]
+									that.setData({
+										pages:pages,
+										goods:goods
+									})
+									that.setData({
+										btnkg:0
+									})
+									that.getOrderList()
+								},1000)
+							}else{
+								that.setData({
+									btnkg:0
+								})
+								if(res.data.msg){
+									wx.showToast({
+										title: res.data.msg,
+										duration: 2000,
+										icon:'none'
+									});
+								}else{
+									wx.showToast({
+										title: '网络异常',
+										duration: 2000,
+										icon:'none'
+									});
+								}
+							}
+							
+						
+						},
+						fail() {
+							that.setData({
+								btnkg:0
+							})
+							 wx.showToast({
+							 	title: '操作失败',
+							 	duration: 1000
+							 });
+						}
+					})
+				} else if (res.cancel) {
+					console.log('用户点击取消')
+				}
+			}
 		})
+		
 		
 	},
 
 	//获取列表
-	getOrderList(type){
-		const pageState1 = pageState.default(this)
-		pageState1.loading()    // 切换为loading状态
-		pageState1.finish()
-		return
+	getOrderList(ttype){
+		// const pageState1 = pageState.default(this)
+		// pageState1.loading()    // 切换为loading状态
+		// pageState1.finish()
+		// return
 		let that = this
 		//http://water5100.800123456.top/WebService.asmx/order
 		wx.request({
-			url:  app.IPurl1+'order',
+			url:  app.IPurl+'/api/orderList',
 			data:{
-				op:'mylist',
-				order_status:type,
-				key:app.jkkey,
-				tokenstr:wx.getStorageSync('tokenstr')
+				token:wx.getStorageSync('token'),
+				status_code:that.data.type,
+				page:that.data.pages[that.data.type],
+				page_length:10
 			},
 			header: {
 				'content-type': 'application/x-www-form-urlencoded' 
 			},
 			dataType:'json',
-			method:'POST',
+			method:'get',
 			success(res) {
-				if(res.data.error==-2){
-					app.checktoken(res.data.error)
-					that.onLoad()
-				}
-				if(res.data.error==0){
-	
-						let resultd=res.data.list
-						// console.log(res.data.list)
-						that.setData({
-							goods:resultd
-						})
-						let imgb=[]
-						let shopnum=[]
-						for(let i in resultd){
-							// console.log(rlist[i].goods_img)
-							// let rlb=resultd[i].order_product_list.goods_img.split(",")
-							let r2d=resultd[i].order_product_list
-							let imgb1=[]
-							let shopnum1=0
-							for(let j in r2d){
-								let rlb=r2d[j].goods_img.split(",")
-								imgb1.push(rlb[0])
-								shopnum1 +=r2d[j].goods_count
-							}
-							shopnum.push(shopnum1)
-							imgb.push(imgb1)
+				if(res.data.code==1){
+					wx.setNavigationBarTitle({
+						title:'订单列表'
+					})
+					that.setData({
+						htmlReset:0
+					})
+						console.log(ttype)
+						let resultd=res.data.data
+						if(ttype=='onshow'){
+							var pages=[1,1,1,1,1]
+							var goods=[ [],[],[],[],[], ]
+							that.data.goods=goods
 						}
-						// console.log(shopnum)
-						that.data.spimg = that.data.spimg.concat(imgb)
-						that.data.shopNum = that.data.shopNum.concat(shopnum)
-						that.setData({
-							spimg:that.data.spimg,
-							shopNum:shopnum
-						})
+						if(resultd.length>0){
+							that.data.goods[that.data.type]=that.data.goods[that.data.type].concat(resultd)
+							that.data.pages[that.data.type]++
+							that.setData({
+								goods:that.data.goods,
+								pages:that.data.pages,
+							})
+							console.log(that.data.goods)
+						}else{
+							wx.showToast({
+								icon:"none",
+								title:"没有更多数据了"
+							})
+						}
+						// console.log(res.data.list)
+						
+						
+				}else{
+					wx.showToast({
+						icon:"none",
+						title:"获取失败"
+					})
+					that.setData({
+						htmlReset:1
+					})
+					console.log(res.data)
 				}
-				pageState1.finish()    // 切换为finish状态
+				
+				// pageState1.finish()    // 切换为finish状态
 			},
-			fail() {
-				 pageState1.error()    // 切换为error状态
+			fail(err) {
+				wx.showToast({
+					icon:"none",
+					title:"获取失败"
+				})
+				that.setData({
+					htmlReset:1
+				})
+				console.log(err)
+				 // pageState1.error()    // 切换为error状态
 			}
 		})
 	},
@@ -310,7 +398,14 @@ Page({
 	},
 	//付款
 	pay(e){
-		let oid=e.currentTarget.dataset.oid
+		let oid=e.currentTarget.dataset.code
+		if(that.data.btnkg==1){
+			return
+		}else{
+			that.setData({
+				btnkg:1
+			})
+		}
 		app.Pay(oid,'info')
 	},
 	onRetry(){

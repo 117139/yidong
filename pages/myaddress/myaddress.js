@@ -4,23 +4,28 @@ const app = getApp()
 
 Page({
   data: {
-		addresslist:[
-			{name:'问心',mobile:'18000000000',province:'某省',city:'某市',county:'某区',address:'详细地址',user_member_shopping_address_id:'1'},
-			{name:'问心',mobile:'18000000000',province:'某省',city:'某市',county:'某区',address:'详细地址',user_member_shopping_address_id:'1'},
-			{name:'问心',mobile:'18000000000',province:'某省',city:'某市',county:'某区',address:'详细地址',user_member_shopping_address_id:'1'},
-		],
+		btnkg:0,
+		addresslist:[],
     mridx:0
   },
   onLoad: function (option) {
   
   },
 	onShow(){
+
 		this.getaddlist()
 	},
 	selecmr(e){
 		let that =this
 		console.log(e.currentTarget.dataset.id)
 		let id=e.currentTarget.dataset.id
+		if(that.data.btnkg==1){
+			return
+		}else{
+			that.setData({
+				btnkg:1
+			})
+		}
 		wx.request({
 			url:  app.IPurl+'/api/userAddressDefaultStatus/'+id,
 			data:  {
@@ -33,10 +38,37 @@ Page({
 			method:'put',
 			success(res) {
 				console.log(res.data)
-				
+				that.setData({
+					btnkg:0
+				})
 				if(res.data.code==1){
 					that.getaddlist()
+				}else{
+					if(res.data.msg){
+						wx.showToast({
+							title: res.data.msg,
+							duration: 2000,
+							icon:'none'
+						});
+					}else{
+						wx.showToast({
+							title: '网络异常',
+							duration: 2000,
+							icon:'none'
+						});
+					}
 				}
+			},
+			fail(err){
+				console.log(err)
+				wx.showToast({
+					title: '网络异常',
+					duration: 2000,
+					icon:'none'
+				});
+				that.setData({
+					btnkg:0
+				})
 			}
 		})
 	},
@@ -58,6 +90,13 @@ Page({
 			success(res) {
 				if (res.confirm) {
 					console.log('用户点击确定')
+					if(that.data.btnkg==1){
+						return
+					}else{
+						that.setData({
+							btnkg:1
+						})
+					}
 					wx.request({
 						url:  app.IPurl+'/api/userAddress/'+e.currentTarget.dataset.id,
 						data:  {
@@ -70,7 +109,9 @@ Page({
 						method:'DELETE',
 						success(res) {
 							console.log(res.data)
-							
+							that.setData({
+								btnkg:0
+							})
 							if(res.data.code==1){
 								wx.showToast({
 									title:'操作成功'
@@ -78,7 +119,31 @@ Page({
 								setTimeout(function(){
 									that.getaddlist()
 								},1000)
+							}else{
+								if(res.data.msg){
+									wx.showToast({
+										title: res.data.msg,
+										duration: 2000,
+										icon:'none'
+									});
+								}else{
+									wx.showToast({
+										title: '网络异常',
+										duration: 2000,
+										icon:'none'
+									});
+								}
 							}
+						},
+						fail(){
+							that.setData({
+								btnkg:0
+							})
+							wx.showToast({
+								title: '网络异常',
+								duration: 2000,
+								icon:'none'
+							});
 						}
 					})
 					

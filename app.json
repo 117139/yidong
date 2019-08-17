@@ -1,9 +1,12 @@
 {
   "pages": [
-		"pages/car/car", 
     "pages/index/index",
-		"pages/goodsDetails/goodsDetails",
+    "pages/login0/login0",
+    "pages/setpwd/stpwd",
+    "pages/login1/login1",
 		"pages/OrderList/OrderList",
+		"pages/car/car", 
+		"pages/goodsDetails/goodsDetails",
     "pages/Order/Order",
 		"pages/OrderDetails/OrderDetails",
     "pages/kefu/kefu",

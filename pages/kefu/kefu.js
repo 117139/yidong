@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-		kf:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563962823914&di=f163ecd10412ed6f01dd7dee6ce22954&imgtype=0&src=http%3A%2F%2Fmmbiz.qpic.cn%2Fmmbiz_png%2FdJmtFMpWFFWia88slDGNJ5AJtyowkSiaXL1Adt4Bzmj0icDNArib0OGlCKc7DPn0ibzJicESzAAKuBzEW1VrRAkvpSBQ%2F640%3Fwx_fmt%3Dpng"
+		kf:"/static/qrcode/service.jpg"
   },
 
   /**

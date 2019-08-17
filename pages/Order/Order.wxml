@@ -1,9 +1,10 @@
 <!--logs.wxml-->
-<import src="/utils/pageState/index.wxml" />
+<!-- <import src="/utils/pageState/index.wxml" /> -->
 <!-- <template is="pageState" data="{{...pageState}}" /> -->
 <wxs src="../../utils/filter.wxs" module="filter" />
 <view class="hengxian"></view>
-<view class="container">
+<view wx:if="{{htmlReset==1}}" class="chongshi" bindtap='cload'>重试</view>
+<view class="container" wx:if="{{htmlReset==0}}">
   <!-- <view class="address" bindtap="goaddress">
 		<view class="add_l">
 			<view class="al_1">{{address.name}} <text class="l_tel">{{address.mobile}}</text></view>
@@ -16,8 +17,9 @@
 	</view> -->
 	<view class="address" data-url="/pages/myaddress1/myaddress" bindtap="jump">
 		<view class="add_l">
-			<view class="al_1">MISTERAYQU <text class="l_tel"as>113****7031</text></view>
-			<view class="al_2">上海市徐汇区田林路487号宝石22号楼杉德大厦1楼</view>
+			<view wx:if="{{address.user_name}}" class="al_1">{{address.user_name}} <text class="l_tel"as>{{address.phone}}</text></view>
+			<view wx:if="{{address.user_name}}" class="al_2">{{address.area}}{{address.address}}</view>
+			<view wx:if="{{!address.user_name}}">请选择地址</view>
 		</view>
 		<!-- <view class="add_r"> -->
 			<text class="iconfont iconnext"></text>
@@ -54,7 +56,7 @@
 		</view>
 	</view>
 	<view class="hengxian"></view>
-	<view class="guige" wx:if="yhlist[0].coupon_money">
+	<view class="guige" wx:if="{{yhlist.length!=0}}">
 		<view class="guige_l">
 			<view class="guige_l_name">优惠券</view>
 			 <!-- <view class="c9">已选100元优惠券</view> -->

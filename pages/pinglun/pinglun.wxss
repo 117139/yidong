@@ -6,3 +6,19 @@
 	box-sizing: border-box;
   background: #eee;
 }
+.imgbox {
+	margin-top: 20rpx;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.imgbox image{
+	width: 190rpx;
+	height: 190rpx;
+	margin-bottom: 10rpx;
+	border-radius: 30rpx;
+}
+.imgbox .One{
+	width: 300rpx;
+	height: 300rpx;
+}

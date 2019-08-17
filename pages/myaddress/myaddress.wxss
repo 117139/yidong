@@ -1,6 +1,7 @@
 .container{
 	min-height: 100vh;
 	background: #eeeeee;padding-top: 17rpx;
+	padding-bottom: 180rpx;
 }
 .addressOne{
 	width: 100%;

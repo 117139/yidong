@@ -1,10 +1,10 @@
 <!--logs.wxml-->
 <import src="../../vendor/wxParse/wxParse.wxml" />
-<import src="/utils/pageState/index.wxml" />
-<template is="pageState" data="{{...pageState}}" />
+<!-- <import src="/utils/pageState/index.wxml" /> -->
+<!-- <template is="pageState" data="{{...pageState}}" /> -->
 <wxs src="../../utils/filter.wxs" module="filter" />
-
-<view class="container log-list">
+<view wx:if="{{htmlReset==1}}" class="chongshi" bindtap='cload'>重试</view>
+<view class="container log-list" wx:if="{{goods!=''}}">
 	<swiper class="swiper" 
 	indicator-dots="{{indicatorDots}}"
 	autoplay="{{autoplay}}" 
@@ -22,7 +22,7 @@
 			</swiper-item>
 		</block>
 	</swiper>
-	<view class="w100">
+	<view v-if="{{goods.goods_name}}" class="w100">
 		<view class="contbox dis_flex ju_b w100">
 			<!-- <view class="flex_1 oh2">YI-DONG SPORT 屹动专业运动鞋 专业为中小学生运动打造的运动鞋</view> -->
 			<view class="flex_1 oh2 fz32">{{goods.goods_name}}</view>
@@ -95,15 +95,14 @@
 				<!-- <view class="tkname oh2">YI-DONG SPORT 屹动专业运动鞋 专业为中小学生运动打造的运动鞋</view> -->
 			</view>
 		</view>
-		
-		<block wx:for="{{guige}}
+		<block wx:for="{{guige}}"
 			wx:for-index="idx"
 			wx:for-item="item" 
-			wx:key="idx">
+			wx:key="idx" wx:if="{{guige[0].name}}">
 			<view class="tkguigetit">{{item.name}}选择</view>
 			<view class="guigeBox">
 				<text class="guigeOne {{idx1==type1[idx]?'cur':''}}" 
-									wx:for="{{item.values}}
+									wx:for="{{item.values}}"
 									wx:for-index="idx1"
 									wx:for-item="item1" 
 									wx:key="idx1"
@@ -122,29 +121,29 @@
 			<view class="buybtn" bindtap="nowbuy">立即购买</view>
 		</view>
 	</van-popup>
-	<view class="w100">
+	<view class="w100" wx:if="{{pllist.length>0}}">
 		<view class="guige" bindtap="">
 			<view class="guige_l">
 				<view class="fz32 mr10">用户评价</view>
-				<view class="guige_l_name">(10条)</view>
+				<view class="guige_l_name">({{pllist.length}}条)</view>
 			</view>
 			<view class="fz26 c9" bindtap="gomore">
 				查看全部<text class="iconfont iconnext fz32 c9"></text>
 			</view>
 		</view>
 		<view class="contbox  dis_flex">
-			<image class="plhaedimg" catchtap="previewImage" data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563957484276&di=052d557cdbc7daf8272249343c94faf2&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201805%2F13%2F20180513224039_tgfwu.png"
-			 src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563957484276&di=052d557cdbc7daf8272249343c94faf2&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201805%2F13%2F20180513224039_tgfwu.png"></image>
+			<image class="plhaedimg" catchtap="previewImage" data-src="{{pllist.data[0].avatarUrl}}"
+			 src="{{pllist.data[0].avatarUrl}}"></image>
 			<view class="flex_1">
 				<view class="fz26 c3 mb10 dis_flex ju_b">
-					<text>用户昵称123</text>
-					<text class="fz24 c9">2019年7月6日</text>
+					<text>{{pllist.data[0].nickName}}</text>
+					<text class="fz24 c9">{{filter.getDateTime(pllist.data[0].create_time)}}</text>
 				</view>
-				<view class="fz26 oh3 c9">这里是商品评价描述性文字这里是商品评价描述性文字这里是商品评价描述性文字……</view>
+				<view class="fz26 oh3 c9">{{pllist.data[0].comment}}</view>
 			</view>
 		</view>
 	</view>
-	<view class="hengxian"></view>
+	<view wx:if="{{pllist.length!=0}}" class="hengxian"></view>
 	<view class="contbox goodsmsgs">
 		<view class="dis_flex aic w100 ju_c pt40 pb30">
 			<text class="mr10">——————</text><text class="iconfont iconaixin fz26 cf6377a mr10"></text><text class="fz32 c3 fwb">商品详情</text><text

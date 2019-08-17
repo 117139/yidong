@@ -8,6 +8,10 @@
   width: 150rpx;
   height: 150rpx;
 }
+.header image{
+	width: 150rpx;
+	height: 150rpx;
+}
 .content{
   margin-top: 80rpx;
   padding: 40rpx 0;

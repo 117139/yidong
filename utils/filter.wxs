@@ -32,15 +32,47 @@ var getTime = function(time){
   console.log(date)
   return date
 }
+
+
+var arrtostr=function(arr){
+	if(arr.length>0){
+		return arr.join('，')
+	}
+}
+ var getDateTime= function (value) {
+	 // if(value.length<11){
+		 value=value*1000
+	 // }
+    //不能使用 new Date()
+      var time = getDate(value);
+      var year = time.getFullYear();
+      var month = time.getMonth() + 1;
+      var date = time.getDate();
+      var hour = time.getHours();
+      var minute = time.getMinutes();
+      var second = time.getSeconds();
+      month = month < 10 ? "0" + month : month;
+      date = date < 10 ? "0" + date : date;
+      hour = hour < 10 ? "0" + hour : hour;
+      minute = minute < 10 ? "0" + minute : minute;
+      second = second < 10 ? "0" + second : second;
+      // return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
+      return year + "年" + month + "月" + date + "日"+ " " + hour + ":" + minute + ":" + second;
+  }
+
+
+
 /*
  * 导出
  */
 module.exports = {
-    dateFormat: dateFormat,
-    moneyFormat: moneyFormat,
+	dateFormat: dateFormat,
+	moneyFormat: moneyFormat,
 	getgimg:getgimg,
   getTime:getTime,
 	imgIP:imgIP,
-	getgimgarr:getgimgarr
+	getgimgarr:getgimgarr,
+	getDateTime: getDateTime,
+	arrtostr:arrtostr
 
 }

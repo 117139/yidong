@@ -1,22 +1,20 @@
 //goodsdetails.js
-var pageState = require('../../utils/pageState/index.js')
+// var pageState = require('../../utils/pageState/index.js')
 var WxParse = require('../../vendor/wxParse/wxParse.js')
 const app = getApp()
 
 Page({
   data: {
+		btnkg:1,    //0可以  1不可以
+		htmlReset:0,
 		kg:0,    
 		goods_id:1, //商品id
 		goods:'', //商品详情
 		ggshow:'', //规格显示
 		ggjson:'', //规格json
 		yunfei:0, //运费
-		spimg:[
-			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463693&di=39d4ee06bfc66cdde04022278d004fee&imgtype=0&src=http%3A%2F%2Fpic45.nipic.com%2F20140729%2F1628220_084628920000_2.jpg',
-			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463693&di=39d4ee06bfc66cdde04022278d004fee&imgtype=0&src=http%3A%2F%2Fpic45.nipic.com%2F20140729%2F1628220_084628920000_2.jpg',
-			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463693&di=39d4ee06bfc66cdde04022278d004fee&imgtype=0&src=http%3A%2F%2Fpic45.nipic.com%2F20140729%2F1628220_084628920000_2.jpg',
-
-		],
+		pllist:[],
+		spimg:[],
 		goodsd:'',
 		indicatorDots: true,
 		autoplay: true,
@@ -26,8 +24,8 @@ Page({
 		sheetshow:false,         //规格弹框控制
 		showcan:false,
 		goods_total_limit:'',  //商品阶梯
-		guige:['41','42','43','44'],  //规格
-		guige1:['白色','黑色','蓝色','灰色'],  //规格
+		guige:[],  //规格
+		guige1:[],  //规格
 		type1:[],         //规格index
 		cnum:0           ,//数量
 		goods_sku_id:0,  //商品id
@@ -54,76 +52,39 @@ Page({
     },
 
   onLoad: function (option) {
+		wx.setNavigationBarTitle({
+			title:'加载中...'
+		})
     if(option.id){
 			// console.log(option.id)
 			this.setData({
 				goods_id:option.id
 			})
 		}
-		var article = '<div>11111111</div><div>11111111</div>'
-		WxParse.wxParse('article', 'html', article, this, 5);
+		// var article = '<div>11111111</div><div>11111111</div>'
+		// WxParse.wxParse('article', 'html', article, this, 5);
 		
 		this.getGoodsDetails()
 		this.getyunfei()
+		this.getpinlun()
   },
+	cload(){
+		this.getGoodsDetails()
+		this.getyunfei()
+		this.getpinlun()
+	},
 	onReady: function () {
-    var that = this;
-   var query = wx.createSelectorQuery();
-
-    query.select('.htoi').boundingClientRect(function (rect) {
-      // console.log(rect.width)
-      that.setData({
-        width: rect.width
-      })
-			const ctx = wx.createCanvasContext('share');
-			// console.log(ctx)
-			var goods =that.data.goods
-			var img =goods.goods_pic.split(",")
-			var imgurl=app.IPurl+img[0]
-		
-			 wx.getImageInfo({
-			  src:imgurl,
-			  success(res){
-			    ctx.drawImage(res.path,0,0,750,750)
-					ctx.fillStyle="#fff";
-					ctx.fillRect(0,750,750,150);
-					ctx.setFillStyle('#000000')//文字颜色：默认黑色
-					ctx.setFontSize(44)//设置字体大小，默认10
-					ctx.fillText(	goods.goods_name ,38, 810)
-					ctx.save()
-					ctx.fillStyle="#f2f2f2";
-					ctx.fillRect(0,840,750,434);
-					ctx.save()
-					ctx.setFillStyle('#f75852')//文字颜色：默认黑色
-					
-					// ctx.setFontSize(14)//设置字体大小，默认10
-					ctx.font="bold 52px Arial";
-					ctx.fillText('￥'+goods.goods_real_price ,38, 1060)
-					ctx.drawImage("../../static/images/xcxewm.jpg",432,860,270,270)
-					ctx.save()
-					ctx.setFillStyle('#333333')//文字颜色：默认黑色
-					
-					// ctx.setFontSize(14)//设置字体大小，默认10
-					ctx.font="30px Arial";
-					ctx.fillText('扫码或长按小程序码' ,432, 1180)
-			    ctx.draw()
-
-			  }
-			})
-    }).exec();
-		// wx.showLoading({
-		// 	title:'图片生成中'
-		// })
-		// setTimeout(function(){
-		// 	that.getTempFilePath1()
-		// 	wx.hideLoading()
-		// },500)
+    
 		
 	},
 	
 	onShow(){
 		if(this.data.kg==1){
+			this.setData({
+				kg:0
+			})
 			this.getyh100()
+			
 		}
 	},
 	/**
@@ -134,7 +95,7 @@ Page({
 		if (res.from === 'button') {
 			console.log(res.target.dataset.supid)
 			this.setData({
-				actionSheetHidden:false,
+				actionSheetHidden:true,
 				kg:1
 			})
 	  }
@@ -145,6 +106,52 @@ Page({
 				
 	    }
 	  }
+	},
+	ctxc(){
+		var that = this;
+		var query = wx.createSelectorQuery();
+		
+		 query.select('.htoi').boundingClientRect(function (rect) {
+		   // console.log(rect.width)
+		   that.setData({
+		     width: rect.width
+		   })
+					const ctx = wx.createCanvasContext('share');
+					// console.log(ctx)
+					var goods =that.data.goods
+					var img =goods.goods_pic.split(",")
+					var imgurl=app.IPurl+img[0]
+				
+					 wx.getImageInfo({
+					  src:imgurl,
+					  success(res){
+					    ctx.drawImage(res.path,0,0,750,750)
+							ctx.fillStyle="#fff";
+							ctx.fillRect(0,750,750,150);
+							ctx.setFillStyle('#000000')//文字颜色：默认黑色
+							ctx.setFontSize(44)//设置字体大小，默认10
+							ctx.fillText(	goods.goods_name ,38, 810)
+							ctx.save()
+							ctx.fillStyle="#f2f2f2";
+							ctx.fillRect(0,840,750,434);
+							ctx.save()
+							ctx.setFillStyle('#f75852')//文字颜色：默认黑色
+							
+							// ctx.setFontSize(14)//设置字体大小，默认10
+							ctx.font="bold 52px Arial";
+							ctx.fillText('￥'+goods.goods_real_price ,38, 1060)
+							ctx.drawImage("../../static/images/xcxewm.jpg",432,860,270,270)
+							ctx.save()
+							ctx.setFillStyle('#333333')//文字颜色：默认黑色
+							
+							// ctx.setFontSize(14)//设置字体大小，默认10
+							ctx.font="30px Arial";
+							ctx.fillText('扫码或长按小程序码' ,432, 1180)
+					    ctx.draw()
+		
+					  }
+					})
+		 }).exec();
 	},
   //获取临时路径
   getTempFilePath1: function () {
@@ -186,26 +193,10 @@ Page({
 				wx.hideLoading()
 			}
 		})
-    /*wx.canvasToTempFilePath({
-      canvasId: 'share',
-      success: (res) => {
-				console.log(res.tempFilePath)
-        that.setData({
-          shareTempFilePath: res.tempFilePath
-        })
-				wx.saveImageToPhotosAlbum({
-					filePath:res.tempFilePath,
-					success(res1) {
-						console.log(res1)
-					}
-				})
-		
-      }
-    })*/
   },
 
 
-
+//获取优惠
 	getyh100(){
 		var that=this
 		wx.request({
@@ -230,9 +221,10 @@ Page({
 								kg:0
 							})
 						setTimeout(function(){
-							wx.navigateTo({
-								url:'/pages/yhlist/yhlist'
-							})	
+							// wx.navigateTo({
+							// 	url:'/pages/yhlist/yhlist'
+							// })
+								that.getGoodsno()
 						},1000)
 							
 					}else{
@@ -254,7 +246,43 @@ Page({
 		
 	},
 	
-
+	getpinlun(){
+		var that=this
+		wx.request({
+				url:  app.IPurl+'/api/comment/1',
+				data:{
+					page:1,
+					page_length:1,
+				},
+				header: {
+					'content-type': 'application/x-www-form-urlencoded' 
+				},
+				dataType:'json',
+				method:'get',
+				success(res) {
+					console.log(res.data)
+					if(res.data.code==1){
+							that.setData({
+								pllist:res.data
+							})
+					}else{
+						wx.showToast({
+							icon:'none',
+							title:res.data.msg
+						})
+					}
+					
+				},
+				fail() {
+					wx.showToast({
+						icon:'none',
+						title:res.data.msg
+					})
+					 console.log('失败')
+				}
+			})
+		
+	},
 
 	onClose(){
 		this.setData({
@@ -276,7 +304,7 @@ Page({
 			for(var i=0;i<type.length;i++){
 				type[i]=0
 				
-				console.log(ggs[i].values)
+				// console.log(ggs[i].values)
 				ggshow1.push(ggs[i].values[0].attr_value)
 				ggjson+='"'+ggs[i].name+'":"'+ggs[i].values[0].attr_value+'"'
 				if(i!=ggs.length-1){
@@ -285,7 +313,7 @@ Page({
 			}
 			
 			
-			ggshow1=ggshow1.join(',')
+			ggshow1=ggshow1.join('，')
 			ggjson+="}"
 			console.log(ggjson)
 			// ggjson=JSON.parse(ggjson)
@@ -329,7 +357,7 @@ Page({
 				}
 			}
 		}
-		ggshow1=ggshow1.join(',')
+		ggshow1=ggshow1.join('，')
 		ggjson+="}"
 		// ggjson=JSON.parse(ggjson)
 		 this.setData({
@@ -345,6 +373,7 @@ Page({
 	},
 	//加入购物车
 	addwgc(){
+		
 		// wx.showToast({
 		// 	title:"加入成功"
 		// })
@@ -352,6 +381,13 @@ Page({
 		///api/shopping
 		console.log('addwgc')
 		let that = this
+		if(that.data.btnkg==1){
+			return
+		}else{
+			that.setData({
+				btnkg:1
+			})
+		}
 		wx.request({
 			url:  app.IPurl+'/api/shopping',
 			data:{
@@ -375,29 +411,63 @@ Page({
 						title:'添加成功'
 					})
 					that.setData({
-						addshow:true
+						addshow:true,
+						btnkg:0
 					})
+				}else{
+					that.setData({
+						btnkg:0
+					})
+					if(res.data.msg){
+						wx.showToast({
+							title: res.data.msg,
+							duration: 2000,
+							icon:'none'
+						});
+					}else{
+						wx.showToast({
+							title: '网络异常',
+							duration: 2000,
+							icon:'none'
+						});
+					}
 				}
+				
+			},
+			fail(err){
+				that.setData({
+					btnkg:0
+				})
+				wx.showToast({
+					title: '网络异常',
+					duration: 2000,
+					icon:'none'
+				});
 			}
 		})
 	},
 	nowbuy(){
-		wx.navigateTo({
-		  url: '/pages/Order/Order'
-		})
-		console.log('buy')
+		// wx.navigateTo({
+		//   url: '/pages/Order/Order'
+		// })
+		// console.log('buy')
 		//http://water5100.800123456.top/WebService.asmx/order
 		let that = this
 	
-		// let goodsxq=JSON.stringify(this.data.goodsd)
-		// let goodsname=this.data.goodsd.goods_sku_name
-		let goodsguige=this.data.guige[this.data.type1].goods_sku_info.goods_unit
+		let goods=this.data.goods
+		//let goodsname=this.data.goodsd.goods_sku_name
+		let goods_pic =goods.goods_pic
+		let goods_name =goods.goods_name
+		let goods_id =goods.id
+		let goods_real_price =goods.goods_real_price
+		let ggshow=that.data.ggshow
+		let ggjson=that.data.ggjson
 		let goodsnum=this.data.cnum
 		// let goodsladder=this.data.goodsd.is_ladder_pricing
 		// let goodsxq=this.data.goodsd
 		// console.log(goodsxq)
 		 wx.navigateTo({
-		  url: '/pages/Order/Order?id=' + that.data.goods_sku_id+'&goodsguige=' + goodsguige+'&ggtype=' + this.data.type1+'&goodsnum=' + goodsnum
+		  url: '/pages/Order/Order?goods_pic=' + goods_pic+'&goods_name=' + goods_name+'&goods_id=' + goods_id+'&goods_real_price=' + goods_real_price+'&ggshow=' + ggshow+'&ggjson=' + ggjson+'&goodsnum=' + goodsnum
 		})
 	},
 	opengwc(e) {
@@ -418,9 +488,67 @@ Page({
 		})
 	},
 	getGoodsDetails(){
-		const pageState1 = pageState.default(this)
-		pageState1.loading()    // 切换为loading状态
-		// return
+		let that = this
+		wx.request({
+			url:  app.IPurl+'api/goodsPage',
+			data:{token:wx.getStorageSync('token')},
+			header: {
+				'content-type': 'application/x-www-form-urlencoded' 
+			},
+			dataType:'json',
+			method:'get',
+			success(res) {
+				// console.log(res.data)
+				if(res.data.code==1){
+					wx.setNavigationBarTitle({
+						title:'商品详情'
+					})
+					let resultd=res.data.data
+					var types=[]
+					for(var i=0;i<resultd.goods_attr.length;i++){
+						types.push(-1)
+					}
+						that.setData({
+							goods:resultd,
+							guige:resultd.goods_attr,
+							type1:types,
+							htmlReset:0
+						})
+						//画图
+						that.ctxc()
+						var article = resultd.goods_desc
+						var subStr = new RegExp('<div>&nbsp;</div>', 'ig');
+						article = article.replace(subStr, "<text style='margin-bottom:1em;'></text>");
+						WxParse.wxParse('article', 'html', article, that, 5);
+						
+				}else{
+					wx.showToast({
+						icon:'none',
+						title:'获取失败'
+					})
+					that.setData({
+						htmlReset:1
+					})
+					console.log(res.data)
+				}
+				// pageState1.finish()    // 切换为finish状态
+				  // pageState1.error()    // 切换为error状态
+			},
+			fail(err) {
+				that.setData({
+					htmlReset:1
+				})
+				wx.showToast({
+					icon:'none',
+					title:'获取失败'
+				})
+				console.log(err)
+				 
+			}
+		})
+	},
+	getGoodsno(){
+	
 		let that = this
 		wx.request({
 			url:  app.IPurl+'api/goodsPage',
@@ -443,17 +571,19 @@ Page({
 							guige:resultd.goods_attr,
 							type1:types
 						})
+						//画图
+						that.ctxc()
 						var article = resultd.goods_desc
 						var subStr = new RegExp('<div>&nbsp;</div>', 'ig');
 						article = article.replace(subStr, "<text style='margin-bottom:1em;'></text>");
 						WxParse.wxParse('article', 'html', article, that, 5);
 						
 				}
-				pageState1.finish()    // 切换为finish状态
+				// pageState1.finish()    // 切换为finish状态
 				  // pageState1.error()    // 切换为error状态
 			},
 			fail() {
-				 pageState1.error()    // 切换为error状态
+				 // pageState1.error()    // 切换为error状态
 			}
 		})
 	},

@@ -1,10 +1,14 @@
 // pages/fabiaopl/fabiaopl.js
+const app=getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+		btnkg:0,   // 0 ok    1 off
+		id:1,
+		oid:1,
 		fbtext:'',
 		tmpdata:{
 			
@@ -17,7 +21,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+		if(options.oid){
+			this.setData({
+				oid:options.oid
+			})
+		}
   },
 
   /**
@@ -111,37 +119,45 @@ Page({
 				// tempFilePath可以作为img标签的src属性显示图片
 				console.log(res)
 				const tempFilePaths = res.tempFilePaths
-				that.data.tmpdata.imgb.push(tempFilePaths[0])
-				that.setData({
-					tmpdata:that.data.tmpdata
-				})
-				return
-				///api/upload_image/upload
-				wx.uploadFile({
-					url: app.IPurl+'/api/upload_image/upload', //仅为示例，非真实的接口地址
-					filePath: tempFilePaths[0],
-					name: 'images',
-					formData: {
-						'module_name': 'used'
-					},
-					success (res){
-						console.log(res.data)
-						var ndata=JSON.parse(res.data)
-						console.log(ndata)
-						console.log(ndata.errcode==0)
-						if(ndata.errcode==0){
-							that.data.tmpdata.imgb.push(ndata.retData[0])
-							that.setData({
-								tmpdata:that.data.tmpdata
-							})
-						}else{
-							wx.showToast({
-								icon:"none",
-								title:"上传失败"
-							})
-						}
+				const imglen=that.data.tmpdata.imgb.length
+				for(var i=0;i<tempFilePaths.length;i++){
+					// console.log(imglen)
+					var newlen=Number(imglen)+Number(i)
+					// console.log(newlen)
+					if(newlen==9){
+						wx.showToast({
+							icon:'none',
+							title:'最多可上传九张'
+						})
+						break;
 					}
-				})
+					wx.uploadFile({
+							url: app.IPurl+'/api/uploadImg', 
+							filePath: tempFilePaths[i],
+							name: 'file[]',
+							formData: {
+							
+							},
+							success (res){
+								console.log(res.data)
+								var ndata=JSON.parse(res.data)
+								console.log(ndata)
+								console.log(ndata.errcode==0)
+								if(ndata.code==1){
+									that.data.tmpdata.imgb.push(ndata.data)
+									that.setData({
+										tmpdata:that.data.tmpdata
+									})
+								}else{
+									wx.showToast({
+										icon:"none",
+										title:"上传失败"
+									})
+								}
+							}
+						})
+					
+				}
 			}
 		})
 	},
@@ -160,23 +176,27 @@ Page({
 			success (res) {
 				if (res.confirm) {
 					console.log('用户点击确定')
-					that.setData({
-						kg:0
-					})
+					
 					var imbox=that.data.tmpdata.imgb
 					imbox=imbox.join(',')
 					wx.showLoading({
 						title:'请稍后。。'
 					})
+					if(that.data.btnkg==1){
+						return
+					}else{
+						that.setData({
+							btnkg:1
+						})
+					}
 					// 'Authorization':wx.getStorageSync('usermsg').user_token
 					wx.request({
-						url:  app.IPurl+'/api/used_comment/save',
+						url:  app.IPurl+'/api/comment/'+that.data.id,
 						data:{
-							"authorization":wx.getStorageSync('usermsg').user_token,
-							'used_id':that.data.sqid,
-							'body':that.data.fbtext,
-							'path':imbox,
-							'module_name':'used'
+							"token":wx.getStorageSync('token'),
+							'comment':that.data.fbtext,
+							'comment_img':imbox,
+							'order_id':that.data.oid
 						},
 						// header: {
 						// 	'content-type': 'application/x-www-form-urlencoded'
@@ -186,41 +206,54 @@ Page({
 						success(res) {
 							console.log(res.data)
 						
-							
-							if(res.data.errcode==0){
-								that.getpl(1)
+								wx.hideLoading()
+							if(res.data.code==1){
 								wx.showToast({
 									 icon:'none',
-									 title:'发表成功'
+									 title:'操作成功'
 								})
 								setTimeout(function(){
-									that.onClose()
+									that.setData({
+										btnkg:0
+									})
+									wx.navigateBack()
 									
 								},1000)
 								
 							}else{
 								that.setData({
-									kg:1
+									btnkg:0
 								})
-								wx.showToast({
-									 icon:'none',
-									 title:res.data.ertips
-								})
+								if(res.data.msg){
+									wx.showToast({
+										title: res.data.msg,
+										duration: 2000,
+										icon:'none'
+									});
+								}else{
+									wx.showToast({
+										title: '网络异常',
+										duration: 2000,
+										icon:'none'
+									});
+								}
 							}
 							
 							 
 						},
-						fail() {
+						fail(err) {
 							that.setData({
-								kg:1
+								btnkg:0
 							})
+								wx.hideLoading()
+							
 							wx.showToast({
 								 icon:'none',
 								 title:'操作失败'
 							})
 						},
 						complete() {
-							wx.hideLoading()
+						
 						}
 					})
 					

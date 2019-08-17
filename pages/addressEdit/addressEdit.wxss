@@ -38,5 +38,5 @@
 	background-color: #f75852;
 }
 .wx-switch-input{width:86rpx !important;height:50rpx !important;}
-.wx-switch-input::before{width:82rpx !important;height: 46rpx !important;}
+.wx-switch-input::before{width:84rpx !important;height: 48rpx !important;}
 .wx-switch-input::after{width: 44rpx !important;height: 44rpx !important;}

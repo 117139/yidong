@@ -1,4 +1,5 @@
 <!--pages/fabiaopl/fabiaopl.wxml-->
+<wxs src="../../utils/filter.wxs" module="filter" />
 <view class="container">
 	<!-- <view class="fabutit ">发表评论</view> -->
 	<view class="textareabox">
@@ -13,7 +14,7 @@
 				 data-idx="{{idx}}"
 				 bindtap="imgdel">
 		
-			<image  src="{{item}}" mode="aspectFill"></image>
+			<image  src="{{filter.imgIP(item)}}" mode="aspectFill"></image>
 		</view>
 		
 		<view wx:if="{{tmpdata.imgb.length<9}}" class="addimg" bindtap="scpic">

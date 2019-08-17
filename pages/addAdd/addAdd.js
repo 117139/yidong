@@ -3,6 +3,7 @@ const app = getApp()
 
 Page({
   data: {
+		btnkg:0,
     region: [],
 		moren:true
   },
@@ -26,6 +27,7 @@ Page({
 	//提交表单
 	formSubmit(e) {
 		let that =this
+		
 		console.log('form发生了submit事件，携带数据为：', e.detail.value)
 		let formresult=e.detail.value
 		if (formresult.name=='') {
@@ -60,6 +62,13 @@ Page({
 			});
 			return false;
 		}
+		if(that.data.btnkg==1){
+			return
+		}else{
+			that.setData({
+				btnkg:1
+			})
+		}
 	//http://water5100.800123456.top/WebService.asmx/useraddress
 		wx.request({
 			url:  app.IPurl+'/api/userAddress',
@@ -84,9 +93,37 @@ Page({
 						title:'保存成功'
 					})
 					setTimeout(function(){
+						that.setData({
+							btnkg:0
+						})
 						wx.navigateBack()
 					},1000)
+				}else{
+					that.setData({
+						btnkg:0
+					})
+					if(res.data.msg){
+						wx.showToast({
+							icon:'none',
+							title:res.data.msg
+						})
+					}else{
+						wx.showToast({
+							icon:'none',
+							title:'操作失败'
+						})
+					}
 				}
+			},
+			fail(err){
+				that.setData({
+					btnkg:0
+				})
+				wx.showToast({
+					icon:'none',
+					title:'操作失败'
+				})
+				console.log(err)
 			}
 		})
   },

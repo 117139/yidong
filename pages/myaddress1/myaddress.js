@@ -1,14 +1,11 @@
 //myaddress.js
-var pageState = require('../../utils/pageState/index.js')
+// var pageState = require('../../utils/pageState/index.js')
 const app = getApp()
 
 Page({
   data: {
-		addresslist:[
-			{name:'问心',mobile:'18000000000',province:'某省',city:'某市',county:'某区',address:'详细地址',user_member_shopping_address_id:'1'},
-			{name:'问心',mobile:'18000000000',province:'某省',city:'某市',county:'某区',address:'详细地址',user_member_shopping_address_id:'1'},
-			{name:'问心',mobile:'18000000000',province:'某省',city:'某市',county:'某区',address:'详细地址',user_member_shopping_address_id:'1'},
-		],
+		btnkg:0, 
+		addresslist:[],
     mridx:0
   },
   onLoad: function (option) {
@@ -58,6 +55,13 @@ Page({
 			success(res) {
 				if (res.confirm) {
 					console.log('用户点击确定')
+					if(that.data.btnkg==1){
+						return
+					}else{
+						that.setData({
+							btnkg:1
+						})
+					}
 					wx.request({
 						url:  app.IPurl+'/api/userAddress/'+e.currentTarget.dataset.id,
 						data:  {
@@ -70,7 +74,9 @@ Page({
 						method:'DELETE',
 						success(res) {
 							console.log(res.data)
-							
+							that.setData({
+								btnkg:0
+							})
 							if(res.data.code==1){
 								wx.showToast({
 									title:'操作成功'
@@ -78,7 +84,35 @@ Page({
 								setTimeout(function(){
 									that.getaddlist()
 								},1000)
+							}else{
+								that.setData({
+									btnkg:0
+								})
+								if(res.data.msg){
+									wx.showToast({
+										title: res.data.msg,
+										duration: 2000,
+										icon:'none'
+									});
+								}else{
+									wx.showToast({
+										title: '网络异常',
+										duration: 2000,
+										icon:'none'
+									});
+								}
 							}
+						},
+						fail(err){
+							that.setData({
+								btnkg:0
+							})
+							wx.showToast({
+								title: '网络异常',
+								duration: 2000,
+								icon:'none'
+							});
+							console.log(err)
 						}
 					})
 					
@@ -88,9 +122,25 @@ Page({
 			}
 		})
 	},
+	selectadd(e){
+		var that =this
+		console.log(e.currentTarget.dataset.idx)
+		var idx= e.currentTarget.dataset.idx
+		var pages = getCurrentPages();   //当前页面
+		var prevPage = pages[pages.length - 2];   //上一页面
+		prevPage.setData({
+		       //直接给上一个页面赋值
+		      addresschose: that.data.addresslist[idx],
+		});
+		 
+		wx.navigateBack({
+		     //返回
+		     delta: 1
+		})
+	},
 	getaddlist(){
-		const pageState1 = pageState.default(this)
-		pageState1.loading()    // 切换为loading状态
+		// const pageState1 = pageState.default(this)
+		// pageState1.loading()    // 切换为loading状态
 		let that =this
 		//http://water5100.800123456.top/WebService.asmx/useraddress
 		wx.request({
@@ -110,12 +160,22 @@ Page({
 					that.setData({
 						addresslist:res.data.data
 					})
+				}else{
+					wx.showToast({
+						icon:'none',
+						title:'获取失败'
+					})
+					console.log(res.data)
 				}
-				pageState1.finish()    // 切换为finish状态
-					// pageState1.error()    // 切换为error状态
+				
 			},
-			fail() {
-				 pageState1.error()    // 切换为error状态
+			fail(err) {
+				wx.showToast({
+					icon:'none',
+					title:'获取失败'
+				})
+				console.log(err)
+				 
 			}
 		})
 	},

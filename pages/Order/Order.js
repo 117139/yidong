@@ -1,50 +1,91 @@
 //order.js
-var pageState = require('../../utils/pageState/index.js')
+// var pageState = require('../../utils/pageState/index.js')
 const app = getApp()
 
 Page({
   data: {
+		btnkg:0,
+		htmlReset:0,
+		type:0,    ///1 单品下单  2 购物车下单
 		xzarr:[],
-		yunfei:0,
-		yhlist:[],
-		addresslist:[],
-		paykg:true,
-		goods_sku_id:'',
-		address:wx.getStorageSync('morenaddress'),
-		ztaddress:0,
-		zttime:0,
+		yunfei:0,  //运费
+		yhlist:[],  //优惠
+		addresslist:[], //地址列表
+		paykg:true,    //按钮开关
+		address:'',
 		sum:23.00,
 		zsum:0
   },
   onLoad: function (option) {
+		wx.setNavigationBarTitle({
+			title:'加载中...'
+		})
 		var that =this
     console.log(option)
 		if(option.type){
 			console.log(option.xzarr)
-			let idg=option.id.split(",")
+			// let idg=option.id.split(",")
+			let idg=option.id
 			console.log(idg)
 			var xzarr=JSON.parse(option.xzarr)
 			that.setData({
+				type:2,
 				xzarr:xzarr,
 				idg:idg
 			})
-			setTimeout(function(){
-				that.countpri()
-				that.getyunfei()
-				that.getyhlist()
-			},0)
+			
 		}else{
-	
+			// var goods=JSON.parse(option.goods)
+			// var goods=option.goods
+			var xzarr0={
+				"goods_pic":option.goods_pic,
+				"goods_name":option.goods_name,
+				"goods_id":option.goods_id,
+				"goods_real_price":option.goods_real_price,
+				"attr_set":option.ggshow,
+				"attr_setjson":option.ggjson,
+				"num":option.goodsnum,
+			}
+			this.data.xzarr[0]=xzarr0
 			that.setData({
-				goods_sku_id:option.id
+				type:1,
+				xzarr:this.data.xzarr
 			})
 			
-			that.getGoodsDetails(option.id)
+			
 
 		}
-		that.getaddlist()
+		setTimeout(function(){
+			that.countpri()
+			that.getyunfei()
+			that.getyhlist()
+		},0)
+		// that.getaddlist()
 		that.getadd()
   },
+	cload(){
+		var that=this
+		that.countpri()
+		that.getyunfei()
+		that.getyhlist()
+		
+		that.getadd()
+	},
+	onShow(){
+		
+				let pages = getCurrentPages();
+		    let currPage = pages[pages.length - 1];
+		    if (currPage.data.addresschose) {
+		        this.setData({
+		            //将携带的参数赋值
+		            address: currPage.data.addresschose,
+		            addressBack: true
+		      });
+		 
+		    console.log(this.data.address, '地址')
+		 
+		    }
+	},
 	onReady(){
 		
 	},
@@ -130,13 +171,13 @@ Page({
 			fail() {
 				wx.showToast({
 					icon:'none',
-					title:res.data.msg
+					title:'获取失败'
 				})
 				 console.log('失败')
 			}
 		})
 	},
-	//运费
+	//获取默认地址
 	getadd(){
 		let that = this
 		wx.request({
@@ -152,9 +193,12 @@ Page({
 			success(res) {
 				// console.log(res.data)
 				if(res.data.code==1){
-	
+						wx.setNavigationBarTitle({
+							title:'提交订单'
+						})
 						that.setData({
-							address:res.data.data
+							address:res.data.data,
+							htmlReset:0
 						})
 						
 						
@@ -163,51 +207,25 @@ Page({
 						icon:'none',
 						title:res.data.msg
 					})
-				}
-				
-			},
-			fail() {
-				wx.showToast({
-					icon:'none',
-					title:res.data.msg
-				})
-				 console.log('失败')
-			}
-		})
-	},
-	//地址
-	getaddlist(){
-		// const pageState1 = pageState.default(this)
-		// pageState1.loading()    // 切换为loading状态
-		let that =this
-		//http://water5100.800123456.top/WebService.asmx/useraddress
-		wx.request({
-			url:  app.IPurl+'/api/userAddressList',
-			data:  {
-					token:wx.getStorageSync('token')
-				},
-			header: {
-				'content-type': 'application/x-www-form-urlencoded' 
-			},
-			dataType:'json',
-			method:'get',
-			success(res) {
-				console.log(res.data)
-				
-				if(res.data.code==1){
 					that.setData({
-						addresslist:res.data.data
+						htmlReset:1
 					})
 				}
-				// pageState1.finish()    // 切换为finish状态
-					// pageState1.error()    // 切换为error状态
+				
 			},
-			fail() {
-				 // pageState1.error()    // 切换为error状态
+			fail(err) {
+				wx.showToast({
+					icon:'none',
+					title:'获取默认地址失败'
+				})
+				that.setData({
+					htmlReset:1
+				})
+				 console.log(err)
 			}
 		})
 	},
-	
+	//获取优惠
 	getyhlist(){
 		var that=this
 		wx.request({
@@ -229,7 +247,7 @@ Page({
 							})
 							
 							var zsum
-							if(res.data.data[0].coupon_money){
+							if(res.data.data[0]){
 								zsum=that.data.sum-res.data.data[0].coupon_money+Number(that.data.yunfei)
 							}else{
 								zsum=Number(that.data.sum)+Number(that.data.yunfei)
@@ -240,7 +258,7 @@ Page({
 					}else{
 						wx.showToast({
 							icon:'none',
-							title:res.data.msg
+							title:''
 						})
 					}
 					
@@ -248,7 +266,8 @@ Page({
 				fail() {
 					wx.showToast({
 						icon:'none',
-						title:res.data.msg
+						// title:res.data.msg
+						title:'获取优惠券信息失败'
 					})
 					 console.log('失败')
 				}
@@ -259,7 +278,14 @@ Page({
 		
 		console.log(app.IPurl1)
 		let that = this
-		let data
+		
+		if(that.data.address==null||that.data.address.id==''||that.data.address.id==undefined){
+			wx.showToast({
+				icon:'none',
+				title:'请先添加地址'
+			})
+			return
+		}
 		if(that.data.paykg==false){
 			return
 		}else{
@@ -270,46 +296,40 @@ Page({
 				paykg:false
 			})
 		}
-		wx.hideLoading()
-		that.setData({
-			paykg:true
-		})
-		wx.showToast({
-			title: '提交失败',
-			icon: 'none',
-			duration: 1000
-		})
-		return
-		if(that.data.goods_sku_id!==''){
+		// wx.hideLoading()
+		// that.setData({
+		// 	paykg:true
+		// })
+		// wx.showToast({
+		// 	title: '提交失败',
+		// 	icon: 'none',
+		// 	duration: 1000
+		// })
+		// return
+		let data
+		let jkurl
+		if(that.data.type==2){
 			data={
-				op:'orderpub',
-				key:app.jkkey,
-				tokenstr:wx.getStorageSync('tokenstr'),
-				goods_sku_id:that.data.goods_sku_id,	//商品ID
-				sku_info_id:that.data.goodslist[0].goods_sku_info[that.data.dbggtype].sku_info_id,
-				logistics_self:0,											//自提
-				// user_member_shopping_address_id:that.data.address.user_member_shopping_address_id, //地址id(物流选择)
-				shop_store_house_id:that.data.ztaddress,
-				shop_delivery_time_id:that.data.zttime,
-				num:that.data.goodsnum,
-				goods_unit:that.data.goodsguige
+				token:wx.getStorageSync('token'),
+				shopping_ids:that.data.idg,
+				user_address_id:that.data.address.id,
+				user_coupon_id:that.data.yhlist[0]?that.data.yhlist[0].id:-1
 			}
+			jkurl='/api/orderForShopping'
 		}else{
-			let idg=that.data.idg.join(',')
-			console.log(idg)
-			// return
+		
 			data={
-				op:'orderpub',
-				key:app.jkkey,
-				tokenstr:wx.getStorageSync('tokenstr'),
-				carids:idg,
-				logistics_self:0,											//自提
-				shop_store_house_id:that.data.ztaddress,
-				shop_delivery_time_id:that.data.zttime,
+				token:wx.getStorageSync('token'),
+				goods_id:that.data.xzarr[0].goods_id,
+				goods_attr:that.data.xzarr[0].attr_setjson,
+				goods_num:that.data.xzarr[0].num,
+				user_address_id:that.data.address.id,
+				user_coupon_id:that.data.yhlist[0]?that.data.yhlist[0].id:-1
 			}
+			jkurl='/api/orderForGoods'
 		}
 		wx.request({
-			url:  app.IPurl1+'order',
+			url:  app.IPurl+jkurl,
 			data:data,
 			header: {
 				'content-type': 'application/x-www-form-urlencoded' 
@@ -321,21 +341,26 @@ Page({
 				wx.hideLoading()
 				console.log(res)
 				
-				if(res.data.error==-2){
-					app.checktoken(res.data.error)
-					that.onLoad()
-				}else if(res.data.error==0){
-					let resultd=res.data
-					console.log(res.data)
-					if(res.data.order_info_id){
-						console.log('178info')
-						app.Pay(res.data.order_info_id,'info')
-					}
-					if(res.data.partner_trade_no){
-						console.log('182no')
-						app.Pay(res.data.partner_trade_no,'no')
-					}
+				if(res.data.code==1){
+					
+					// setTimeout(function(){
+						if(res.data.data.order_code){
+							console.log('order_code'+res.data.data.order_code)
+						 app.Pay(res.data.data.order_code)
+						}
+					// },1000)
+					// let resultd=res.data
+					// console.log(res.data)
+					// if(res.data.data.order_code){
+					// 	console.log('order_code'+res.data.data.order_code)
+					// 	// app.Pay(res.data.order_info_id,'info')
+					// }
 				}else{
+					wx.showToast({
+						title: res.data.msg,
+						icon: 'none',
+						duration: 1000
+					})
 					that.setData({
 						paykg:true
 					})
@@ -367,8 +392,8 @@ Page({
 	},
 	//单品
 	getGoodsDetails(id){
-		const pageState1 = pageState.default(this)
-		pageState1.loading()    // 切换为loading状态
+		// const pageState1 = pageState.default(this)
+		// pageState1.loading()    // 切换为loading状态
 		let that = this
 		wx.request({
 			url:  app.IPurl1+'shopinfo',
@@ -434,11 +459,16 @@ Page({
 						})
 						that.countpri()
 				}
-				pageState1.finish()    // 切换为finish状态
+				// pageState1.finish()    // 切换为finish状态
 				  // pageState1.error()    // 切换为error状态
 			},
-			fail() {
-				 pageState1.error()    // 切换为error状态
+			fail(err) {
+				wx.showToast({
+					icon:'none',
+					title:'获取失败'
+				})
+				console.log(err)
+				 // pageState1.error()    // 切换为error状态
 			}
 		})
 	},

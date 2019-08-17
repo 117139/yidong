@@ -1,16 +1,14 @@
 //car.js
-var pageState = require('../../utils/pageState/index.js')
+// var pageState = require('../../utils/pageState/index.js')
 const app = getApp()
 
 Page({
   data: {
-		goods:[1,2,3],
+		btnkg:0,     //0  ok       1 off
+		htmlReset:0,
+		goods:[],
 		spimg:[],
-		goods_sele:[
-			{xuan:false,num:1,price:133},
-			{xuan:false,num:1,price:133},
-			{xuan:false,num:1,price:133},
-		],
+		goods_sele:[],
 		xuan:false,
 		all:false,
 		sum:'0.00'
@@ -19,10 +17,17 @@ Page({
    
   },
 	onShow(){
+		wx.setNavigationBarTitle({
+			title:'加载中...'
+		})
 		var that=this
 		that.getcar()
 			
 
+	},
+	cload(){
+		var that=this
+		that.getcar()
 	},
 	onReady(){
 		
@@ -209,8 +214,8 @@ Page({
 	},
 	//获取购物车
 	getcar(){
-		const pageState1 = pageState.default(this)
-		pageState1.loading()    // 切换为loading状态
+		// const pageState1 = pageState.default(this)
+		// pageState1.loading()    // 切换为loading状态
 		let that = this
 		wx.request({
 			url:  app.IPurl+'/api/shopping',
@@ -229,7 +234,8 @@ Page({
 					let resultd=res.data.data
 					// console.log(resultd)
 					that.setData({
-						goods:resultd
+						goods:resultd,
+						htmlReset:0
 					})
 					
 					//设置选中的数组
@@ -250,17 +256,34 @@ Page({
 						sum:'0'
 					})
 					that.countpri()
+					wx.setNavigationBarTitle({
+						title:'购物车'
+					})
+				}else{
+					wx.showToast({
+						icon:'none',
+						title:'获取失败'
+					})
+					that.setData({
+						htmlReset:1
+					})
+					console.log(res.data)
 				}
-				that.selecAll()
-				pageState1.finish()    // 切换为finish状态
+				// that.selecAll()
+				// pageState1.finish()    // 切换为finish状态
 			},
-			fail() {
-				 pageState1.error()    // 切换为error状态
+			fail(err) {
+				wx.showToast({
+					icon:'none',
+					title:'获取失败'
+				})
+				that.setData({
+					htmlReset:1
+				})
+				console.log(err)
+				 // pageState1.error()    // 切换为error状态
 			}
 		})
-	},
-	onRetry(){
-		this.getcar()
 	},
 	opengoodsxq(e){
 		let id=e.currentTarget.dataset.gid
@@ -268,6 +291,73 @@ Page({
 	},
 	jump(e){
 		app.jump(e)
+	},
+	cardel(e){
+		var that =this
+				if(that.data.btnkg==1){
+					return
+				}else{
+					that.setData({
+						btnkg:1
+					})
+				}
+			let id=e.currentTarget.dataset.id
+			wx.request({
+				url:  app.IPurl+'/api/shopping/'+id,
+				data:{
+					token:wx.getStorageSync('token')
+				},
+				header: {
+					'content-type': 'application/x-www-form-urlencoded' 
+				},
+				dataType:'json',
+				method:'DELETE',
+				success(res) {
+					
+					if(res.data.code==1){
+						let resultd=res.data
+						console.log(res)
+						wx.showToast({
+							icon:'none',
+							title:'删除成功'
+						})
+						setTimeout(function() {
+							that.setData({
+								btnkg:0
+							})
+							that.getcar()
+						}, 1000);
+					}else{
+						that.setData({
+							btnkg:0
+						})
+						if(res.data.msg){
+							wx.showToast({
+								title: res.data.msg,
+								duration: 2000,
+								icon:'none'
+							});
+						}else{
+							wx.showToast({
+								title: '网络异常',
+								duration: 2000,
+								icon:'none'
+							});
+						}
+					}
+				},
+				fail() {
+					that.setData({
+						btnkg:0
+					})
+					wx.hideLoading()
+					wx.showToast({
+						title: '网络异常',
+						duration: 2000,
+						icon:'none'
+					});
+				}
+			})
 	}
 })
 

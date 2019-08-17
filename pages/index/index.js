@@ -2,15 +2,13 @@
 //获取应用实例
 const app = getApp()
 var WxParse = require('../../vendor/wxParse/wxParse.js')
-var pageState = require('../../utils/pageState/index.js')
+// var pageState = require('../../utils/pageState/index.js')
 Page({
   data: {
+		btnkg:0, // 0 ok     1 off
+		htmlReset:0,
 		tokenstr: 'xxx',
-		bannerimg:[
-			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463693&di=39d4ee06bfc66cdde04022278d004fee&imgtype=0&src=http%3A%2F%2Fpic45.nipic.com%2F20140729%2F1628220_084628920000_2.jpg',
-			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463693&di=39d4ee06bfc66cdde04022278d004fee&imgtype=0&src=http%3A%2F%2Fpic45.nipic.com%2F20140729%2F1628220_084628920000_2.jpg',
-			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563874463693&di=39d4ee06bfc66cdde04022278d004fee&imgtype=0&src=http%3A%2F%2Fpic45.nipic.com%2F20140729%2F1628220_084628920000_2.jpg'
-		],
+		bannerimg:[],
 		youhui:100, //优惠
 		shopxq:'',
 		kg:0,
@@ -22,15 +20,27 @@ Page({
 		circular:true
   },
   onLoad: function () {
+		wx.setNavigationBarTitle({
+			title:'加载中...'
+		})
 		var that=this
 		that.getbanner()
 		that.getshoplist()
 		that.getyouhui()
 		that.getgoods()
   },
-	
+	cload(){
+		var that=this
+		that.getbanner()
+		that.getshoplist()
+		that.getyouhui()
+		that.getgoods()
+	},
 	onShow(){
 		if(this.data.kg==1){
+			this.setData({
+				kg:0
+			})
 			this.getyh100()
 		}
 	},
@@ -89,7 +99,7 @@ Page({
 							wx.navigateTo({
 								url:'/pages/yhlist/yhlist'
 							})	
-						},1000)
+						},500)
 							
 					}else{
 						wx.showToast({
@@ -115,8 +125,8 @@ Page({
 		app.opengoods(id,sku_info_id)
 	},
 	getbanner(){
-		const pageState1 = pageState.default(this)
-		pageState1.loading()    // 切换为loading状态
+		// const pageState1 = pageState.default(this)
+		// pageState1.loading()    // 切换为loading状态
 		let that = this
 		wx.request({
 			url:  app.IPurl+'api/indexRollPic',
@@ -134,12 +144,23 @@ Page({
 						that.setData({
 							bannerimg:resultd,
 						})
+				}else{
+					wx.showToast({
+						icon:'none',
+						title:'获取失败'
+					})
+					console.log(res.data)
 				}
-				pageState1.finish()    // 切换为finish状态
+				// pageState1.finish()    // 切换为finish状态
 				  // pageState1.error()    // 切换为error状态
 			},
-			fail() {
-				 pageState1.error()    // 切换为error状态
+			fail(err) {
+				wx.showToast({
+					icon:'none',
+					title:'获取失败'
+				})
+				console.log(err)
+				 // pageState1.error()    // 切换为error状态
 			}
 		})
 	},
@@ -219,16 +240,33 @@ Page({
 				if(res.data.code==1){
 					let resultd=res.data.data
 						
-						
+						wx.setNavigationBarTitle({
+							title:'YIDONG-SPORT'
+						})
 						that.setData({
 							goods:resultd,
-							
+							htmlReset:0
 						})
+				}else{
+					wx.showToast({
+						icon:'none',
+						title:'获取失败'
+					})
+					that.setData({
+						htmlReset:1
+					})
 				}
 			
 			},
-			fail() {
-				console.log('获取失败')
+			fail(err) {
+				wx.showToast({
+					icon:'none',
+					title:'获取失败'
+				})
+				that.setData({
+					htmlReset:1
+				})
+				console.log('err')
 			}
 		})
 	},
