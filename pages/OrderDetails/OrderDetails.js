@@ -462,6 +462,7 @@ Page({
 		});
 	},
 	pay(){
+    var that = this
 		if(that.data.btnkg==1){
 			return
 		}else{

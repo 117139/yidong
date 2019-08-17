@@ -5,7 +5,7 @@ const app = getApp()
 
 Page({
   data: {
-		btnkg:1,    //0可以  1不可以
+		btnkg:0,    //0可以  1不可以
 		htmlReset:0,
 		kg:0,    
 		goods_id:1, //商品id
@@ -294,7 +294,8 @@ Page({
   },
 	sheetshow(){
 		this.setData({
-			sheetshow:true
+			sheetshow:true,
+      btnkg:0
 		})
 		var ggs=this.data.guige
 		var type=this.data.type1
@@ -411,9 +412,13 @@ Page({
 						title:'添加成功'
 					})
 					that.setData({
-						addshow:true,
-						btnkg:0
+						addshow:true
+					
 					})
+          // that.setData({
+          //   btnkg: 0
+          // })
+         
 				}else{
 					that.setData({
 						btnkg:0

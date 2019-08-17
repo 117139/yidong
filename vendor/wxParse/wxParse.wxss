@@ -17,8 +17,12 @@
     color: #666;
     line-height: 1.8;
 }
-image{
-	max-width: 100%;
+.wxParse-img{
+	max-width: 700rpx;
+}
+.wxParse-video{
+  max-width: 700rpx;
+  width: 100%;
 }
 view{
     word-break:break-all; 

@@ -1,4 +1,6 @@
 /**index.wxss**/
+@import "/vendor/wxParse/wxParse.wxss";
+
 page{
 	width: 100%;
 }

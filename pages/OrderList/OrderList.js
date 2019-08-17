@@ -64,7 +64,7 @@ Page({
 			pages:pages,
 			goods:this.data.goods
 		})
-		if(that.data.btnkg==1){
+    if (this.data.btnkg==1){
 			that.setData({
 				btnkg:0
 			})
@@ -398,6 +398,7 @@ Page({
 	},
 	//付款
 	pay(e){
+    var that =this
 		let oid=e.currentTarget.dataset.code
 		if(that.data.btnkg==1){
 			return
