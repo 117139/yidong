@@ -1,6 +1,6 @@
 //app.js
 App({
-	IPurl:'http://xie.800123456.top/',
+	IPurl:'http://xie.800123456.top:8000/',
 	onLaunchtype:'',
   onLaunch: function () {
     // 展示本地存储能力

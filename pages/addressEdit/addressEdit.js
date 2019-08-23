@@ -82,7 +82,7 @@ Page({
 			});
 			return false;
 		}
-		var areaz=that.data.region[0]+''+that.data.region[1]+''+that.data.region[2]
+		var areaz=that.data.region[0]+' '+that.data.region[1]+' '+that.data.region[2]
 		if(that.data.region[1]==undefined||that.data.region[2]==undefined){
 			areaz=that.data.region[0]
 		}
