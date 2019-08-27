@@ -1,6 +1,7 @@
 //app.js
 App({
-	IPurl:'http://xie.800123456.top:8000/',
+	// IPurl:'http://xie.800123456.top:8000/',
+	IPurl:'https://yidong-sport.com/',
 	onLaunchtype:'',
   onLaunch: function () {
     // 展示本地存储能力
