@@ -247,7 +247,7 @@ image{
 .tkguigetit{
 	font-size: 26rpx;
 	color: #333;
-	padding: 50rpx 0 40rpx;
+	padding: 20rpx 0 20rpx;
 }
 .guigeBox{
 	display: felx;
@@ -264,7 +264,8 @@ image{
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
-	margin-right: 38rpx;
+	margin-right: 10rpx;
+  margin-bottom: 10rpx;
 }
 .guigeOne.cur{
 	border: 1px solid #f75852;
@@ -275,7 +276,7 @@ image{
 	justify-content: space-between;
 	font-size: 26rpx;
 	color: #333;
-	margin-top: 60rpx;
+	margin-top: 20rpx;
   padding-bottom:60rpx; 
 }
 .czbtnG{
