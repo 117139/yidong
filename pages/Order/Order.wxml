@@ -56,7 +56,7 @@
 		</view>
 	</view>
 	<view class="hengxian"></view>
-	<view class="guige" wx:if="{{yhlist.length!=0}}">
+	<view class="guige" wx:if="{{yhlist.length!=0}}"  data-url="/pages/yhlist/yhlist?type=1" bindtap="jump">
 		<view class="guige_l">
 			<view class="guige_l_name">优惠券</view>
 			 <!-- <view class="c9">已选100元优惠券</view> -->

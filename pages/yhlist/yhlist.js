@@ -6,14 +6,25 @@ Page({
    * 页面的初始数据
    */
   data: {
-			yhlist:[]
+		btnkg:0,
+		yhlist:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-	
+		var that =this
+		if(options.type==1){
+			that.setData({
+				btnkg:0,
+				addresback:true
+			})
+		}else{
+			that.setData({
+				addresback:false
+			})
+		}
   },
 
   /**
@@ -101,5 +112,30 @@ Page({
 				}
 			})
 		
+	},
+	toback(e){
+		var that =this
+		if(that.data.addresback==true){
+			if(that.data.btnkg==1){
+				return
+			}else{
+				that.setData({
+					btnkg:1
+				})
+			}
+			console.log(e.currentTarget.dataset.idx)
+			var idx= e.currentTarget.dataset.idx
+			var pages = getCurrentPages();   //当前页面
+			var prevPage = pages[pages.length - 2];   //上一页面
+			prevPage.setData({
+			       //直接给上一个页面赋值
+			      yhlistchose: that.data.yhlist[idx],
+			});
+			 
+			wx.navigateBack({
+			     //返回
+			     delta: 1
+			})
+		}
 	},
 })

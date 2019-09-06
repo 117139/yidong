@@ -25,7 +25,7 @@
   </picker>
   <view class="addmsg">
 		<view class="msgtit">详细地址</view>
-		<input class="msgsrk" name="xxaddress" value="{{editaddress.address}}" type="text" placeholder="街道、楼牌号等"/>
+		<input class="msgsrk" name="xxaddress" value="{{editaddress.address}}" type="text" placeholder="街道、楼牌号等" maxlength="40"/>
 	</view>
   <view class="addmsg">
 		<view class="">设置默认地址</view>

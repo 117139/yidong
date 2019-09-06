@@ -85,6 +85,9 @@ Page({
 		    console.log(this.data.address, '地址')
 		 
 		    }
+				if(currPage.data.yhlistchose){
+					console.log(currPage.data.yhlistchose, '优惠')
+				}
 	},
 	onReady(){
 		
