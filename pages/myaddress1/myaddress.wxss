@@ -28,6 +28,8 @@
 	align-items: center;
 	border-bottom: 1px solid #eee;
 	margin-bottom: 20rpx;
+	word-wrap:break-word;
+	word-break:break-all;
 }
 .addsetting{
 	width: 100%;
