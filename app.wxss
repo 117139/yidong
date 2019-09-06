@@ -259,6 +259,7 @@
 .cffb719{
 	color: #ffb719;
 }
+
 /*fontsize*/
 .fz14{
 	font-size: 14rpx;

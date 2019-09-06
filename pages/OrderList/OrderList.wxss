@@ -12,6 +12,7 @@
 	font-size: 24rpx;
 	color: #999;
 	line-height: 140rpx;
+	text-align: center;
 }
 .address{
 	display: flex;

@@ -91,16 +91,18 @@ Page({
 	 * 用户点击右上角分享
 	 */
 	onShareAppMessage: function (res) {
+		var that =this
 		console.log(res)
 		if (res.from === 'button') {
 			console.log(res.target.dataset.supid)
-			this.setData({
+			that.setData({
 				actionSheetHidden:true,
 				kg:1
 			})
 	  }
 	  return {
-	    title: '霸道板鞋男',
+	    // title: '霸道板鞋男',
+			title:that.data.goods.goods_name,
 	    success: function (res) {
 	      console.log('成功', res)
 				
@@ -173,7 +175,7 @@ Page({
 						actionSheetHidden: !that.data.actionSheetHidden
 					
 					});
-				},1000)
+				},0)
 		
       }
     })

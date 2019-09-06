@@ -135,12 +135,12 @@ Page({
 					}
 				}
 				
-				console.log(res.data.code)
+				// console.log(res.data.code)
 				// that.setData({
 				// 	yzm:res.data.code.substr(0,4)
 				// })
-				console.log(that.data.yzm)
-				that.codetime()
+				// console.log(that.data.yzm)
+				// that.codetime()
 			},
 			fail(err){
 				that.setData({
