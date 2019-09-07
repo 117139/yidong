@@ -3,8 +3,23 @@
 	padding: 0 36rpx;
 }
 .yhinr{
-	height: 94rpx;
+  align-items: flex-start;
+	/* height: 94rpx; */
+   height: 150rpx;
 }
 .yhquan_my{
   margin-bottom:20rpx; 
+}
+.yhqinr{
+  position: relative;
+ 
+}
+.expire_time0{
+  font-size: 24rpx; 
+}
+.expire_time{
+  position: absolute;
+  bottom: 18rpx;
+  right: 55rpx;
+  font-size: 24rpx;
 }

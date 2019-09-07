@@ -24,7 +24,9 @@
 				<view class="gofenxiang ">
 					<text class="flex_1 pl10">无门槛</text><text class="iconfont iconxiaosanjiao_ ml10 fz14 mr20"></text>
 				</view>
+        <view class='expire_time0'>过期时间：{{item.expire_time}}</view>
 			</view>
+      <!-- <view class='expire_time'>过期时间：{{item.expire_time}}</view> -->
 		</view>
 	</view>
 </view>
