@@ -48,7 +48,7 @@ Page({
 		
 	},
 	onShareAppMessage: function (res) {
-		var img =this.data.goods.goods_pic.split(",")
+		/*var img =this.data.goods.goods_pic.split(",")
 		var imgurl=app.IPurl+img[0]
 		console.log(res)
 		if (res.from === 'button') {
@@ -60,7 +60,7 @@ Page({
 			
 	  }
 	  return {
-	    title: '霸道板鞋男',
+	    title: this.data.goods.goods_name,
       imageUrl: imgurl,
 			path:'/pages/goodsDetails/goodsDetails',
 	    success: function (res) {
@@ -70,7 +70,7 @@ Page({
         // 转发失败
         console.log("用户点击了取消", res)
       }
-	  }
+    }*/
 	},
 	getyh100(){
 		var that=this

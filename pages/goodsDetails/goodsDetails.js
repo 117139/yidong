@@ -202,7 +202,7 @@ Page({
 	getyh100(){
 		var that=this
 		wx.request({
-				url:  app.IPurl+'/api/coupon/1',
+				url:  app.IPurl+'/api/coupon/'+that.data.goods.id,
 				data:{
 					token:wx.getStorageSync('token')
 				},

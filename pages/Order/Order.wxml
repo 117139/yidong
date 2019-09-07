@@ -61,7 +61,7 @@
 			<view class="guige_l_name">优惠券</view>
 			 <!-- <view class="c9">已选100元优惠券</view> -->
 		</view>
-		<view class="fz26 c9">-￥{{yhlist[0].coupon_money}}</view>
+		<view class="fz26 c9">-￥{{yhlist[yhidx].coupon_money}}	<text class="iconfont iconnext"></text></view>
 	</view>
 	<!-- <view class="hengxian"></view> -->
 	<view class="guige">

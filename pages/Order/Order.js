@@ -10,6 +10,7 @@ Page({
 		xzarr:[],
 		yunfei:0,  //运费
 		yhlist:[],  //优惠
+    yhidx:0,
 		addresslist:[], //地址列表
 		paykg:true,    //按钮开关
 		address:'',
@@ -87,6 +88,9 @@ Page({
 		    }
 				if(currPage.data.yhlistchose){
 					console.log(currPage.data.yhlistchose, '优惠')
+          this.setData({
+            yhidx: currPage.data.yhindex
+          })
 				}
 	},
 	onReady(){
@@ -316,7 +320,7 @@ Page({
 				token:wx.getStorageSync('token'),
 				shopping_ids:that.data.idg,
 				user_address_id:that.data.address.id,
-				user_coupon_id:that.data.yhlist[0]?that.data.yhlist[0].id:-1
+        user_coupon_id: that.data.yhlist[that.data.yhidx] ? that.data.yhlist[that.data.yhidx].id:-1
 			}
 			jkurl='/api/orderForShopping'
 		}else{
@@ -327,7 +331,7 @@ Page({
 				goods_attr:that.data.xzarr[0].attr_setjson,
 				goods_num:that.data.xzarr[0].num,
 				user_address_id:that.data.address.id,
-				user_coupon_id:that.data.yhlist[0]?that.data.yhlist[0].id:-1
+				user_coupon_id:that.data.yhlist[that.data.yhidx]?that.data.yhlist[that.data.yhidx].id:-1
 			}
 			jkurl='/api/orderForGoods'
 		}

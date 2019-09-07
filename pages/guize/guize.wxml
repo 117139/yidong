@@ -1,0 +1,3 @@
+<!--pages/guize/guize.wxml-->
+<import src="../../vendor/wxParse/wxParse.wxml" />
+<view class='container'></view>

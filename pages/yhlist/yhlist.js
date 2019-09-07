@@ -130,6 +130,7 @@ Page({
 			prevPage.setData({
 			       //直接给上一个页面赋值
 			      yhlistchose: that.data.yhlist[idx],
+            yhindex:idx
 			});
 			 
 			wx.navigateBack({

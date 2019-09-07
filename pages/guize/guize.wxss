@@ -1,0 +1,9 @@
+/* pages/guize/guize.wxss */
+@import "/vendor/wxParse/wxParse.wxss";
+page{
+	width: 100%;
+}
+.container{
+	min-height: 100%;
+	height: auto;
+}

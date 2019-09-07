@@ -1,7 +1,14 @@
 <!--pages/yhlist/yhlist.wxml-->
 <wxs src="../../utils/filter.wxs" module="filter" />
 <view class="container">
-	<view class="yhquan" wx:for="{{yhlist}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+<view wx:if="{{!yhlist}}" class='zanwu'>暂无优惠券</view>
+	<view class="yhquan yhquan_my"
+   wx:for="{{yhlist}}" 
+   wx:for-index="idx" 
+   wx:for-item="item" 
+   wx:key="idx"
+   data-idx="{{idx}}"
+   bindtap='toback'>
 		<image class="yhqbg" src="../../static/images/quan_04.jpg"></image>
 		<view class="yhqinr">
 			<view class="fz140 c30 fwb mr30 letter-s20">{{filter.moneyFormat(item.coupon_money)}}</view>

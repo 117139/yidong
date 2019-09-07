@@ -27,7 +27,7 @@
 		<view class="dis_flex aic w100 ju_c pt30 pb15">
 			<text class="mr10">——————</text><text class="iconfont iconaixin fz26 cf6377a mr10"></text><text class="fz32 c3 fwb">分享领券</text><text class="ml10">——————</text>
 		</view>
-		<view class="yhquan">
+		<!-- <view class="yhquan">
 			<image class="yhqbg" src="../../static/images/quan_04.jpg"></image>
 			<view class="yhqinr">
 				<view class="fz140 c30 fwb mr30 letter-s20">{{youhui}}</view>
@@ -40,7 +40,13 @@
 				</view>
 				<button class="shareBtn" open-type='share' data-supid="1" data-type="{{idx1}}"></button>
 			</view>
-		</view>
+		</view> -->
+    <view class="yhquan"  bindtap="jump" data-url="/pages/guize/guize">
+      <image class="yhqbg" src="../../static/images/index_q.jpg"></image>
+      <view class="yhqinr">
+        <view class="fz80 c30 fwb mr30 letter-5">{{youhui}}</view>
+      </view>
+    </view>
 	</view>
 	<view class="hengxian"></view>
 	<!-- <view class="list boxsiz dis_flex ais" bindtap="jump" data-url="/pages/goodsDetails/goodsDetails?shop_id=1">

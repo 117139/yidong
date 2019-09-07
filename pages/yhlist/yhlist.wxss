@@ -5,3 +5,6 @@
 .yhinr{
 	height: 94rpx;
 }
+.yhquan_my{
+  margin-bottom:20rpx; 
+}

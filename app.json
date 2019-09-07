@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/guize/guize",
     "pages/login0/login0",
     "pages/setpwd/stpwd",
     "pages/login1/login1",
