@@ -33,7 +33,7 @@
 			</view>
 		</view>
 		<view class="contbox dis_flex aic">
-			<view class="cf6377a fz30 mr20 fwb">￥<text class="fz50">{{filter.moneyFormat(goods.goods_real_price)}}</text></view>
+			<view class="cf6377a fz30 mr20 fwb">￥<text class="fz50">{{filter.moneyFormat(newprice?newprice:goods.goods_real_price)}}</text></view>
 			<view class="scx c3 fz26">原价 ￥{{filter.moneyFormat(goods.goods_price)}}</view>
 			<!-- <view class="cf6377a fz30 mr20 fwb">￥<text class="fz50">{{filter.moneyFormat(750)}}</text></view>
 			<view class="scx c3 fz26">原价 ￥{{filter.moneyFormat(1550)}}</view> -->
@@ -83,13 +83,13 @@
 	<van-popup custom-class="popopBox" show="{{ sheetshow }}" position="bottom" bind:close="onClose">
 		<view class="popopBox1">
 			<view class="goodsimg" wx:if="{{goods.goods_pic}}">
-				<image src="{{filter.getgimg(goods.goods_pic)}}" data-src="{{filter.getgimg(goods.goods_pic)}}" bindtap="previewImage"></image>
+				<image src="{{filter.getgimg(newimg?newimg:goods.goods_pic)}}" data-src="{{filter.getgimg(newimg?newimg:goods.goods_pic)}}" bindtap="previewImage"></image>
 			</view>
 			<view class="goodstkjg">
 				<view class="closebtn" bindtap="onClose">
 					<image src="/static/images/closebtn_03.jpg"></image>
 				</view>
-				<view class="tkpri">￥{{goods.goods_real_price}}</view>
+				<view class="tkpri">￥{{newprice?newprice:goods.goods_real_price}}</view>
 				<!-- <view class="tkpri">￥{{750}}</view> -->
 				<view class="tkname oh2">{{goods.goods_name}}</view>
 				<!-- <view class="tkname oh2">YI-DONG SPORT 屹动专业运动鞋 专业为中小学生运动打造的运动鞋</view> -->

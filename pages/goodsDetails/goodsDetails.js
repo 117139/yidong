@@ -10,6 +10,8 @@ Page({
 		kg:0,    
 		goods_id:1, //商品id
 		goods:'', //商品详情
+    newprice: '', //新增价格
+    newimg: '',    //新增img
 		ggshow:'', //规格显示
 		ggjson:'', //规格json
 		yunfei:0, //运费
@@ -198,7 +200,7 @@ Page({
   },
 
 
-//获取优惠
+  //获取优惠
 	getyh100(){
 		var that=this
 		wx.request({
@@ -303,12 +305,14 @@ Page({
 		var type=this.data.type1
 		if(type[0]==-1){
 			var ggshow1=[]
+      var ggshowid = []
 			var ggjson='{'
 			for(var i=0;i<type.length;i++){
 				type[i]=0
 				
 				// console.log(ggs[i].values)
 				ggshow1.push(ggs[i].values[0].attr_value)
+        ggshowid.push(ggs[i].values[0].id)
 				ggjson+='"'+ggs[i].name+'":"'+ggs[i].values[0].attr_value+'"'
 				if(i!=ggs.length-1){
 					ggjson+=','
@@ -319,6 +323,27 @@ Page({
 			ggshow1=ggshow1.join('，')
 			ggjson+="}"
 			console.log(ggjson)
+      var newpri = this.bSort(ggshowid)
+      newpri = newpri.join('_')
+      console.log(newpri)
+      var json1 = this.data.goods.sku_data
+      var mrpri = this.data.goods.goods_real_price
+      var mrpimg = this.data.goods.goods_pic
+      this.setData({
+        newprice: mrpri,
+        newimg: mrpimg,
+      })
+      for (var key in json1) {
+        // console.log(key, newpri, newpri == key);     //获取key值
+        if (key == newpri) {
+          console.log(json1[key])
+          this.setData({
+            newprice: json1[key].sku_price,
+            newimg: json1[key].sku_images,
+          })
+        }
+        // console.log(json1[key]); //获取对应的value值
+      }
 			// ggjson=JSON.parse(ggjson)
 			this.setData({
 				type1:type,
@@ -347,27 +372,65 @@ Page({
 		var ggs=this.data.guige
 		var ggidxs=this.data.type1
 		
-		var ggshow1=[]
+    var ggshow1 = []
+		var ggshowid=[]
 		var ggjson='{'
 		for(var i=0;i<ggs.length;i++){
 			console.log(ggidxs[i])
 			if(ggidxs[i]!=-1){
 				console.log(ggs[i].values)
-				ggshow1.push(ggs[i].values[ggidxs[i]].attr_value)
+        ggshow1.push(ggs[i].values[ggidxs[i]].attr_value)
+        ggshowid.push(ggs[i].values[ggidxs[i]].id)
 				ggjson+='"'+ggs[i].name+'":"'+ggs[i].values[ggidxs[i]].attr_value+'"'
 				if(i!=ggs.length-1){
 					ggjson+=','
 				}
 			}
 		}
-		ggshow1=ggshow1.join('，')
+		var ggshow2=ggshow1.join('，')
 		ggjson+="}"
 		// ggjson=JSON.parse(ggjson)
+    var newpri = this.bSort(ggshowid)
+    newpri = newpri.join('_')
+    console.log(newpri)
+    var json1 = this.data.goods.sku_data
+    var mrpri = this.data.goods.goods_real_price
+    var mrpimg = this.data.goods.goods_pic
+    this.setData({
+      newprice: mrpri,
+      newimg: mrpimg,
+    })
+    for (var key in json1) {
+      // console.log(key, newpri, newpri == key);     //获取key值
+      if (key == newpri){
+        console.log(json1[key])
+        this.setData({
+          newprice: json1[key].sku_price,
+          newimg: json1[key].sku_images,
+        })
+      }
+      // console.log(json1[key]); //获取对应的value值
+    }
+    // console.log(this.data.goods.sku_data['"'+newpri+'"'])
 		 this.setData({
-		  ggshow: ggshow1,
+       ggshow: ggshow2,
 			ggjson:ggjson
 		})
 	},
+  bSort(arr) {
+    var len = arr.length;
+    for(var i = 0; i<len- 1; i++) {
+      for (var j = 0; j < len - 1 - i; j++) {
+        // 相邻元素两两对比，元素交换，大的元素交换到后面
+        if (arr[j] > arr[j + 1]) {
+          var temp = arr[j];
+          arr[j] = arr[j + 1];
+          arr[j + 1] = temp;
+        }
+      }
+    }
+    return arr;
+  },
 	//更多评价
 	gomore(){
 		wx.navigateTo({
@@ -461,12 +524,14 @@ Page({
 		//http://water5100.800123456.top/WebService.asmx/order
 		let that = this
 	
-		let goods=this.data.goods
+    let goods = this.data.goods
+    let newimg = this.data.newimg
+    let newprice = this.data.newprice
 		//let goodsname=this.data.goodsd.goods_sku_name
-		let goods_pic =goods.goods_pic
+    let goods_pic = newimg ? newimg :goods.goods_pic
 		let goods_name =goods.goods_name
 		let goods_id =goods.id
-		let goods_real_price =goods.goods_real_price
+    let goods_real_price = newprice ? newprice :goods.goods_real_price
 		let ggshow=that.data.ggshow
 		let ggjson=that.data.ggjson
 		let goodsnum=this.data.cnum
