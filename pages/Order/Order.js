@@ -10,6 +10,7 @@ Page({
 		xzarr:[],
 		yunfei:0,  //运费
 		yhlist:[],  //优惠
+    sku_id:'',    //新单价
     yhidx:0,
 		addresslist:[], //地址列表
 		paykg:true,    //按钮开关
@@ -50,7 +51,8 @@ Page({
 			this.data.xzarr[0]=xzarr0
 			that.setData({
 				type:1,
-				xzarr:this.data.xzarr
+				xzarr:this.data.xzarr,
+        sku_id: option.sku_id
 			})
 			
 			
@@ -88,8 +90,12 @@ Page({
 		    }
 				if(currPage.data.yhlistchose){
 					console.log(currPage.data.yhlistchose, '优惠')
+          
+          var zsum = this.data.sum - this.data.yhlist[currPage.data.yhindex].coupon_money + Number(this.data.yunfei)
+          console.log(zsum)
           this.setData({
-            yhidx: currPage.data.yhindex
+            yhidx: currPage.data.yhindex,
+            zsum: zsum
           })
 				}
 	},
@@ -331,6 +337,7 @@ Page({
 				goods_attr:that.data.xzarr[0].attr_setjson,
 				goods_num:that.data.xzarr[0].num,
 				user_address_id:that.data.address.id,
+        sku_id: that.data.sku_id,
 				user_coupon_id:that.data.yhlist[that.data.yhidx]?that.data.yhlist[that.data.yhidx].id:-1
 			}
 			jkurl='/api/orderForGoods'

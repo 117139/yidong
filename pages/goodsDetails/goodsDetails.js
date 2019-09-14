@@ -12,6 +12,7 @@ Page({
 		goods:'', //商品详情
     newprice: '', //新增价格
     newimg: '',    //新增img
+    sku_id:'',
 		ggshow:'', //规格显示
 		ggjson:'', //规格json
 		yunfei:0, //运费
@@ -339,6 +340,7 @@ Page({
           console.log(json1[key])
           this.setData({
             newprice: json1[key].sku_price,
+            sku_id: json1[key].sku_id,
             newimg: json1[key].sku_images,
           })
         }
@@ -406,6 +408,7 @@ Page({
         console.log(json1[key])
         this.setData({
           newprice: json1[key].sku_price,
+          sku_id: json1[key].sku_id,
           newimg: json1[key].sku_images,
         })
       }
@@ -460,7 +463,8 @@ Page({
 				token:wx.getStorageSync('token'),
 				goods_id:that.data.goods_id,						//(商品id) 
 				num:that.data.cnum,															//（数量） 
-				attr_set:that.data.ggjson,//(规格名称) 
+				attr_set:that.data.ggjson,//(规格名称)
+        sku_id: that.data.sku_id,
 			},
 			header: {
 				'content-type': 'application/x-www-form-urlencoded' 
@@ -535,11 +539,12 @@ Page({
 		let ggshow=that.data.ggshow
 		let ggjson=that.data.ggjson
 		let goodsnum=this.data.cnum
+    let sku_id= that.data.sku_id
 		// let goodsladder=this.data.goodsd.is_ladder_pricing
 		// let goodsxq=this.data.goodsd
 		// console.log(goodsxq)
 		 wx.navigateTo({
-		  url: '/pages/Order/Order?goods_pic=' + goods_pic+'&goods_name=' + goods_name+'&goods_id=' + goods_id+'&goods_real_price=' + goods_real_price+'&ggshow=' + ggshow+'&ggjson=' + ggjson+'&goodsnum=' + goodsnum
+       url: '/pages/Order/Order?goods_pic=' + goods_pic + '&goods_name=' + goods_name + '&goods_id=' + goods_id + '&goods_real_price=' + goods_real_price + '&ggshow=' + ggshow + '&ggjson=' + ggjson + '&goodsnum=' + goodsnum + '&sku_id=' + sku_id
 		})
 	},
 	opengwc(e) {
