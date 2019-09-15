@@ -43,6 +43,9 @@ Page({
 			})
 			this.getyh100()
 		}
+    wx.setNavigationBarTitle({
+      title: 'YIDONG-SPORT',
+    })
 	},
 	onHide(){
 		

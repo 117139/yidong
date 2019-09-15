@@ -229,7 +229,6 @@ Page({
 			method:'GET',
 			success(res) {
 				// console.log(res.data)
-				
 				if(res.data.code==1){
 					let resultd=res.data.data
 					// console.log(resultd)
@@ -256,9 +255,7 @@ Page({
 						sum:'0'
 					})
 					that.countpri()
-					wx.setNavigationBarTitle({
-						title:'购物车'
-					})
+					
 				}else{
 					wx.showToast({
 						icon:'none',
@@ -282,7 +279,12 @@ Page({
 				})
 				console.log(err)
 				 // pageState1.error()    // 切换为error状态
-			}
+			},
+      complete(){
+        wx.setNavigationBarTitle({
+          title: '购物车'
+        })
+      }
 		})
 	},
 	opengoodsxq(e){
@@ -361,6 +363,3 @@ Page({
 	}
 })
 
-
-
-//http://water5100.800123456.top/WebService.asmx/order?op=orderpub&key=server_mima&tokenstr=1357311016561513&goods_sku_id=1&logistics_self=0&shop_store_house_id=5&shop_delivery_time_id=9&num=1&goods_unit=330ml*24瓶
