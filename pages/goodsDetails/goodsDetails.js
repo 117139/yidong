@@ -12,7 +12,7 @@ Page({
 		goods:'', //商品详情
     newprice: '', //新增价格
     newimg: '',    //新增img
-    sku_id:'',
+    sku_id:0,
 		ggshow:'', //规格显示
 		ggjson:'', //规格json
 		yunfei:0, //运费
@@ -333,6 +333,7 @@ Page({
       this.setData({
         newprice: mrpri,
         newimg: mrpimg,
+        sku_id:0
       })
       for (var key in json1) {
         // console.log(key, newpri, newpri == key);     //获取key值
@@ -401,6 +402,7 @@ Page({
     this.setData({
       newprice: mrpri,
       newimg: mrpimg,
+      sku_id: 0
     })
     for (var key in json1) {
       // console.log(key, newpri, newpri == key);     //获取key值
