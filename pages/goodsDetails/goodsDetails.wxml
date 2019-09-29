@@ -33,14 +33,14 @@
 			</view>
 		</view>
 		<view class="contbox dis_flex aic">
-			<view class="cf6377a fz30 mr20 fwb">￥<text class="fz50">{{filter.moneyFormat(newprice?newprice:goods.goods_real_price)}}</text></view>
+			<view class="cf6377a fz34 mr20 fwb">￥<text class="fz40">{{newprice?newprice:goods.price_section}}</text></view>
 			<view class="scx c3 fz26">原价 ￥{{filter.moneyFormat(goods.goods_price)}}</view>
 			<!-- <view class="cf6377a fz30 mr20 fwb">￥<text class="fz50">{{filter.moneyFormat(750)}}</text></view>
 			<view class="scx c3 fz26">原价 ￥{{filter.moneyFormat(1550)}}</view> -->
 		</view>
 	</view>
 	<view class="hengxian"></view>
-	<view wx:if="{{goods.is_get_coupon==0}}" class="guige" catchtap="listenerButton">
+	<!-- <view wx:if="{{goods.is_get_coupon==0}}" class="guige" catchtap="listenerButton">
 		<view class="guige_l">
 			<view class="guige_l_name c3">促销</view>
 			<view class="c9">分享领100元无门槛优惠券</view>
@@ -55,9 +55,8 @@
 			<view class="c9">100元无门槛优惠券</view>
 		</view>
 		<view class="guige_r">
-			<!-- <text class="iconfont iconsangedian fz36 c9"></text> -->
 		</view>
-	</view>
+	</view>-->
 	<view class="hengxian"></view>
 	<view class="guige">
 		<view class="guige_l">

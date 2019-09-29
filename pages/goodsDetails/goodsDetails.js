@@ -82,10 +82,15 @@ Page({
 	},
 	
 	onShow(){
+    if (!wx.getStorageSync('userWxmsg')) {
+     
+      return
+    }
 		if(this.data.kg==1){
 			this.setData({
 				kg:0
 			})
+      
 			this.getyh100()
 			
 		}
@@ -196,10 +201,51 @@ Page({
 			success(res1) {
 				console.log(res1)
 				wx.hideLoading()
-			}
+			},
+      fail: function (res) {
+        wx.hideLoading()
+        console.log(res)
+        if (res.errMsg === "saveImageToPhotosAlbum:fail:auth denied" || res.errMsg === "saveImageToPhotosAlbum:fail auth deny" || res.errMsg === "saveImageToPhotosAlbum:fail authorize no response") {
+          console.log("打开设置窗口");
+          that.imageErrorAuth()
+        }
+      }
 		})
   },
-
+  imageErrorAuth() {
+    // 授权失败 提示授权操作
+    wx.showModal({
+      title: '提示',
+      content: '需要您授权保存至相册',
+      showCancel: false,
+      success: modalSuccess => {
+        wx.openSetting({
+          success(settingData) {
+            console.log("settingData", settingData)
+            if (settingData.authSetting['scope.writePhotosAlbum']) {
+              wx.showModal({
+                title: '提示',
+                content: '获取权限成功,再次保存图片即可',
+                showCancel: false
+              })
+            } else {
+              wx.showModal({
+                title: '提示',
+                content: '获取权限失败，将无法保存到相册',
+                showCancel: false
+              })
+            }
+          },
+          fail(failData) {
+            console.log("failData", failData)
+          },
+          complete(finishData) {
+            console.log("finishData", finishData)
+          }
+        })
+      }
+    })
+  },
 
   //获取优惠
 	getyh100(){
@@ -444,7 +490,12 @@ Page({
 	},
 	//加入购物车
 	addwgc(){
-		
+    if (!wx.getStorageSync('userWxmsg')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+      return
+    }
 		// wx.showToast({
 		// 	title:"加入成功"
 		// })
@@ -523,9 +574,12 @@ Page({
 		})
 	},
 	nowbuy(){
-		// wx.navigateTo({
-		//   url: '/pages/Order/Order'
-		// })
+    if (!wx.getStorageSync('userWxmsg')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+      return
+    }
 		// console.log('buy')
 		//http://water5100.800123456.top/WebService.asmx/order
 		let that = this

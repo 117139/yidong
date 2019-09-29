@@ -216,10 +216,10 @@ Page({
 						
 						
 				}else{
-					wx.showToast({
-						icon:'none',
-						title:res.data.msg
-					})
+					// wx.showToast({
+					// 	icon:'none',
+					// 	title:res.data.msg
+					// })
 					that.setData({
 						htmlReset:1
 					})

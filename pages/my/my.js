@@ -14,6 +14,12 @@ Page({
 		app.previewImage(e)
 	},
 	jump(e){
-		app.jump(e)
+    if (!wx.getStorageSync('userWxmsg')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    } else {
+      app.jump(e)
+    }
 	}
 })

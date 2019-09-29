@@ -4,7 +4,7 @@
   <view class='w100'>
     <view class='fz28 c3 w100 p20 boxsiz'>1.点击首页下方【立即抢购】按钮进入商品详情页
     </view>
-    <view class='fz28 c3 w100 p20 boxsiz'>2.点击商品右侧【分享】按钮分享给好友
+    <view class='fz28 c3 w100 p20 boxsiz'>2.点击商品右侧【分享】按钮分享给好友或群聊
     </view>
     <view class='fz28 c3 w100 p20 boxsiz'>3.返回小程序【我的】查看【我的优惠券】
     </view>

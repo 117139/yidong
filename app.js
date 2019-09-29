@@ -2,7 +2,7 @@
 App({
 	// IPurl:'http://xie.800123456.top:8000/',
 	IPurl:'https://yidong-sport.com/',
-  // IPurl:'http://chenjingjie.cn/',
+  //IPurl:'http://chenjingjie.cn/',
 	onLaunchtype:'',
   onLaunch: function () {
     // 展示本地存储能力
@@ -10,7 +10,9 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
-   // wx.setStorageSync('token', 'xxx')
+    wx.removeStorageSync('userInfo')
+    wx.removeStorageSync('userWxmsg')
+    wx.removeStorageSync('token')
     // 获取用户信息
     wx.getSetting({
     	success: res => {
@@ -32,9 +34,9 @@ App({
     				}
     			})
     		} else {
-    			wx.reLaunch({
-    				url: '/pages/login/login',
-    			})
+    			// wx.reLaunch({
+    			// 	url: '/pages/login/login',
+    			// })
     		}
     	}
     })
@@ -60,9 +62,9 @@ App({
 						}
 					})
 				} else {
-					wx.reLaunch({
-						url: '/pages/login/login',
-					})
+					// wx.reLaunch({
+					// 	url: '/pages/login/login',
+					// })
 				}
 			}
 		})
@@ -103,12 +105,10 @@ App({
 									url:'/pages/login1/login1?status=0'
 								})
 							}else{
-								wx.setStorageSync('login', 'login')
+								// wx.setStorageSync('login', 'login')
 								
 								if(type=='shouquan'){
-									wx.reLaunch({
-										url:'/pages/index/index'
-									})
+                  wx.navigateBack()
 								}
 							}
 						}else{

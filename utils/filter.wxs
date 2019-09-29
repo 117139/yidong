@@ -1,5 +1,6 @@
 // var imgip ='http://xie.800123456.top:8000/'
 var imgip='https://yidong-sport.com/'
+//var imgip ='http://chenjingjie.cn/';
 // filter.wxs
 var dateFormat = function(date) {
     var dates = date.split('/');

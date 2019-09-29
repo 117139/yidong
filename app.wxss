@@ -464,6 +464,7 @@
 }
 image{
 	max-width: 100%;
+  width: 340px;
 }
 .chongshi{
 	position: fixed;

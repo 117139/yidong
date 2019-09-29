@@ -15,6 +15,10 @@
 			</swiper-item>
 		</block>
 	</swiper>
+  <view class="hengxian"></view>
+  <view style="width:100%;">
+    <video style="width:100%" src="https://yidong-sport.com//static/miniprogramvideo/index_video1.mp4" autoplay> </video>
+  </view>
 	<view class="goodsmsgs mian">
 		<view class="dis_flex aic w100 ju_c pt40 pb30">
 			<text class="mr10">——————</text><text class="iconfont iconaixin fz26 cf6377a mr10"></text><text class="fz32 c3 fwb">产品展示</text><text class="ml10">——————</text>
@@ -76,8 +80,8 @@
 			<view class="dis_flex ju_b aic w100">
 				<view class="dis_flex aic">
 					<view class="cf33c7b fwb">
-						<text class="fz30">￥</text>
-						<text class="fz48">{{filter.moneyFormat(goods.goods_real_price)}}</text>
+						<text class="fz34">￥</text>
+						<text class="fz40">{{goods.price_section}}</text>
 					</view>
 					<view class="scx fz26 c9 ml10">￥{{filter.moneyFormat(goods.goods_price)}}</view>
 				</view>
