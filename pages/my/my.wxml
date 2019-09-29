@@ -4,7 +4,7 @@
 
 		<view class="myhead">
 			<!-- <image class="bg" src="/static/images/my/mytx.jpg"></image> -->
-      <image wx:if="{{!userInfo.avatarUrl}}"  class="bg" src="/static/images/tx.jpg"></image>
+      <image wx:if="{{!userInfo.avatarUrl}}"  data-url='/pages/login/login' bindtap='jump' class="bg" src="/static/images/tx.jpg"></image>
 			<image wx:if="{{userInfo.avatarUrl}}" class="bg" src="{{userInfo.avatarUrl}}" data-src="{{userInfo.avatarUrl}}" bindtap="previewImage"></image>
 		</view>
 		<view wx:if="{{!userInfo.avatarUrl}}" class="myname" data-url='/pages/login/login' bindtap='jump'>点击登录</view>

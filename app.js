@@ -98,6 +98,11 @@ App({
 							// console.log('登录成功')
 		          // wx.setStorageSync('usermsg', res.data.retData)
 							wx.setStorageSync('token',  res.data.token)
+              setTimeout(function () {
+                if (getCurrentPages().length != 0) {
+                  getCurrentPages()[getCurrentPages().length - 1].onLoad()
+                }
+              }, 0)
 							// res.data.status=1
 							if(res.data.status==0){
 								

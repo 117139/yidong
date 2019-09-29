@@ -10,6 +10,11 @@ Page({
 			userInfo: wx.getStorageSync('userWxmsg')
 		})
   },
+  onShow: function () {
+    if (wx.getStorageSync('userWxmsg').nickName !== undefined) {
+      app.dologin()
+    }
+  },
 	previewImage(e){
 		app.previewImage(e)
 	},
